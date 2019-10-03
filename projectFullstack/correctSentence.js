@@ -17,7 +17,7 @@ correctSentence("Greetings, friends") == "Greetings, friends."
 correctSentence("Greetings, friends.") == "Greetings, friends."
  */
 
-function correctSentence(text) {
+export default function correctSentence(text) {
   text[0].toUpperCase();
   text += '.';
   return text;

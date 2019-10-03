@@ -6,6 +6,6 @@
  * и класса (например, отрицательные числа)
  */
 
-function convertBytesToHuman(bytes) {
+export default function convertBytesToHuman(bytes) {
   // your solution goes here
 }
