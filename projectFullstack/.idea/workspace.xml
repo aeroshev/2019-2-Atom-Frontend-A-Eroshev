@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="7e72336a-7800-4931-a843-7e3bfb952e82" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convertBytesToHuman.js" beforeDir="false" afterPath="$PROJECT_DIR$/convertBytesToHuman.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convertBytesToHuman.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/convertBytesToHuman.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/correctSentence.js" beforeDir="false" afterPath="$PROJECT_DIR$/correctSentence.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/correctSentence.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/correctSentence.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nonUniqueElements.js" beforeDir="false" afterPath="$PROJECT_DIR$/nonUniqueElements.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nonUniqueElements.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/nonUniqueElements.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
@@ -42,7 +48,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.correctSentence.test.js">
+  <component name="RunManager" selected="Jest.returns non unique elements">
     <configuration name="returns correct sentence" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -56,6 +62,19 @@
       </test-names>
       <method v="2" />
     </configuration>
+    <configuration name="returns non unique elements" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/nonUniqueElements.test.js" />
+      <test-names>
+        <test-name value="returns non unique elements" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="correctSentence.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/correctSentence.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
@@ -64,6 +83,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.returns non unique elements" />
         <item itemvalue="Node.js.correctSentence.test.js" />
         <item itemvalue="Jest.returns correct sentence" />
         <item itemvalue="Node.js.correctSentence.js" />
@@ -85,7 +105,9 @@
       <workItem from="1569866002230" duration="77000" />
       <workItem from="1569949524325" duration="743000" />
       <workItem from="1570093863927" duration="1043000" />
-      <workItem from="1570105971123" duration="2051000" />
+      <workItem from="1570105971123" duration="3721000" />
+      <workItem from="1570198516917" duration="5877000" />
+      <workItem from="1570262276553" duration="697000" />
     </task>
     <servers />
   </component>
