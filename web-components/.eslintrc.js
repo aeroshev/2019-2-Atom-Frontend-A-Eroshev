@@ -20,6 +20,6 @@ module.exports = {
     "no-plusplus": 1,
     "semi": 1,
     "default-case": 1,
-    'no-case-declarations': 1,
+    "no-case-declarations": 1
   }
 };
