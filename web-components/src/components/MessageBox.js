@@ -2,8 +2,6 @@ const template = document.createElement('template');
 template.innerHTML = `
 <style>
   *{
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
   }
   li{
@@ -44,7 +42,7 @@ template.innerHTML = `
 </li>
 `;
 
-class MessageForm extends HTMLElement {
+class MessageBox extends HTMLElement {
   constructor() {
     super();
 
@@ -83,4 +81,4 @@ class MessageForm extends HTMLElement {
   }
 }
 
-customElements.define('message-box', MessageForm);
+customElements.define('message-box', MessageBox);

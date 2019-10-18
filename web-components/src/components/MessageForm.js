@@ -2,8 +2,6 @@ const template = document.createElement('template');
 template.innerHTML = `
 <style>
   *{
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
   }
   li{
@@ -59,10 +57,10 @@ template.innerHTML = `
   }
 </style>
 <div class="header">
-  <dialog-info></dialog-info>
+    <dialog-info></dialog-info>
 </div>
 <div class="content">
-  <div class="messageWrap">
+    <div class="messageWrap">
     <date-marker></date-marker>
   </div>
 </div>
@@ -83,19 +81,18 @@ class MessageForm extends HTMLElement {
 
     this.$input.addEventListener('onSubmit', this.onSubmit.bind(this));
 
+    this.dialogID = 0;
     this.messageLoader();
   }
 
   // при обновлении страницы эта функция выгружает из localStorage историю сообщений
   messageLoader() {
-    const lsLen = localStorage.length;
-    if (lsLen > 0) {
-      for (let i = 0; i < lsLen; i++) {
-        const messageBox = JSON.parse(localStorage.getItem(`${i}`));
-        if (messageBox != null) this.renderMessage(messageBox);
-      }
+    const messageArray = JSON.parse(localStorage.getItem(`${this.dialogID}`));
+    for (let index = 0; index < messageArray.length; index++) {
+      this.renderMessage(messageArray[index])
     }
   }
+
 
   // рендеринг объекта времени
   renderDate(time) {
@@ -123,14 +120,20 @@ class MessageForm extends HTMLElement {
     const time = new Date();
     // задаём атрибуты messageBox
     const messageBox = {
-      messageID: localStorage.length,
+      messageID: this.dialogID + localStorage.length,
       owner: ((owner) ? 'opposide' : 'self'),
       message: text,
       additions,
       time: time.getTime(),
     };
     // сохраняем в localStorage в виде JSON
-    localStorage.setItem(`${messageBox.messageID}`, JSON.stringify(messageBox));
+    let messageArray = JSON.parse(localStorage.getItem(`${this.dialogID}`));
+    if (messageArray === null) {
+      messageArray = [];
+    }
+    messageArray.push(messageBox);
+
+    localStorage.setItem(`${this.dialogID}`, JSON.stringify(messageArray));
     this.renderMessage(messageBox);
   }
 

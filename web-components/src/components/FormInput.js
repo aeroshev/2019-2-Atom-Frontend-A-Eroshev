@@ -2,8 +2,6 @@ const template = document.createElement('template');
 template.innerHTML = `
 <style>
   *{
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
   }
   :host{
@@ -41,7 +39,7 @@ template.innerHTML = `
 <div class="inputButton">
     <div class="additionalButton"></div>
 </div>
-<input/>
+<input>
 <div class="inputButton">
     <div class="sendButton"></div>
 </div>
