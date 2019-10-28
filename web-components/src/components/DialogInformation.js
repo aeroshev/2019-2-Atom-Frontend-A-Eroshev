@@ -39,12 +39,15 @@ template.innerHTML = `
 
   .headerButton .backButton{
     background-size: 100%;
-      margin-top: 15px;
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+    background-color: red;
   }
 
 </style>
 <div class="headerButton">
-    <div class="backButton"><img src="image/back.png"/></div>
+    <div class="backButton"></div>
 </div>
 <div class="statusConteiner">
   <div class="userName">
@@ -64,6 +67,25 @@ class DialogInformation extends HTMLElement {
 
     this.shadowRoot = this.attachShadow({ mode: 'open' });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+    this.$backButton = this.shadowRoot.querySelector('.backButton');
+    this.$searchButton = this.shadowRoot.querySelector('.searchButton');
+    this.$optionsButton = this.shadowRoot.querySelector('.optionsButton');
+
+    this.$backButton.addEventListener('keypress', this.escPress.bind(this));
+    this.$backButton.addEventListener('click', this.backButton.bind(this));
+  }
+
+  escPress(event) {
+    if (event.keyCode === 27) this.escape();
+  }
+
+  escape() {
+    this.dispatchEvent(new Event('pressExit'));
+  }
+
+  backButton() {
+    this.dispatchEvent(new Event('clickBackButton'));
   }
 }
 

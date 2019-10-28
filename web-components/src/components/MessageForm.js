@@ -18,25 +18,16 @@ template.innerHTML = `
   .header{
     position: fixed;
     left: 0; top: 0;
-    background-color: #760db2;
+    background-color: #8E24AA;
     width: 100%;
     z-index: 1;
   }
-  .content{
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    flex: auto;
-    flex-wrap: wrap;
-    flex-direction: column-reverse;
-    align-content: flex-end;
-    z-index: 0;
-    overflow-y: auto;
-  }
+
   ::-webkit-scrollbar {
     width: 0px;
   }
   .messageWrap{
+    margin-top: 40px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -45,7 +36,7 @@ template.innerHTML = `
   message-box{
     box-sizing: border-box;
     width: 100%;
-    padding: 0 10px 10px 10px;
+    padding: 0 4px 0 4px;
   }
   .footer{
     position: fixed;
@@ -59,13 +50,9 @@ template.innerHTML = `
 <div class="header">
     <dialog-info></dialog-info>
 </div>
-<div class="content">
-    <div class="messageWrap">
-    <date-marker></date-marker>
-  </div>
-</div>
+<div class="messageWrap"></div>
 <div class="footer">
-  <form-input placeholder="Cообщение"></form-input>
+  <form-input placeholder="Message"></form-input>
 </div>
 `;
 
@@ -78,32 +65,51 @@ class MessageForm extends HTMLElement {
 
     this.$input = this.shadowRoot.querySelector('form-input');
     this.$messages = this.shadowRoot.querySelector('.messageWrap');
+    this.$toolBar = this.shadowRoot.querySelector('dialog-info');
 
     this.$input.addEventListener('onSubmit', this.onSubmit.bind(this));
 
-    this.dialogID = 0;
-    this.messageLoader();
+    this.dialogID = undefined;
+    this.lastMessage = undefined;
+    this.lastTimeMessage = undefined;
   }
 
   // при обновлении страницы эта функция выгружает из localStorage историю сообщений
-  messageLoader() {
-    const messageArray = JSON.parse(localStorage.getItem(`${this.dialogID}`));
-    for (let index = 0; index < messageArray.length; index++) {
-      this.renderMessage(messageArray[index])
+  messageLoader(dialogID) {
+    const json = localStorage.getItem(`${dialogID}`);
+
+    let messageArray = 0;
+    try {
+      messageArray = JSON.parse(json);
+    } catch (SyntaxError) {
+      localStorage.clear();
+    }
+    if (messageArray != null) {
+      for (let index = 0; index < messageArray.length; index++) {
+        this.renderMessage(messageArray[index]);
+      }
     }
   }
 
+  clearChat() {
+    this.$messages.innerHTML = '';
+  }
 
+  setId(dialogID) {
+    this.dialogID = dialogID;
+  }
+
+  /*
   // рендеринг объекта времени
   renderDate(time) {
     let elem = document.createElement('date-marker');
     elem = this.$messages.appendChild(elem);
     elem.setAttribute('time', time);
   }
-
+*/
   // рендеринг объекта сообщения
   renderMessage(messageBox) {
-    this.renderDate(messageBox.time);
+    /* this.renderDate(messageBox.time); */
 
     let elem = document.createElement('message-box');
     elem = this.$messages.appendChild(elem);
@@ -121,11 +127,19 @@ class MessageForm extends HTMLElement {
     // задаём атрибуты messageBox
     const messageBox = {
       messageID: this.dialogID + localStorage.length,
-      owner: ((owner) ? 'opposide' : 'self'),
+      owner: ((owner) ? 'opposite' : 'self'),
       message: text,
       additions,
       time: time.getTime(),
     };
+
+    if (this.lastMessage !== messageBox.message) {
+      this.lastMessage = messageBox.message;
+    }
+    if (this.lastTimeMessage !== messageBox.time) {
+      this.lastTimeMessage = messageBox.time;
+    }
+
     // сохраняем в localStorage в виде JSON
     let messageArray = JSON.parse(localStorage.getItem(`${this.dialogID}`));
     if (messageArray === null) {

@@ -21,11 +21,18 @@ template.innerHTML = `
     padding-left: 10px;
   }
   .additionalButton{
+    height: 100%;
+    width: 30px;
     background-size: 90%;
+    color: red;
+    z-index: 1;
   }
   .sendButton{
+    height: 100%;
+    width: 30px;
     background-size: 90%;
-    background: url("image/Send.png");
+    color: red;
+    z-index: 1;
   }
   .inputButton{
     height: 100%;
