@@ -3,11 +3,8 @@ template.innerHTML = `
 <style>
 
  message-form {
-    z-index: 1;
     display: none;
-    animation-duration: 0.5s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
+    z-index: 1;
  }
   
  *{
@@ -36,14 +33,15 @@ template.innerHTML = `
     color: #f8fff9;
     font-weight: bold;
  } 
+
   
 </style>
 <div class="header">
   <div class="menu"></div>
   <a class="message">Сообщения</a>
 </div>
-<message-form></message-form>
 <dialog-list></dialog-list>
+<message-form></message-form>
 `;
 
 class GetDialog extends HTMLElement {
@@ -56,7 +54,9 @@ class GetDialog extends HTMLElement {
     this.$dialogList = this.shadowRoot.querySelector('dialog-list');
     this.$chatForm = this.shadowRoot.querySelector('message-form');
 
-    this.addEventOpenDialog()
+    this.$dialogList.addEventListener('addNewChat', () => this.addEventOpenDialog());
+
+    this.addEventOpenDialog();
   }
 
   addEventOpenDialog() {

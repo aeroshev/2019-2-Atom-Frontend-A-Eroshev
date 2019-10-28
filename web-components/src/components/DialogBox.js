@@ -23,7 +23,6 @@ template.innerHTML = `
     padding-left: 20%;
     text-align: left;
     font-size: small;
-    background-color: red;
   }
   
   .dialogWrap .dialogAvatar {
@@ -33,7 +32,6 @@ template.innerHTML = `
     height: 60px;
     margin: 0px;
     border-radius: 30px;
-    background-color: red;
   }
   
   .dialogWrap .messageTime {
@@ -44,7 +42,6 @@ template.innerHTML = `
     margin-top: 5px;
     margin-bottom: 5px;
     float: right;
-    background-color: red;
   }
   
   .dialogWrap .lastMessage {
@@ -53,12 +50,10 @@ template.innerHTML = `
     padding-left: 60px;
     padding-right: 60px;
     text-align: left;
-    background-color: red;
   }
   
   .dialogWrap .messageStatus {
     float: right;
-    background-color: red;
   }
 
 </style>
@@ -89,33 +84,30 @@ class DialogBox extends HTMLElement {
   }
 
   static get observedAttributes() {
-    console.log('observedAttr');
-    return ['dialogID', 'dialogName', 'lastMessage', 'timeLastMessage', 'messageStatus'];
+    return ['dialogid', 'dialogname', 'lastmessage', 'timelastmessage', 'messagestatus'];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    console.log('Change attr');
-    // eslint-disable-next-line default-case
     switch (name) {
-      case 'dialogID':
-        this.$wrap.attr('dialogID', newValue);
+      case 'dialogid':
+        this.$wrap.attr('dialogid', newValue);
         break;
 
-      case 'dialogName':
+      case 'dialogname':
         this.$dialogName.innerText += newValue;
         break;
 
-      case 'lastMessage':
+      case 'lastmessage':
         this.$lastMessage.innerText += newValue;
         break;
 
-      case 'timeLastMessage':
+      case 'timelastmessage':
         let date = new Date(parseInt(newValue, 10));
         date = date.toString().split(' ')[4].split(':');
         this.$messageTime.innerText = date[0] + ':' + date[1];
         break;
 
-      case 'messageStatus':
+      case 'messagestatus':
         this.$messageStatus.innerText += newValue;
         break;
     }

@@ -126,7 +126,7 @@ class MessageForm extends HTMLElement {
     const time = new Date();
     // задаём атрибуты messageBox
     const messageBox = {
-      messageID: this.dialogID + localStorage.length,
+      messageID: this.dialogID++,
       owner: ((owner) ? 'opposite' : 'self'),
       message: text,
       additions,
