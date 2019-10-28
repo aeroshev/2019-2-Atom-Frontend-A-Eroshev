@@ -133,12 +133,12 @@ class MessageForm extends HTMLElement {
       time: time.getTime(),
     };
 
-    if (this.lastMessage !== messageBox.message) {
-      this.lastMessage = messageBox.message;
-    }
-    if (this.lastTimeMessage !== messageBox.time) {
-      this.lastTimeMessage = messageBox.time;
-    }
+    // if (this.lastMessage !== messageBox.message) {
+    //   this.lastMessage = messageBox.message;
+    // }
+    // if (this.lastTimeMessage !== messageBox.time) {
+    //   this.lastTimeMessage = messageBox.time;
+    // }
 
     // сохраняем в localStorage в виде JSON
     let messageArray = JSON.parse(localStorage.getItem(`${this.dialogID}`));
