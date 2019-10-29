@@ -110,7 +110,6 @@ class DialogList extends HTMLElement {
     this.shadowRoot = this.attachShadow({ mode: 'open' });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-
     this.$content = this.shadowRoot.querySelector('.wrap');
     this.$newChat = this.shadowRoot.querySelector('.buttonNew');
 

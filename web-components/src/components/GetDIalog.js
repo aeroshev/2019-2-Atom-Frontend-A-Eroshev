@@ -5,8 +5,7 @@ template.innerHTML = `
  message-form {
     position: absolute;
     display: none;
-    overflow: hidden;
-    /*right: -100%;*/
+    /*overflow: hidden;*/
     z-index: 1;
     animation-name: smoothOpen;
     animation-duration: 0.5s;
@@ -24,18 +23,11 @@ template.innerHTML = `
         -webkit-transform: translate(0) scaleX(1);
         transform: translate(0) scaleX(1)
     }
-
-    /*to {*/
-    /*    -webkit-transform: translate(50%) scaleX(0);*/
-    /*    transform: translate(50%) scaleX(0)*/
-    /*}*/
 }
 
  dialog-list {
     position: absolute;
-    /*display: none;*/
     overflow: visible;
-    /*right: -100%;*/
     z-index: 1;
     animation-name: smoothClose;
     animation-duration: 0.5s;
@@ -54,8 +46,6 @@ template.innerHTML = `
     }
 
 }
-
-  
 </style>
 <dialog-list></dialog-list>
 <message-form></message-form>
@@ -99,7 +89,7 @@ class GetDialog extends HTMLElement {
   openChat(dialogID) {
     this.openedDialogID = dialogID;
 
-    this.$chatForm.style.display = 'block';
+    this.$chatForm.style.display = 'flex';
     this.$dialogList.style.display = 'none';
 
     this.$chatForm.clearChat();
@@ -112,45 +102,8 @@ class GetDialog extends HTMLElement {
 
   closeChat() {
     this.$chatForm.style.display = 'none';
-    this.$dialogList.style.display = 'block';
-
-    // this.updateDialogList();
+    this.$dialogList.style.display = 'flex';
   }
-
-  updateDialogList() {
-    // debugger;
-    // let dialogList = [];
-    // const json = localStorage.getItem('dialogList');
-    // try {
-    //   dialogList = JSON.parse(json);
-    // } catch (SyntaxError) {
-    //   alert("Can't unpacked storage");
-    // }
-    //
-    // for (let i = 0; i < dialogList.length; i++) {
-    //   let elem = this.$dialogList.$content.querySelector(`dialog-box[dialogid="${i}"]`);
-    //
-    // }
-  }
-
-  /*
-  @keyframes theme__linear-indeterminate-bar___3vY69 {
-    0% {
-        -webkit-transform: translate(-50%) scaleX(0);
-        transform: translate(-50%) scaleX(0)
-    }
-
-    50% {
-        -webkit-transform: translate(0) scaleX(.3);
-        transform: translate(0) scaleX(.3)
-    }
-
-    to {
-        -webkit-transform: translate(50%) scaleX(0);
-        transform: translate(50%) scaleX(0)
-    }
-}
-   */
 }
 
 customElements.define('get-dialog', GetDialog);

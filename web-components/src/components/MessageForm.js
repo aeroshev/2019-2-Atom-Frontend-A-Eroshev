@@ -16,7 +16,7 @@ template.innerHTML = `
     flex-direction: column;
   }
   .header{
-    position: fixed;
+    position: absolute;
     left: 0; top: 0;
     background-color: #8E24AA;
     width: 100%;
@@ -35,12 +35,28 @@ template.innerHTML = `
   }
   message-box{
     box-sizing: border-box;
+    /*overflow: hidden;*/
     width: 100%;
     padding: 0 4px 0 4px;
+    animation-name: smoothDrop;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+  }
+  @keyframes smoothDrop {
+    from {
+        -webkit-transform: translate(-100%) scaleX(0);
+        transform: translate(-100%) scaleX(0)
+    }
+    to {
+        -webkit-transform: translate(0) scaleX(1);
+        transform: translate(0) scaleX(1)
+    }
   }
   .footer{
-    position: fixed;
-    left: 0; bottom: 0;
+    position: absolute;
+    left: 0; 
+    bottom: 0;
     width: 100%;
     background-color: #f8fff9;
     outline: 1px solid rgba(5,0,0,0.94);
@@ -68,10 +84,6 @@ class MessageForm extends HTMLElement {
     this.$toolBar = this.shadowRoot.querySelector('dialog-info');
 
     this.$input.addEventListener('onSubmit', this.onSubmit.bind(this));
-
-    this.dialogID = undefined;
-    this.lastMessage = undefined;
-    this.lastTimeMessage = undefined;
   }
 
   // при обновлении страницы эта функция выгружает из localStorage историю сообщений
@@ -123,7 +135,7 @@ class MessageForm extends HTMLElement {
   // создание новго сообщения
   newMessage(owner, text, additions = null) {
     // полуаем текущее время
-    const time = new Date();
+    const time = new Date()
     // задаём атрибуты messageBox
     const messageBox = {
       messageID: this.dialogID++,
@@ -131,17 +143,17 @@ class MessageForm extends HTMLElement {
       message: text,
       additions,
       time: time.getTime(),
-    };
+    }
 
     // сохраняем в localStorage в виде JSON
-    let messageArray = JSON.parse(localStorage.getItem(`${this.dialogID}`));
+    let messageArray = JSON.parse(localStorage.getItem(`${this.dialogID}`))
     if (messageArray === null) {
-      messageArray = [];
+      messageArray = []
     }
-    messageArray.push(messageBox);
+    messageArray.push(messageBox)
 
-    localStorage.setItem(`${this.dialogID}`, JSON.stringify(messageArray));
-    this.renderMessage(messageBox);
+    localStorage.setItem(`${this.dialogID}`, JSON.stringify(messageArray))
+    this.renderMessage(messageBox)
   }
 
   onSubmit() {
