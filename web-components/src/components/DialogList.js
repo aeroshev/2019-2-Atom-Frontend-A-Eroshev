@@ -15,6 +15,23 @@ template.innerHTML = `
     display: flex;
     flex-direction: column;
   }
+  
+ .header{
+    position: absolute;
+    left: 0; top: 0;
+    background-color: #8E24AA;
+    width: 100%;
+    height: 60px;
+    z-index: 1;
+ }
+  
+  .header .message {
+    padding-left: 50px;
+    line-height: 60px;
+    float: left;
+    color: #f8fff9;
+    font-weight: bold;
+ } 
   .wrap{
     margin-top: 60px;
     width: 100%;
@@ -76,6 +93,10 @@ template.innerHTML = `
   }
 }
 </style>
+<div class="header">
+  <div class="menu"></div>
+  <a class="message">Сообщения</a>
+</div>
 <div class="wrap"></div>
 <div class="buttonNew"></div>
 `;
@@ -92,7 +113,6 @@ class DialogList extends HTMLElement {
 
     this.$content = this.shadowRoot.querySelector('.wrap');
     this.$newChat = this.shadowRoot.querySelector('.buttonNew');
-    // this.$lastMessageManage = this.shadowRoot.querySelector('message-form');
 
     this.$newChat.addEventListener('click', this.createNewChat.bind(this));
 
@@ -124,7 +144,7 @@ class DialogList extends HTMLElement {
       localStorage.setItem('dialogList', JSON.stringify(dialogArray));
       this.renderDialog(dialogBox);
 
-      this.dispatchEvent(new Event('addNewChat'));
+      this.shadowRoot.dispatchEvent(new Event('addNewChat'));
     }
   }
 
@@ -132,20 +152,11 @@ class DialogList extends HTMLElement {
     let elem = document.createElement('dialog-box');
     elem = this.$content.appendChild(elem);
 
-    // let lastMessage = '';
-    //     // if (this.$lastMessageManage.lastMessage !== undefined) {
-    //     //   lastMessage = this.$lastMessageManage.lastMessage;
-    //     // }
-    //     // let timeLastMessage = 0;
-    //     // if (this.$lastMessageManage.lastTimeMessage !== undefined) {
-    //     //   timeLastMessage = this.$lastMessageManage.lastTimeMessage;
-    //     // }
-
-    elem.setAttribute('dialogID', dialogBox.dialogID);
-    elem.setAttribute('dialogName', dialogBox.dialogName);
-    elem.setAttribute('lastMessage', dialogBox.lastMessage);
-    elem.setAttribute('timeLastMessage', dialogBox.timeLastMessage);
-    elem.setAttribute('messageStatus', dialogBox.messageStatus);
+    elem.setAttribute('dialogid', dialogBox.dialogID);
+    elem.setAttribute('dialogname', dialogBox.dialogName);
+    elem.setAttribute('lastmessage', dialogBox.lastMessage);
+    elem.setAttribute('timelastmessage', dialogBox.timeLastMessage);
+    elem.setAttribute('messagestatus', dialogBox.messageStatus);
   }
 
   loadTest() {

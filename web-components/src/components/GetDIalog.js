@@ -3,43 +3,60 @@ template.innerHTML = `
 <style>
 
  message-form {
+    position: absolute;
     display: none;
+    overflow: hidden;
+    /*right: -100%;*/
     z-index: 1;
+    animation-name: smoothOpen;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
  }
-  
- *{
-    box-sizing: border-box;
-  }
- :host {
-    width: 100%;
-    height: 100%;
-    background-size: 50px;
-    display: flex;
-    flex-direction: column;
- }
- .header{
-    position: fixed;
-    left: 0; top: 0;
-    background-color: #8E24AA;
-    width: 100%;
-    height: 60px;
+ 
+  @keyframes smoothOpen {
+    from {
+        -webkit-transform: translate(-100%) scaleX(0);
+        transform: translate(-100%) scaleX(0)
+    }
+
+    to {
+        -webkit-transform: translate(0) scaleX(1);
+        transform: translate(0) scaleX(1)
+    }
+
+    /*to {*/
+    /*    -webkit-transform: translate(50%) scaleX(0);*/
+    /*    transform: translate(50%) scaleX(0)*/
+    /*}*/
+}
+
+ dialog-list {
+    position: absolute;
+    /*display: none;*/
+    overflow: visible;
+    /*right: -100%;*/
     z-index: 1;
+    animation-name: smoothClose;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
  }
-  
-  .header .message {
-  padding-left: 50px;
-    line-height: 60px;
-    float: left;
-    color: #f8fff9;
-    font-weight: bold;
- } 
+   @keyframes smoothClose {
+    from {
+        -webkit-transform: translate(-100%) scaleX(0);
+        transform: translate(-100%) scaleX(0)
+    }
+
+    to {
+        -webkit-transform: translate(0) scaleX(1);
+        transform: translate(0) scaleX(1)
+    }
+
+}
 
   
 </style>
-<div class="header">
-  <div class="menu"></div>
-  <a class="message">Сообщения</a>
-</div>
 <dialog-list></dialog-list>
 <message-form></message-form>
 `;
@@ -54,7 +71,7 @@ class GetDialog extends HTMLElement {
     this.$dialogList = this.shadowRoot.querySelector('dialog-list');
     this.$chatForm = this.shadowRoot.querySelector('message-form');
 
-    this.$dialogList.addEventListener('addNewChat', () => this.addEventOpenDialog());
+    this.shadowRoot.addEventListener('addNewChat', () => this.addEventOpenDialog());
 
     this.addEventOpenDialog();
   }
@@ -96,7 +113,44 @@ class GetDialog extends HTMLElement {
   closeChat() {
     this.$chatForm.style.display = 'none';
     this.$dialogList.style.display = 'block';
+
+    // this.updateDialogList();
   }
+
+  updateDialogList() {
+    // debugger;
+    // let dialogList = [];
+    // const json = localStorage.getItem('dialogList');
+    // try {
+    //   dialogList = JSON.parse(json);
+    // } catch (SyntaxError) {
+    //   alert("Can't unpacked storage");
+    // }
+    //
+    // for (let i = 0; i < dialogList.length; i++) {
+    //   let elem = this.$dialogList.$content.querySelector(`dialog-box[dialogid="${i}"]`);
+    //
+    // }
+  }
+
+  /*
+  @keyframes theme__linear-indeterminate-bar___3vY69 {
+    0% {
+        -webkit-transform: translate(-50%) scaleX(0);
+        transform: translate(-50%) scaleX(0)
+    }
+
+    50% {
+        -webkit-transform: translate(0) scaleX(.3);
+        transform: translate(0) scaleX(.3)
+    }
+
+    to {
+        -webkit-transform: translate(50%) scaleX(0);
+        transform: translate(50%) scaleX(0)
+    }
+}
+   */
 }
 
 customElements.define('get-dialog', GetDialog);
