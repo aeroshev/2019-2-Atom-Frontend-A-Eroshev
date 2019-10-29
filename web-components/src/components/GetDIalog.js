@@ -15,12 +15,10 @@ template.innerHTML = `
  
   @keyframes smoothOpen {
     from {
-        -webkit-transform: translate(-100%) scaleX(0);
         transform: translate(-100%) scaleX(0)
     }
 
     to {
-        -webkit-transform: translate(0) scaleX(1);
         transform: translate(0) scaleX(1)
     }
 }
@@ -36,12 +34,10 @@ template.innerHTML = `
  }
    @keyframes smoothClose {
     from {
-        -webkit-transform: translate(-100%) scaleX(0);
         transform: translate(-100%) scaleX(0)
     }
 
     to {
-        -webkit-transform: translate(0) scaleX(1);
         transform: translate(0) scaleX(1)
     }
 
