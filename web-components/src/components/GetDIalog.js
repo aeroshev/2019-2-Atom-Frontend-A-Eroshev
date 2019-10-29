@@ -57,13 +57,14 @@ class GetDialog extends HTMLElement {
     this.$dialogList = this.shadowRoot.querySelector('dialog-list');
     this.$chatForm = this.shadowRoot.querySelector('message-form');
 
-    this.shadowRoot.addEventListener('addNewChat', () => this.addEventOpenDialog());
+    this.shadowRoot.addEventListener('addNewChat', () => this.addListenerOpenDialog());
+    this.listener;
 
-    this.addEventOpenDialog();
+    this.addListenerOpenDialog();
   }
 
-  addEventOpenDialog() {
-    if (this.addedEvent === undefined) { this.addedEvent = []; }
+  addListenerOpenDialog() {
+    if (this.listener === undefined) { this.listener = []; }
 
     let dialogList = [];
     const json = localStorage.getItem('dialogList');
@@ -74,17 +75,15 @@ class GetDialog extends HTMLElement {
     }
 
     dialogList.forEach((dialogID) => {
-      if (!(dialogID in this.addedEvent)) {
+      if (!(dialogID in this.listener)) {
         const elem = this.$dialogList.$content.querySelector(`dialog-box[dialogid="${dialogID}"]`);
         elem.addEventListener('click', () => this.openChat(dialogID));
-        this.addedEvent.push(dialogID);
+        this.listener.push(dialogID);
       }
     });
   }
 
   openChat(dialogID) {
-    this.openedDialogID = dialogID;
-
     this.$chatForm.style.display = 'flex';
     this.$dialogList.style.display = 'none';
 

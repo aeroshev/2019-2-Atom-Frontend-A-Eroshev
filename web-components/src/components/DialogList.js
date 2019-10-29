@@ -140,7 +140,7 @@ class DialogList extends HTMLElement {
       localStorage.setItem('dialogList', JSON.stringify(dialogArray));
       this.renderDialog(dialogBox);
 
-      this.shadowRoot.dispatchEvent(new Event('addNewChat'));
+      this.dispatchEvent(new Event('addNewChat'));
     }
   }
 

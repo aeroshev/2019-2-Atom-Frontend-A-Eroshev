@@ -133,7 +133,7 @@ class MessageForm extends HTMLElement {
   // создание новго сообщения
   newMessage(owner, text, additions = null) {
     // полуаем текущее время
-    const time = new Date()
+    const time = new Date();
     // задаём атрибуты messageBox
     const messageBox = {
       messageID: this.dialogID++,
@@ -141,17 +141,17 @@ class MessageForm extends HTMLElement {
       message: text,
       additions,
       time: time.getTime(),
-    }
+    };
 
     // сохраняем в localStorage в виде JSON
-    let messageArray = JSON.parse(localStorage.getItem(`${this.dialogID}`))
+    let messageArray = JSON.parse(localStorage.getItem(`${this.dialogID}`));
     if (messageArray === null) {
-      messageArray = []
+      messageArray = [];
     }
-    messageArray.push(messageBox)
+    messageArray.push(messageBox);
 
-    localStorage.setItem(`${this.dialogID}`, JSON.stringify(messageArray))
-    this.renderMessage(messageBox)
+    localStorage.setItem(`${this.dialogID}`, JSON.stringify(messageArray));
+    this.renderMessage(messageBox);
   }
 
   onSubmit() {
