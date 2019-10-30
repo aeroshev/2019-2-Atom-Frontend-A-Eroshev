@@ -85,11 +85,12 @@ class MessageForm extends HTMLElement {
 
     this.lastMessage = undefined;
     this.timeSend = undefined;
+    this.dialogID = undefined;
   }
 
   // при обновлении страницы эта функция выгружает из localStorage историю сообщений
   messageLoader(dialogID) {
-    const json = localStorage.getItem(`${dialogID}`);
+    const json = localStorage.getItem(`dialogID_${dialogID}`);
 
     let messageArray = 0;
     try {
@@ -110,6 +111,26 @@ class MessageForm extends HTMLElement {
 
   setId(dialogID) {
     this.dialogID = dialogID;
+  }
+
+  countUnreadMessage() {
+    let messageList = [];
+    const json = localStorage.getItem(`dialogID_${this.dialogID}`);
+    try {
+      messageList = JSON.parse(json);
+    } catch (SyntaxError) {
+      alert("Can't unpacked storage");
+    }
+
+    let quantityUnreadMessages = 0;
+    if (messageList != null) {
+      for (let index = 0; index < messageList.length; index++) {
+        if (messageList[index].read === 'unread') {
+          quantityUnreadMessages++;
+        }
+      }
+    }
+    return quantityUnreadMessages;
   }
 
   /*
@@ -139,24 +160,25 @@ class MessageForm extends HTMLElement {
     const time = new Date();
     // задаём атрибуты messageBox
     const messageBox = {
-      messageID: this.dialogID++,
+      messageID: this.dialogID + localStorage.length,
       owner: ((owner) ? 'opposite' : 'self'),
       message: text,
       additions,
       time: time.getTime(),
+      read: 'read',
     };
 
     this.lastMessage = messageBox.message;
     this.timeSend = messageBox.time;
 
     // сохраняем в localStorage в виде JSON
-    let messageArray = JSON.parse(localStorage.getItem(`${this.dialogID}`));
+    let messageArray = JSON.parse(localStorage.getItem(`dialogID_${this.dialogID}`));
     if (messageArray === null) {
       messageArray = [];
     }
     messageArray.push(messageBox);
 
-    localStorage.setItem(`${this.dialogID}`, JSON.stringify(messageArray));
+    localStorage.setItem(`dialogID_${this.dialogID}`, JSON.stringify(messageArray));
     this.renderMessage(messageBox);
   }
 

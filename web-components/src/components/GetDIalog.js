@@ -110,7 +110,7 @@ class GetDialog extends HTMLElement {
     if (this.$chatForm.lastMessage && this.$chatForm.timeSend) {
       elem.setAttribute('lastmessage', this.$chatForm.lastMessage);
       elem.setAttribute('timelastmessage', this.$chatForm.timeSend);
-      elem.setAttribute('messagestatus', 'read');
+      elem.setAttribute('messagestatus', this.$chatForm.countUnreadMessage());
     }
   }
 }
