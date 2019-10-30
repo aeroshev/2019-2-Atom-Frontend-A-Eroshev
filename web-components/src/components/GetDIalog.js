@@ -58,13 +58,13 @@ class GetDialog extends HTMLElement {
     this.$chatForm = this.shadowRoot.querySelector('message-form');
 
     this.shadowRoot.addEventListener('addNewChat', () => this.addListenerOpenDialog());
-    this.listener;
+    this.collectorListener = undefined;
 
     this.addListenerOpenDialog();
   }
 
   addListenerOpenDialog() {
-    if (this.listener === undefined) { this.listener = []; }
+    if (this.collectorListener === undefined) { this.collectorListener = []; }
 
     let dialogList = [];
     const json = localStorage.getItem('dialogList');
@@ -75,10 +75,10 @@ class GetDialog extends HTMLElement {
     }
 
     dialogList.forEach((dialogID) => {
-      if (!(dialogID in this.listener)) {
+      if (!(dialogID in this.collectorListener)) {
         const elem = this.$dialogList.$content.querySelector(`dialog-box[dialogid="${dialogID}"]`);
         elem.addEventListener('click', () => this.openChat(dialogID));
-        this.listener.push(dialogID);
+        this.collectorListener.push(dialogID);
       }
     });
   }
@@ -98,6 +98,20 @@ class GetDialog extends HTMLElement {
   closeChat() {
     this.$chatForm.style.display = 'none';
     this.$dialogList.style.display = 'flex';
+
+    let dialogList = [];
+    const json = localStorage.getItem('dialogList');
+    try {
+      dialogList = JSON.parse(json);
+    } catch (SyntaxError) {
+      alert("Can't unpacked storage");
+    }
+
+    for (let i = 0; i < dialogList.length; i++) {
+      const elem = this.$dialogList.$content.querySelector(`dialog-box[dialogid="${i}"]`);
+      elem.setAttribute('lastmessage', 'world');
+      elem.setAttribute('messagestatus', 'unread');
+    }
   }
 }
 

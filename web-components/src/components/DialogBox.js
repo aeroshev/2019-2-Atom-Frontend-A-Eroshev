@@ -75,7 +75,6 @@ class DialogBox extends HTMLElement {
     this.shadowRoot = this.attachShadow({ mode: 'open' });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-    this.$wrap = this.shadowRoot.querySelector('.dialogWrap');
     this.$dialogName = this.shadowRoot.querySelector('.dialogName');
     this.$userAvatar = this.shadowRoot.querySelector('.dialogAvatar');
     this.$messageTime = this.shadowRoot.querySelector('.messageTime');
@@ -84,21 +83,17 @@ class DialogBox extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['dialogid', 'dialogname', 'lastmessage', 'timelastmessage', 'messagestatus'];
+    return ['dialogname', 'lastmessage', 'timelastmessage', 'messagestatus'];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
-      case 'dialogid':
-        this.$wrap.attr('dialogid', newValue);
-        break;
-
       case 'dialogname':
-        this.$dialogName.innerText += newValue;
+        this.$dialogName.innerText = newValue;
         break;
 
       case 'lastmessage':
-        this.$lastMessage.innerText += newValue;
+        this.$lastMessage.innerText = newValue;
         break;
 
       case 'timelastmessage':
@@ -108,7 +103,7 @@ class DialogBox extends HTMLElement {
         break;
 
       case 'messagestatus':
-        this.$messageStatus.innerText += newValue;
+        this.$messageStatus.innerText = newValue;
         break;
     }
   }

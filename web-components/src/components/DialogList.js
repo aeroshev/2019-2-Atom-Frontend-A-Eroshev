@@ -162,7 +162,7 @@ class DialogList extends HTMLElement {
     const dialogBox1 = {
       dialogID: this.numberOfID++,
       dialogName: 'some',
-      lastMessage: 'hello',
+      lastMessage: '',
       timeLastMessage: time.getTime(),
       messageStatus: 'read',
     };
@@ -170,7 +170,7 @@ class DialogList extends HTMLElement {
     const dialogBox2 = {
       dialogID: this.numberOfID++,
       dialogName: 'some',
-      lastMessage: 'hello',
+      lastMessage: '',
       timeLastMessage: time.getTime(),
       messageStatus: 'read',
     };
