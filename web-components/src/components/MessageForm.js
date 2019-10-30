@@ -82,6 +82,9 @@ class MessageForm extends HTMLElement {
     this.$toolBar = this.shadowRoot.querySelector('dialog-info');
 
     this.$input.addEventListener('onSubmit', this.onSubmit.bind(this));
+
+    this.lastMessage = undefined;
+    this.timeSend = undefined;
   }
 
   // при обновлении страницы эта функция выгружает из localStorage историю сообщений
@@ -142,6 +145,9 @@ class MessageForm extends HTMLElement {
       additions,
       time: time.getTime(),
     };
+
+    this.lastMessage = messageBox.message;
+    this.timeSend = messageBox.time;
 
     // сохраняем в localStorage в виде JSON
     let messageArray = JSON.parse(localStorage.getItem(`${this.dialogID}`));

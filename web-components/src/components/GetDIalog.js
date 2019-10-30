@@ -59,6 +59,7 @@ class GetDialog extends HTMLElement {
 
     this.shadowRoot.addEventListener('addNewChat', () => this.addListenerOpenDialog());
     this.collectorListener = undefined;
+    this.openedChatId = undefined;
 
     this.addListenerOpenDialog();
   }
@@ -84,6 +85,8 @@ class GetDialog extends HTMLElement {
   }
 
   openChat(dialogID) {
+    this.openedChatId = dialogID;
+
     this.$chatForm.style.display = 'flex';
     this.$dialogList.style.display = 'none';
 
@@ -99,18 +102,15 @@ class GetDialog extends HTMLElement {
     this.$chatForm.style.display = 'none';
     this.$dialogList.style.display = 'flex';
 
-    let dialogList = [];
-    const json = localStorage.getItem('dialogList');
-    try {
-      dialogList = JSON.parse(json);
-    } catch (SyntaxError) {
-      alert("Can't unpacked storage");
-    }
+    this.UpdateList(this.openedChatId);
+  }
 
-    for (let i = 0; i < dialogList.length; i++) {
-      const elem = this.$dialogList.$content.querySelector(`dialog-box[dialogid="${i}"]`);
-      elem.setAttribute('lastmessage', 'world');
-      elem.setAttribute('messagestatus', 'unread');
+  UpdateList(openedChatId) {
+    const elem = this.$dialogList.$content.querySelector(`dialog-box[dialogid="${openedChatId}"]`);
+    if (this.$chatForm.lastMessage && this.$chatForm.timeSend) {
+      elem.setAttribute('lastmessage', this.$chatForm.lastMessage);
+      elem.setAttribute('timelastmessage', this.$chatForm.timeSend);
+      elem.setAttribute('messagestatus', 'read');
     }
   }
 }
