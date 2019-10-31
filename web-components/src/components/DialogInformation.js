@@ -74,6 +74,7 @@ class DialogInformation extends HTMLElement {
 
     this.$backButton.addEventListener('keypress', this.escPress.bind(this));
     this.$backButton.addEventListener('click', this.backButton.bind(this));
+    this.$searchButton.addEventListener('click', this.searchButton.bind(this));
   }
 
   escPress(event) {
@@ -86,6 +87,10 @@ class DialogInformation extends HTMLElement {
 
   backButton() {
     this.dispatchEvent(new Event('clickBackButton'));
+  }
+
+  searchButton() {
+    this.dispatchEvent(new Event('clickSearchButton'));
   }
 }
 

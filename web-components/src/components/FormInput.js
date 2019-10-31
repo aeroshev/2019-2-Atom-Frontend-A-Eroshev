@@ -23,16 +23,17 @@ template.innerHTML = `
   .additionalButton{
     height: 100%;
     width: 30px;
-    background-size: 90%;
-    color: red;
+    /*background-size: 90%;*/
+    background-color: red;
     z-index: 1;
   }
   .sendButton{
     height: 100%;
-    width: 30px;
-    background-size: 90%;
-    color: red;
+    width: 50px;
+    /*background-size: 90%;*/
+    /*background-color: red;*/
     z-index: 1;
+    background: url(/static/images/sends.png) no-repeat center center;
   }
   .inputButton{
     height: 100%;
