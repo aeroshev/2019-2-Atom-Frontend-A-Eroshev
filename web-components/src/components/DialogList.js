@@ -128,11 +128,12 @@ class DialogList extends HTMLElement {
         alert('Error storage');
       }
 
+      const time = new Date();
       const dialogBox = {
         dialogID: this.numberOfID++,
         dialogName: nameChat,
         lastMessage: '',
-        timeLastMessage: '',
+        timeLastMessage: time.getTime(),
         messageStatus: '',
       };
 
