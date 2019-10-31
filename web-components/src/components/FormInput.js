@@ -33,7 +33,6 @@ template.innerHTML = `
     /*background-size: 90%;*/
     /*background-color: red;*/
     z-index: 1;
-    background: url(/static/images/sends.png) no-repeat center center;
   }
   .inputButton{
     height: 100%;
@@ -45,7 +44,7 @@ template.innerHTML = `
   }
 </style>
 <div class="inputButton">
-    <div class="additionalButton"></div>
+    <div class="additionalButton"><img src="static/images/sends.png"></div>
 </div>
 <input>
 <div class="inputButton">

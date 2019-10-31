@@ -113,6 +113,24 @@ class MessageForm extends HTMLElement {
     this.dialogID = dialogID;
   }
 
+  getLast() {
+    let messageList = [];
+    const json = localStorage.getItem(`dialogID_${this.dialogID}`);
+    try {
+      messageList = JSON.parse(json);
+    } catch (SyntaxError) {
+      alert("Can't unpacked storage");
+    }
+    if (messageList != null) {
+      const lastMessageBox = messageList[messageList.length - 1];
+      this.lastMessage = lastMessageBox.message;
+      this.timeSend = lastMessageBox.time;
+    } else {
+      this.lastMessage = '';
+      this.timeSend = 0;
+    }
+  }
+
   countUnreadMessage() {
     let messageList = [];
     const json = localStorage.getItem(`dialogID_${this.dialogID}`);

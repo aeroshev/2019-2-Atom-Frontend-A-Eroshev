@@ -108,9 +108,12 @@ class GetDialog extends HTMLElement {
   UpdateList(openedChatId) {
     const elem = this.$dialogList.$content.querySelector(`dialog-box[dialogid="${openedChatId}"]`);
     if (this.$chatForm.lastMessage && this.$chatForm.timeSend) {
-      elem.setAttribute('lastmessage', this.$chatForm.lastMessage);
-      elem.setAttribute('timelastmessage', this.$chatForm.timeSend);
-      elem.setAttribute('messagestatus', this.$chatForm.countUnreadMessage());
+      this.$chatForm.getLast();
+      if (this.$chatForm.lastMessage !== '' && this.$chatForm.timeSend !== 0) {
+        elem.setAttribute('lastmessage', this.$chatForm.lastMessage);
+        elem.setAttribute('timelastmessage', this.$chatForm.timeSend);
+        elem.setAttribute('messagestatus', this.$chatForm.countUnreadMessage());
+      }
     }
   }
 }
