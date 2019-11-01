@@ -34,7 +34,8 @@ template.innerHTML = `
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    overflow: visible;
+    overflow: hidden;
+    overflow-y: scroll;  
   }
   message-box{
     box-sizing: border-box;
