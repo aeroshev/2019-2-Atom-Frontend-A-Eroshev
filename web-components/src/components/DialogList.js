@@ -52,13 +52,19 @@ template.innerHTML = `
     background: url(https://static.thenounproject.com/png/424968-200.png) no-repeat center center;
     background-size: 50%;
  }
- 
+    
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+  
   .wrap{
     margin-top: 60px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    align-content: flex-end;
+    align-content: flex-start;
+    overflow: hidden;
+    overflow-y: scroll;
   }
     dialog-box{
       box-sizing: border-box;

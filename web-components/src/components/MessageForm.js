@@ -70,7 +70,7 @@ template.innerHTML = `
 </div>
 <div class="messageWrap"></div>
 <div class="footer">
-  <form-input placeholder="Message"></form-input>
+  <form-input placeholder="Message" name="scroll"></form-input>
 </div>
 `;
 
