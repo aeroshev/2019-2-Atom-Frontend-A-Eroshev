@@ -12,13 +12,14 @@ template.innerHTML = `
   .headerButton{
     height: 100%;
     /*width: 120px;*/
-    margin: 0 5px;
+    /*margin: 0 5px;*/
     cursor: pointer;
   }
   .statusConteiner{
     flex: auto;
     height: 100%;
     padding: 5px 0;
+    width: 50%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -27,8 +28,8 @@ template.innerHTML = `
     height: 100%;
     width: 50px;
     border-radius: 30px;
-    margin-right: 30px;
-    margin-left: 30px;
+    margin-right: 10px;
+    margin-left: 10px;
     background: url(https://cdn.iconscout.com/icon/free/png-256/avatar-367-456319.png) no-repeat center center;
     background-size: 100%; 
   }
@@ -59,10 +60,10 @@ template.innerHTML = `
     background-size: 100%;
     display: inline-block;
     height: 100%;
-    width: 50px;
+    width: 40px;
     float: left;
     background: url(https://static.thenounproject.com/png/424968-200.png) no-repeat center center;
-    background-size: 50%;
+    background-size: 70%;
   }
   
   .headerButton .optionsButton{
