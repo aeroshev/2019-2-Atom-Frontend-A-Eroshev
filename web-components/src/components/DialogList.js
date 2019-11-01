@@ -26,12 +26,33 @@ template.innerHTML = `
  }
   
   .header .message {
-    padding-left: 50px;
+    display: inline-block;
+    padding-left: 10px;
     line-height: 60px;
     float: left;
     color: #f8fff9;
     font-weight: bold;
+ }
+ .header .menu {
+    width: 60px;
+    height: 100%;
+    display: inline-block;
+    margin-right: 20px;
+    background-size: 30px;
+    float: left;
+    cursor: pointer;
+    background: url(https://static.thenounproject.com/png/703781-200.png);
+    background-size: 100%;
  } 
+ .header .search{
+    display: inline-block;
+    height: 100%;
+    width: 60px;
+    float: right;
+    background: url(https://static.thenounproject.com/png/424968-200.png) no-repeat center center;
+    background-size: 50%;
+ }
+ 
   .wrap{
     margin-top: 60px;
     width: 100%;
@@ -46,6 +67,7 @@ template.innerHTML = `
       height: 100px;
       padding: 10px;
       background-color: #f8fff4;
+      cursor: pointer;
   }
   
    .buttonNew{
@@ -61,6 +83,10 @@ template.innerHTML = `
       cursor: pointer;
       animation: pulse 2s infinite;
       box-shadow: 0 0 0 rgba(204,169,44, 0.4);
+      background-image: url(http://simpleicon.com/wp-content/uploads/pencil.png);
+      background-size: 77%;
+      background-position: center;
+      
  }
  
     .pulse:hover {
@@ -89,83 +115,12 @@ template.innerHTML = `
       box-shadow: 0 0 0 0 rgba(204,169,44, 0);
   }
   
-     .header #nav-icon1 {
-  width: 60px;
-  height: 45px;
-  position: relative;
-  
-  margin: 50px auto;
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
-  cursor: pointer;
-}
-
-  #nav-icon1 span {
-  display: block;
-  position: absolute;
-  height: 9px;
-  width: 100%;
-  background: #d3531a;
-  border-radius: 9px;
-  opacity: 1;
-  left: 0;
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
-  -webkit-transition: .25s ease-in-out;
-  -moz-transition: .25s ease-in-out;
-  -o-transition: .25s ease-in-out;
-  transition: .25s ease-in-out;
-}
-
-#nav-icon1 span:nth-child(1) {
-  top: 0px;
-}
-
-#nav-icon1 span:nth-child(2) {
-  top: 18px;
-}
-
-#nav-icon1 span:nth-child(3) {
-  top: 36px;
-}
-
-#nav-icon1.open span:nth-child(1) {
-  top: 18px;
-  -webkit-transform: rotate(135deg);
-  -moz-transform: rotate(135deg);
-  -o-transform: rotate(135deg);
-  transform: rotate(135deg);
-}
-
-#nav-icon1.open span:nth-child(2) {
-  opacity: 0;
-  left: -60px;
-}
-
-#nav-icon1.open span:nth-child(3) {
-  top: 18px;
-  -webkit-transform: rotate(-135deg);
-  -moz-transform: rotate(-135deg);
-  -o-transform: rotate(-135deg);
-  transform: rotate(-135deg);
-}
-}
+     .he
 </style>
 <div class="header">
-  <div id="nav-icon1">
-  <span></span>
-  <span></span>
-  <span></span>
-    </div>
+  <div class="menu"></div>
   <a class="message">Сообщения</a>
+  <div class="search"></div>
 </div>
 <div class="wrap"></div>
 <div class="buttonNew"></div>

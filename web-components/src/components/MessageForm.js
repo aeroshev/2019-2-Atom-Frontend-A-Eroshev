@@ -27,11 +27,13 @@ template.innerHTML = `
     width: 0px;
   }
   .messageWrap{
-    margin-top: 40px;
+    margin-top: 60px;
+    margin-bottom: 50px;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    align-content: flex-end;
+    align-content: flex-start;
   }
   message-box{
     box-sizing: border-box;

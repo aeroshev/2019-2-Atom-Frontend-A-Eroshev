@@ -32,6 +32,8 @@ template.innerHTML = `
     height: 60px;
     margin: 0px;
     border-radius: 30px;
+    background: url(https://cdn.iconscout.com/icon/free/png-256/avatar-367-456319.png) no-repeat center center;
+    background-size: 100%;
   }
   
   .dialogWrap .messageTime {
@@ -47,7 +49,7 @@ template.innerHTML = `
   .dialogWrap .lastMessage {
     width: 100%;
     height: 40px;
-    padding-left: 60px;
+    padding-left: 100px;
     padding-right: 60px;
     text-align: left;
   }

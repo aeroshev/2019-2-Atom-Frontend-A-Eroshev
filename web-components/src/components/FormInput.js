@@ -23,16 +23,16 @@ template.innerHTML = `
   .additionalButton{
     height: 100%;
     width: 30px;
-    /*background-size: 90%;*/
-    background-color: red;
+    background: url(https://image.flaticon.com/icons/png/512/61/61733.png) no-repeat center center;
+    background-size: 90%;
     z-index: 1;
   }
   .sendButton{
     height: 100%;
     width: 50px;
-    /*background-size: 90%;*/
-    /*background-color: red;*/
     z-index: 1;
+    background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4nLrdWTWhP1h2cPfOyG-PLg9zT4scHHlkdkBCFJpfXbFps7Ji&s) no-repeat center center;
+    background-size: 90%;
   }
   .inputButton{
     height: 100%;
@@ -44,7 +44,7 @@ template.innerHTML = `
   }
 </style>
 <div class="inputButton">
-    <div class="additionalButton"><img src="static/images/sends.png"></div>
+    <div class="additionalButton"></div>
 </div>
 <input>
 <div class="inputButton">
