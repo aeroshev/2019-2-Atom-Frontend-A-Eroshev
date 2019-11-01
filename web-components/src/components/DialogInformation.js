@@ -12,7 +12,7 @@ template.innerHTML = `
   .headerButton{
     height: 100%;
     /*width: 120px;*/
-    margin: 0 15px;
+    margin: 0 5px;
     cursor: pointer;
   }
   .statusConteiner{
@@ -27,7 +27,8 @@ template.innerHTML = `
     height: 100%;
     width: 50px;
     border-radius: 30px;
-    margin-right: 50px;
+    margin-right: 30px;
+    margin-left: 30px;
     background: url(https://cdn.iconscout.com/icon/free/png-256/avatar-367-456319.png) no-repeat center center;
     background-size: 100%; 
   }
@@ -50,7 +51,7 @@ template.innerHTML = `
     width: 40px;
     height: 40px;
     margin: 10px;
-    background: url(https://cdn2.iconfinder.com/data/icons/simple-circular-icons-line/84/Left_Carrot-512.png);
+    background: url(https://cdn2.iconfinder.com/data/icons/simple-circular-icons-line/84/Left_Carrot-512.png) no-repeat center center;
     background-size: 100%;
   }
   
@@ -58,7 +59,7 @@ template.innerHTML = `
     background-size: 100%;
     display: inline-block;
     height: 100%;
-    width: 60px;
+    width: 50px;
     float: left;
     background: url(https://static.thenounproject.com/png/424968-200.png) no-repeat center center;
     background-size: 50%;
@@ -68,8 +69,8 @@ template.innerHTML = `
     background-size: 100%;
     display: inline-block;
     height: 100%;
-    width: 60px;
-    background: url(https://static.thenounproject.com/png/703781-200.png);
+    width: 50px;
+    background: url(https://static.thenounproject.com/png/703781-200.png) no-repeat center center;
     background-size: 100%;
   }
 
