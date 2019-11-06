@@ -145,3 +145,7 @@ flow-typed/
 docs/_book/
 jest_*/
 .jscpd/
+
+#### special ignore ####
+.idea
+web-components/build

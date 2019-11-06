@@ -21,11 +21,18 @@ template.innerHTML = `
     padding-left: 10px;
   }
   .additionalButton{
+    height: 100%;
+    width: 30px;
+    background: url(https://image.flaticon.com/icons/png/512/61/61733.png) no-repeat center center;
     background-size: 90%;
+    z-index: 1;
   }
   .sendButton{
+    height: 100%;
+    width: 50px;
+    z-index: 1;
+    background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4nLrdWTWhP1h2cPfOyG-PLg9zT4scHHlkdkBCFJpfXbFps7Ji&s) no-repeat center center;
     background-size: 90%;
-    background: url("image/Send.png");
   }
   .inputButton{
     height: 100%;

@@ -5,7 +5,7 @@ template.innerHTML = `
     box-sizing: border-box;
   }
   li{
-    margin-top: 50px;
+    margin-top: 10px;
     padding-bottom: 100px;
     list-style: none;
   }

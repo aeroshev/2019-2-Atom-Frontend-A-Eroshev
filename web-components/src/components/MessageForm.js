@@ -16,40 +16,49 @@ template.innerHTML = `
     flex-direction: column;
   }
   .header{
-    position: fixed;
+    position: absolute;
     left: 0; top: 0;
-    background-color: #760db2;
+    background-color: #8E24AA;
     width: 100%;
     z-index: 1;
   }
-  .content{
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    flex: auto;
-    flex-wrap: wrap;
-    flex-direction: column-reverse;
-    align-content: flex-end;
-    z-index: 0;
-    overflow-y: auto;
-  }
+
   ::-webkit-scrollbar {
     width: 0px;
   }
   .messageWrap{
+    margin-top: 60px;
+    margin-bottom: 50px;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    align-content: flex-end;
+    align-content: flex-start;
+    overflow: hidden;
+    overflow-y: scroll;  
   }
   message-box{
     box-sizing: border-box;
+    /*overflow: hidden;*/
     width: 100%;
-    padding: 0 10px 10px 10px;
+    padding: 0 4px 0 4px;
+    animation-name: smoothDrop;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+  }
+  @keyframes smoothDrop {
+    from {
+        transform: translate(-100%) scaleX(0)
+    }
+    to {
+        transform: translate(0) scaleX(1)
+    }
   }
   .footer{
-    position: fixed;
-    left: 0; bottom: 0;
+    position: absolute;
+    left: 0; 
+    bottom: 0;
     width: 100%;
     background-color: #f8fff9;
     outline: 1px solid rgba(5,0,0,0.94);
@@ -59,13 +68,9 @@ template.innerHTML = `
 <div class="header">
     <dialog-info></dialog-info>
 </div>
-<div class="content">
-    <div class="messageWrap">
-    <date-marker></date-marker>
-  </div>
-</div>
+<div class="messageWrap"></div>
 <div class="footer">
-  <form-input placeholder="Cообщение"></form-input>
+  <form-input placeholder="Message" name="scroll"></form-input>
 </div>
 `;
 
@@ -78,32 +83,89 @@ class MessageForm extends HTMLElement {
 
     this.$input = this.shadowRoot.querySelector('form-input');
     this.$messages = this.shadowRoot.querySelector('.messageWrap');
+    this.$toolBar = this.shadowRoot.querySelector('dialog-info');
 
     this.$input.addEventListener('onSubmit', this.onSubmit.bind(this));
 
-    this.dialogID = 0;
-    this.messageLoader();
+    this.lastMessage = undefined;
+    this.timeSend = undefined;
+    this.dialogID = undefined;
   }
 
   // при обновлении страницы эта функция выгружает из localStorage историю сообщений
-  messageLoader() {
-    const messageArray = JSON.parse(localStorage.getItem(`${this.dialogID}`));
-    for (let index = 0; index < messageArray.length; index++) {
-      this.renderMessage(messageArray[index])
+  messageLoader(dialogID) {
+    const json = localStorage.getItem(`dialogID_${dialogID}`);
+
+    let messageArray = 0;
+    try {
+      messageArray = JSON.parse(json);
+    } catch (SyntaxError) {
+      localStorage.clear();
+    }
+    if (messageArray != null) {
+      for (let index = 0; index < messageArray.length; index++) {
+        this.renderMessage(messageArray[index]);
+      }
     }
   }
 
+  clearChat() {
+    this.$messages.innerHTML = '';
+  }
 
+  setId(dialogID) {
+    this.dialogID = dialogID;
+  }
+
+  getLast() {
+    let messageList = [];
+    const json = localStorage.getItem(`dialogID_${this.dialogID}`);
+    try {
+      messageList = JSON.parse(json);
+    } catch (SyntaxError) {
+      alert("Can't unpacked storage");
+    }
+    if (messageList != null) {
+      const lastMessageBox = messageList[messageList.length - 1];
+      this.lastMessage = lastMessageBox.message;
+      this.timeSend = lastMessageBox.time;
+    } else {
+      this.lastMessage = '';
+      this.timeSend = 0;
+    }
+  }
+
+  countUnreadMessage() {
+    let messageList = [];
+    const json = localStorage.getItem(`dialogID_${this.dialogID}`);
+    try {
+      messageList = JSON.parse(json);
+    } catch (SyntaxError) {
+      alert("Can't unpacked storage");
+    }
+
+    let quantityUnreadMessages = 0;
+    if (messageList != null) {
+      for (let index = 0; index < messageList.length; index++) {
+        if (messageList[index].read === 'unread') {
+          quantityUnreadMessages++;
+        }
+      }
+    }
+    return quantityUnreadMessages;
+  }
+
+  /*
   // рендеринг объекта времени
   renderDate(time) {
     let elem = document.createElement('date-marker');
     elem = this.$messages.appendChild(elem);
     elem.setAttribute('time', time);
   }
-
+*/
   // рендеринг объекта сообщения
   renderMessage(messageBox) {
-    this.renderDate(messageBox.time);
+    /* this.renderDate(messageBox.time); */
 
     let elem = document.createElement('message-box');
     elem = this.$messages.appendChild(elem);
@@ -121,19 +183,24 @@ class MessageForm extends HTMLElement {
     // задаём атрибуты messageBox
     const messageBox = {
       messageID: this.dialogID + localStorage.length,
-      owner: ((owner) ? 'opposide' : 'self'),
+      owner: ((owner) ? 'opposite' : 'self'),
       message: text,
       additions,
       time: time.getTime(),
+      read: 'read',
     };
+
+    this.lastMessage = messageBox.message;
+    this.timeSend = messageBox.time;
+
     // сохраняем в localStorage в виде JSON
-    let messageArray = JSON.parse(localStorage.getItem(`${this.dialogID}`));
+    let messageArray = JSON.parse(localStorage.getItem(`dialogID_${this.dialogID}`));
     if (messageArray === null) {
       messageArray = [];
     }
     messageArray.push(messageBox);
 
-    localStorage.setItem(`${this.dialogID}`, JSON.stringify(messageArray));
+    localStorage.setItem(`dialogID_${this.dialogID}`, JSON.stringify(messageArray));
     this.renderMessage(messageBox);
   }
 
