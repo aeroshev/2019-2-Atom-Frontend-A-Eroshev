@@ -1,0 +1,41 @@
+* {
+	box-sizing: border-box;
+}
+:host {
+	display: flex;
+	height: 50px;
+	flex-direction: row;
+}
+
+input {
+	color: #050000;
+	border: none;
+	outline: 0;
+	flex: auto;
+	height: 100%;
+	background-color: transparent;
+	font-size: medium;
+	padding-left: 10px;
+}
+.additionalButton {
+	height: 100%;
+	width: 30px;
+	background: url(https://image.flaticon.com/icons/png/512/61/61733.png) no-repeat center center;
+	background-size: 90%;
+	z-index: 1;
+}
+.sendButton {
+	height: 100%;
+	width: 50px;
+	z-index: 1;
+	background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4nLrdWTWhP1h2cPfOyG-PLg9zT4scHHlkdkBCFJpfXbFps7Ji&s) no-repeat center center;
+	background-size: 90%;
+}
+.inputButton {
+	height: 100%;
+	width: 30px;
+	margin: 0 15px;
+	cursor: pointer;
+	opacity: 0.85;
+	transition-duration: 0.15s;
+}

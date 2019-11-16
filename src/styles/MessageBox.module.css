@@ -1,0 +1,28 @@
+*{
+	box-sizing: border-box;
+}
+li{
+	margin-top: 10px;
+	padding-bottom: 100px;
+	list-style: none;
+}
+.messageBox{
+	display: inline-block;
+	border-radius: 5px;
+	padding: 10px;
+	text-align: justify;
+	max-width: 60%;
+	word-break: break-all;
+}
+.messageBox .time{
+	width: 100%;
+	text-align: right;
+	margin-top: 5px;
+	color: #727272;
+	font-size: small;
+}
+.messageBox .text{
+	float: right;
+	background-color: #f4d3ee;
+	color: #727272;
+}

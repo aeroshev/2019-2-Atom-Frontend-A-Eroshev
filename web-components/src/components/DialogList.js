@@ -121,7 +121,6 @@ template.innerHTML = `
       box-shadow: 0 0 0 0 rgba(204,169,44, 0);
   }
   
-     .he
 </style>
 <div class="header">
   <div class="menu"></div>
