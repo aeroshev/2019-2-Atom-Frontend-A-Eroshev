@@ -2,44 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ac40467-f6c0-47a9-8789-785ec8f18553" name="Default Changelist" comment="Add animation for dialog-list and message-form">
-      <change afterPath="$PROJECT_DIR$/src/components/Application.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ButtonCreateChat.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ChatList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/DialogBox.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/FormInput.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/HeaderChat.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/HeaderDialogList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ManagerChat.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ManagerChatList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MessageBox.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/ButtonCreateChat.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/ChatList.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/DialogBox.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/FormInput.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/HeaderChat.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/ManagerChatList.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/MessageBox.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/HeaderDialogList.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/counter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Counter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/ActionTypes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/CounterContainer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/counter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/storeDev.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/storeProd.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/globalStyles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/CounterContainer.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/serviceWorker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-components/src/components/DialogList.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-components/src/components/DialogList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ButtonCreateChat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ButtonCreateChat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ChatList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChatList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DialogBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DialogBox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FormInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FormInput.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HeaderChat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HeaderChat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HeaderDialogList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HeaderDialogList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ManagerChat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ManagerChat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ManagerChatList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ManagerChatList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/ChatList.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/ChatList.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/FormInput.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/FormInput.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/HeaderChat.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/HeaderChat.module.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -118,7 +95,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.frontend: Compose Deployment">
+  <component name="RunManager" selected="npm.lint">
     <configuration name="docker-compose.yml.frontend: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings>
@@ -137,6 +114,16 @@
       <command value="run" />
       <scripts>
         <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="lint" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -162,23 +149,13 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="test" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.lint" />
         <item itemvalue="Docker.docker-compose.yml.frontend: Compose Deployment" />
         <item itemvalue="npm.test (1)" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.test" />
       </list>
     </recent_temporary>
   </component>
@@ -229,7 +206,9 @@
       <workItem from="1573317816603" duration="752000" />
       <workItem from="1573473838342" duration="300000" />
       <workItem from="1573485603246" duration="3210000" />
-      <workItem from="1573893023732" duration="9099000" />
+      <workItem from="1573893023732" duration="9616000" />
+      <workItem from="1573942489074" duration="1446000" />
+      <workItem from="1573975160635" duration="6354000" />
     </task>
     <servers />
   </component>

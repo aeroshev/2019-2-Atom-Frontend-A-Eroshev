@@ -7,15 +7,20 @@
 	flex-direction: row;
 }
 
-input {
+.customInput {
 	color: #050000;
 	border: none;
-	outline: 0;
 	flex: auto;
 	height: 100%;
-	background-color: transparent;
 	font-size: medium;
 	padding-left: 10px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #f8fff9;
+	outline: 1px solid rgba(5,0,0,0.94);
+	z-index: 1;
 }
 .additionalButton {
 	height: 100%;

@@ -27,3 +27,8 @@ li{
 	overflow-y: scroll;
 }
 
+.noMessage{
+	text-align:  center;
+	color: white;
+	margin: 0px 40p 0px 40px;
+}

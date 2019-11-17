@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormInput } from './FormInput'
 
 
 export class ManagerChat extends React.Component {
@@ -8,7 +9,7 @@ export class ManagerChat extends React.Component {
 
 	render() {
 		return(
-			<h1>Hello!</h1>
+			<FormInput/>
 		);
 	}
 }
