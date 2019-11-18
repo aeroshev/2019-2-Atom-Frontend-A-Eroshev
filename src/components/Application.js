@@ -1,6 +1,7 @@
 import React from 'react';
 import { ManagerChatList } from './ManagerChatList';
 import { ManagerChat } from './ManagerChat';
+import { UserProfile } from './Profile';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -15,16 +16,11 @@ export class Application extends React.Component {
 	render() {
 		return (
 			<Router>
-				<div>
-					<Switch>
-						<Route path="/">
-							<ManagerChatList/>
-						</Route>
-						<Route path="/chat">
-							<ManagerChat/>
-						</Route>
-					</Switch>
-				</div>
+				<Switch>
+					<Route path="/" exact component={ManagerChatList} />
+					<Route path="/chat" component={ManagerChat} />
+					<Route path="/profile" component={UserProfile} />
+				</Switch>
 			</Router>
 		)
 	}

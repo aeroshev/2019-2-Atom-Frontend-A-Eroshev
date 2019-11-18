@@ -1,5 +1,4 @@
 import React from 'react';
-import { HeaderDialogList } from './HeaderDialogList'
 import { DialogBox } from './DialogBox'
 import styles from '../styles/ChatList.module.css'
 import { BrowserRouter as Link } from "react-router-dom";
@@ -11,13 +10,14 @@ export function ButtonNewChat (props) {
 
 	function handleClick(event) {
 		event.preventDefault();
+		console.log( listDialogs);
 		const nameChat = prompt('Name new chat', 'NewChat');
 		const time = new Date();
 		if (listDialogs.length === 1) {
 			listDialogs.pop();
 		}
 		const boxInfo = {
-			id: ((listDialogs.length === 0) ? 1 : listDialogs.length),
+			id: ((listDialogs.length === 0) ? 0 : listDialogs.length),
 			dialogName: nameChat,
 			messageTime: time.getTime(),
 			lastMessage: '',
@@ -35,11 +35,11 @@ export function ButtonNewChat (props) {
 }
 
 export function ChatList (props) {
-	const { chatList } = props;
-	let listDialogs = [];
+	const { chatList, listDialogs } = props;
+
 
 	if (!chatList) {
-		listDialogs.push(<b className={styles.noMessage}>No chats</b>);
+		listDialogs.push(<div className={styles.noMessage}>No chats</div>);
 		} else {
 			let timeLastMessageChat;
 
@@ -57,7 +57,6 @@ export function ChatList (props) {
 
 		return(
 			<div>
-				<HeaderDialogList/>
 				<div className={styles.wrap}>{ listDialogs }</div>
 				<ButtonNewChat listDialogs={ listDialogs }/>
 			</div>

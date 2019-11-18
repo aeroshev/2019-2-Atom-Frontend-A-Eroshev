@@ -1,16 +1,44 @@
 import React from 'react';
 import { ChatList } from './ChatList'
+import { HeaderDialogList } from './HeaderDialogList'
 
 export class ManagerChatList extends React.Component {
 	constructor(props) {
 		super(props);
+		this.loadTest();
 
 		const info = this.parseData();
 
 		this.state = {
 			chatList: info.chatList,
-			messageList: info.messageList
+			listDialogs: [],
 		};
+
+	}
+
+	loadTest() {
+		const time = new Date();
+
+		const dialogBox1 = {
+			id: 0,
+			dialogName: 'some',
+			lastMessage: '',
+			timeLastMessage: time.getTime(),
+			messageStatus: 'read',
+		};
+
+		const dialogBox2 = {
+			id: 1,
+			dialogName: 'some',
+			lastMessage: '',
+			timeLastMessage: time.getTime(),
+			messageStatus: 'read',
+		};
+
+		const arr = [dialogBox1, dialogBox2];
+		localStorage.setItem('chatList', JSON.stringify(arr));
+
+		return;
 	}
 
 	parseData() {
@@ -18,15 +46,13 @@ export class ManagerChatList extends React.Component {
 		try {
 			data = {
 				chatList: JSON.parse(localStorage.getItem('chatList')),
-				messageList: JSON.parse(localStorage.getItem('messageList'))
 			};
 		} catch (Error) {
-				localStorage.clear();
-				console.log('Error local storage');
-				data = {
-					chatList: null,
-					messageList: null
-				};
+			localStorage.clear();
+			console.log('Error local storage');
+			data = {
+				chatList: null,
+			};
 		}
 		return data;
 	}
@@ -34,11 +60,12 @@ export class ManagerChatList extends React.Component {
 	render() {
 		const {
 			chatList,
-			messageList
+			listDialogs
 		} = this.state;
 		return (
 			<div>
-				<ChatList chatList={chatList}/>
+				<HeaderDialogList/>
+				<ChatList chatList={chatList} listDialogs={listDialogs}/>
 			</div>
 		);
 	}
