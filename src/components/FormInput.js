@@ -1,16 +1,17 @@
-import React from 'react';
-import styles from '../styles/FormInput.module.css'
+import React, { useContext } from 'react';
+import MyContext from './Context';
+import styles from '../styles/FormInput.module.css';
 
 
 export function FormInput(props) {
-	const { formEntered } = props;
+	const { formEntered } = useContext(MyContext);
 	const input = React.useRef(null);
 
 	function onSubmit() {
 		const value = input.current.value.trim();
 		if (value !== '') {
 			input.current.value = '';
-			formEntered(value);
+			formEntered.bind(value)
 		}
 	}
 

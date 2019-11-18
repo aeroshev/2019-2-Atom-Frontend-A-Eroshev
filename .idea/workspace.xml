@@ -2,22 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ac40467-f6c0-47a9-8789-785ec8f18553" name="Default Changelist" comment="Add animation for dialog-list and message-form">
-      <change afterPath="$PROJECT_DIR$/src/components/Context.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MessageList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Profile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/ManagerChat.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Application.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Application.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ChatList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChatList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DialogBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DialogBox.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/FormInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FormInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HeaderChat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HeaderChat.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ManagerChat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ManagerChat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ManagerChatList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ManagerChatList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/ChatList.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/ChatList.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/DialogBox.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/DialogBox.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/FormInput.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/FormInput.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/HeaderChat.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/HeaderChat.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MessageBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MessageBox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MessageList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MessageList.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -212,7 +201,8 @@
       <workItem from="1573975160635" duration="6627000" />
       <workItem from="1574020675107" duration="317000" />
       <workItem from="1574070021489" duration="6761000" />
-      <workItem from="1574086440562" duration="2892000" />
+      <workItem from="1574086440562" duration="4832000" />
+      <workItem from="1574103356228" duration="8000" />
     </task>
     <servers />
   </component>

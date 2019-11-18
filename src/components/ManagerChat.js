@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormInput } from './FormInput';
 import { HeaderChat } from './HeaderChat';
-import { MessageBox } from './MessageBox';
 import { MessageList } from './MessageList';
 import MyContext from './Context';
 import styles from '../styles/ManagerChat.module.css';
@@ -37,7 +36,7 @@ export class ManagerChat extends React.Component {
 		};
 
 		const arr = [dialogBox1, dialogBox2];
-		localStorage.setItem('chatList', JSON.stringify(arr));
+		localStorage.setItem('messageList', JSON.stringify(arr));
 
 		return;
 	}
@@ -59,8 +58,9 @@ export class ManagerChat extends React.Component {
 	}
 
 	formEntered(value) {
-		const { activeChat, messageList } = this.state;
-		messageList[activeChat - 1].push({
+		console.log("formEntered");
+		const {messageList } = this.state;
+		messageList.push({
 			time: new Date().getTime(),
 			text: value,
 		});
@@ -75,12 +75,11 @@ export class ManagerChat extends React.Component {
 			listMessages
 		} = this.state;
 		return(
-			<MyContext.Provider value={this}>
+			<MyContext.Provider value={{formEntered: this.formEntered}}>
 				<div className={styles.header}>
 					<HeaderChat/>
 				</div>
 				<MessageList messageList={messageList} listMessages={listMessages}/>
-				<FormInput />
 			</MyContext.Provider>
 		);
 	}
