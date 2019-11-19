@@ -10,7 +10,13 @@ export function HeaderChat(props) {
 					<div className={styles.backButton}/>
 				</Link>
 			</div>
-			<div className={styles.status}>Online</div>
+			<div className={styles.statusConteiner}>
+				<div className={styles.userAvatat}></div>
+				<div className={styles.userName}>
+					<div className={styles.name}>Eroshev Artem</div>
+					<div className={styles.status}>Online</div>
+				</div>
+			</div>
 			<div className={styles.headerButton}>
 				<div className={styles.searchButton}/>
 				<div className={styles.optionsButton}/>

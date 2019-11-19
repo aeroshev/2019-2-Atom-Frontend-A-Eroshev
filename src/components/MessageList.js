@@ -1,29 +1,21 @@
 import React from 'react';
-import styles from '../styles/ManagerChat.module.css';
-import { FormInput } from './FormInput';
+import styles from '../styles/MessageList.module.css';
 import { MessageBox } from './MessageBox';
 
 
-export function MessageList(props) {
-	const { messageList, listMessages } = props;
+export function MessageList(props){
+		const list = [];
+		let iter = 0;
+		props.messageList.forEach(item => {
+	
+			const Message = <MessageBox key={iter++} content={item.content} time={item.time} />;
+	
+			list.push(Message);
+		});
 
-	let lastTime = null;
-	const list = [];
-	let $i = 0;
-	messageList.forEach((elem) => {
-		const currentTime = elem.time;
-
-		const Message = <MessageBox key={$i++} text={elem.text} time={elem.time}/>;
-		let Marker = null;
-
-		listMessages.push(Message);
-
-		lastTime = currentTime;
-	});
-	return (
-			<div className={styles.messageWrap}>
-				<div className={styles.messageBox}>{ listMessages }</div>
-				<FormInput/>
-			</div>
-	);
+		return (
+				<div className={styles.messageWrap}>
+					<div className={styles.messageBox}>{ list }</div>
+				</div>
+		);
 }
