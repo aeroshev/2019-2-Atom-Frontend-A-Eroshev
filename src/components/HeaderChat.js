@@ -3,6 +3,7 @@ import styles from '../styles/HeaderChat.module.css';
 import { Link } from "react-router-dom";
 
 export function HeaderChat(props) {
+	const { status } = props;
 	return (
 		<div className={styles.header}>
 			<div className={styles.headerButton}>

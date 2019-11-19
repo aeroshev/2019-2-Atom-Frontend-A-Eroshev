@@ -37,8 +37,8 @@ export class FormInput extends React.Component {
 				</div>
 				<form 
 				onSubmit={this.handleSubmit}
-				className={styles.customInput}>
-					<input 
+				>
+					<input className={styles.customInput}
 					onChange={this.handleChange}
 					value={this.state.message}
 					placeholder={'Message'}

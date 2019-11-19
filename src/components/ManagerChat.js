@@ -15,6 +15,7 @@ export class ManagerChat extends React.Component {
 
 		this.state = {
 			messageList: info.messageList,
+			statusInfo: info.statusInfo,
 		};
 	}
 
@@ -37,6 +38,7 @@ export class ManagerChat extends React.Component {
 
 		const arr = [dialogBox1, dialogBox2];
 		localStorage.setItem('messageList', JSON.stringify(arr));
+		localStorage.setItem('statusInfo', JSON.stringify([{id: 0, status: 'online'}, {id: 1, status: 'ofline'}]))
 
 		return;
 	}
@@ -45,13 +47,15 @@ export class ManagerChat extends React.Component {
 		let data;
 		try {
 			data = {
-				messageList: JSON.parse(localStorage.getItem('messageList'))
+				messageList: JSON.parse(localStorage.getItem('messageList')),
+				statusInfo: JSON.parse(localStorage.getItem('statusInfo')),
 			};
 		} catch (Error) {
 			localStorage.clear();
 			console.log('Error local storage');
 			data = {
-				messageList: null
+				messageList: null,
+				statusInfo: null,
 			};
 		}
 		return data;
@@ -71,7 +75,7 @@ export class ManagerChat extends React.Component {
 	render() {
 		return(
 			<div>
-				<HeaderChat />
+				<HeaderChat status={this.state.statusInfo} />
 				<MessageList messageList={this.state.messageList} />
 				<FormInput sendMessage={this.sendMessage} />
 			</div>

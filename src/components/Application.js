@@ -11,15 +11,27 @@ import {
 export class Application extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			activeChat: 0,
+		}
+	}
+
+	setActiveChat(id) {
+		const { activeChat } = this.state;
+		activeChat = id;
+		this.setState(
+			activeChat,
+		);
 	}
 
 	render() {
 		return (
 			<Router>
 				<Switch>
-					<Route path="/" exact component={ManagerChatList} />
-					<Route path="/chat" component={ManagerChat} />
-					<Route path="/profile" component={UserProfile} />
+					<Route path="/" exact component={ ManagerChatList } />
+					<Route path="/chat" component={ ManagerChat } />
+					<Route path="/profile" component={ UserProfile } />
 				</Switch>
 			</Router>
 		)

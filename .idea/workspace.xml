@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ac40467-f6c0-47a9-8789-785ec8f18553" name="Default Changelist" comment="Add animation for dialog-list and message-form">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Application.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Application.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ButtonCreateChat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ButtonCreateChat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DialogBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DialogBox.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/FormInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FormInput.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HeaderChat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HeaderChat.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ManagerChat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ManagerChat.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MessageBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MessageBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MessageList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MessageList.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -203,6 +205,7 @@
       <workItem from="1574070021489" duration="6761000" />
       <workItem from="1574086440562" duration="4832000" />
       <workItem from="1574103356228" duration="8000" />
+      <workItem from="1574145342659" duration="336000" />
     </task>
     <servers />
   </component>
