@@ -35,7 +35,7 @@ export class FormInput extends React.Component {
 				<div className={styles.inputButton}>
 					<div className={styles.additionalButton}/>
 				</div>
-				<form 
+				<form className={styles.customInput}
 				onSubmit={this.handleSubmit}
 				>
 					<input className={styles.customInput}

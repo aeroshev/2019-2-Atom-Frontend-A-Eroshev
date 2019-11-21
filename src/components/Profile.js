@@ -1,7 +1,11 @@
 import React from 'react'
+import styles from '../styles/Profile.module.css';
 
 export function UserProfile(props) {
 	return (
-		<div>Profile User</div>
+		<div className={styles.paper}>
+			<div className={styles.toolBar}></div>
+			<div className={styles.avatar}></div>
+		</div>	
 	);
 }

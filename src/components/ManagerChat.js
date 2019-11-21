@@ -9,7 +9,6 @@ import styles from '../styles/ManagerChat.module.css';
 export class ManagerChat extends React.Component {
 	constructor(props) {
 		super(props);
-		this.loadTest();
 
 		const info = this.parseData();
 
@@ -17,6 +16,8 @@ export class ManagerChat extends React.Component {
 			messageList: info.messageList,
 			statusInfo: info.statusInfo,
 		};
+
+		this.sendMessage = this.sendMessage.bind(this);
 	}
 
 	loadTest() {
@@ -63,13 +64,13 @@ export class ManagerChat extends React.Component {
 
 	sendMessage(message) {
 		const { messageList } = this.state;
-		messageList.push({
+		this.setState({messageList: [...messageList, { 
+			id: messageList.length, 
+			chatID: 0,
 			content: message,
 			time: new Date().getTime(),
-		});
-		this.setState({
-			messageList,
-		});
+		}]});
+		localStorage.setItem('messageList', JSON.stringify(messageList));
 	}
 
 	render() {

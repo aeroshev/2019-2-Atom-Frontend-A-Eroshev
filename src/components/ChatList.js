@@ -1,65 +1,26 @@
 import React from 'react';
-import { DialogBox } from './DialogBox'
-import styles from '../styles/ChatList.module.css'
-import { BrowserRouter as Link } from "react-router-dom";
-import style_button from '../styles/ButtonCreateChat.module.css';
+import { DialogBox } from './DialogBox';
+import styles from '../styles/ChatList.module.css';
 
-
-export function ButtonNewChat (props) {
-	let { listDialogs } = props;
-
-	function handleClick(event) {
-		event.preventDefault();
-		console.log( listDialogs);
-		const nameChat = prompt('Name new chat', 'NewChat');
-		const time = new Date();
-		if (listDialogs.length === 1) {
-			listDialogs.pop();
-		}
-		const boxInfo = {
-			id: ((listDialogs.length === 0) ? 0 : listDialogs.length),
-			dialogName: nameChat,
-			messageTime: time.getTime(),
-			lastMessage: '',
-			messageStatus: ''
-		}
-
-		if (nameChat !== null) {
-			const item = <DialogBox key={boxInfo.id} boxInfo={boxInfo}/>;
-			listDialogs.push(item);
-		}
-	}
-		return (
-			<button className={ style_button.buttonNew } onClick={ handleClick }/>
-		);
-}
 
 export function ChatList (props) {
-	const { chatList, listDialogs } = props;
+	const list = [];
+	let iter = 0;
 
+	if (!props.chatList) {
+		list.push(<div className={styles.noMessage}>No chats</div>);
+	} else {
+	props.chatList.forEach(item => {
+		const Chat = <DialogBox key={ iter++ } boxInfo = { item } />;
 
-	if (!chatList) {
-		listDialogs.push(<div className={styles.noMessage}>No chats</div>);
-		} else {
-			let timeLastMessageChat;
-
-		chatList.forEach(function(chat, ind, chatList) {
-			const item = <DialogBox key={ ind } boxInfo = { chat }/>;
-			if (chat.messageTime > timeLastMessageChat) {
-				listDialogs.unshift(item);
-			} else {
-				listDialogs.push(item);
-			}
-
-			timeLastMessageChat = chat.messageTime;
+		list.push(Chat);
 		});
 	}
 
-		return(
-			<div>
-				<div className={styles.wrap}>{ listDialogs }</div>
-				<ButtonNewChat listDialogs={ listDialogs }/>
-			</div>
-		);
+	return(			
+		<div>
+			<div className={styles.wrap}>{ list }</div>
+		</div>
+	);
 }
 

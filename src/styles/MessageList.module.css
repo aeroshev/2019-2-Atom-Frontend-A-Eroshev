@@ -8,7 +8,6 @@
 	height: 100%;
 	background-color: #373338;
 	background-size: 50px;
-	display: flex;
 	flex-direction: column;
 	height: 100%;
 	width: 100%;
@@ -19,15 +18,15 @@
 	overflow-y: scroll;
 }
 .messageBox{
-    display: inline-block;
-	border-radius: 5px;
-	padding: 10px;
-	text-align: justify;
+	float: right;
+	margin-top: 10px;
+	margin-bottom: 10px;
+    padding-bottom: 100px;
+    list-style: none;
 	max-width: 60%;
 	word-break: break-all;
     box-sizing: border-box;
-    display: flex;
-    background-color: #f4d3ee;
+	display: flex;
 	flex-direction: column;
 	/*overflow: hidden;*/
 	width: 100%;

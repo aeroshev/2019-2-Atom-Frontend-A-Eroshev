@@ -3,9 +3,10 @@ import styles from '../styles/MessageList.module.css';
 import { MessageBox } from './MessageBox';
 
 
-export function MessageList(props){
+export function MessageList(props) {
 		const list = [];
 		let iter = 0;
+
 		props.messageList.forEach(item => {
 	
 			const Message = <MessageBox key={iter++} content={item.content} time={item.time} />;

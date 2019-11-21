@@ -1,21 +1,38 @@
-*{
-	box-sizing: border-box;
+.messageBox {
+    box-sizing: border-box;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0 5px 0;
+    max-width: 60%;
+    word-break: break-all;
+    background-color: #f4d3ee;
+    width: 100%;
+	  padding: 0 10px 0 10px;
+	  animation-name: smoothDrop;
+	  animation-duration: 0.5s;
+	  animation-timing-function: ease-in-out;
+	  animation-fill-mode: forwards;
 }
-li{
-	/* margin-top: 10px;
-	padding-bottom: 100px; */
-	list-style: none;
+@keyframes smoothDrop {
+	from {
+		transform: translate(-100%) scaleX(0)
+	}
+	to {
+		transform: translate(0) scaleX(1)
+	}
 }
+
 
 .messageBox .time{
 	width: 100%;
 	text-align: right;
-	margin-top: 5px;
-	color: #727272;
+	padding-top: 5px;
+	color: black;
 	font-size: small;
 }
 .messageBox .text{
-	float: right;
-	background-color: #f4d3ee;
-	color: #727272;
+  padding-top: 5px;
+  text-align: justify;
+	color: black;
 }
