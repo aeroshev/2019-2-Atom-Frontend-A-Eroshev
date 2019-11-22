@@ -7,7 +7,7 @@ export function MessageList(props) {
 		const list = [];
 		let iter = 0;
 
-		props.messageList.forEach(item => {
+		props.messageList[props.activeChat].forEach(item => {
 	
 			const Message = <MessageBox key={iter++} content={item.content} time={item.time} />;
 	

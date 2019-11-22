@@ -2,7 +2,7 @@ import React from 'react';
 import { HeaderChat } from './HeaderChat';
 import { MessageList } from './MessageList';
 import { FormInput } from './FormInput';
-import MyContext from './Context';
+import ActiveChatContext from './Context';
 import styles from '../styles/ManagerChat.module.css';
 
 
@@ -37,8 +37,12 @@ export class ManagerChat extends React.Component {
 			time: time.getTime(),
 		};
 
-		const arr = [dialogBox1, dialogBox2];
-		localStorage.setItem('messageList', JSON.stringify(arr));
+		const arr0 = [dialogBox1];
+		const arr1 = [dialogBox2];
+		const map = new Map();
+		map.set(0, arr0);
+		map.set(1, arr1);
+		localStorage.setItem('messageList', JSON.stringify(map));
 		localStorage.setItem('statusInfo', JSON.stringify([{id: 0, status: 'online'}, {id: 1, status: 'ofline'}]))
 
 		return;
@@ -77,7 +81,9 @@ export class ManagerChat extends React.Component {
 		return(
 			<div>
 				<HeaderChat status={this.state.statusInfo} />
-				<MessageList messageList={this.state.messageList} />
+				<ActiveChatContext.Consumer>
+					{value => (<MessageList messageList={this.state.messageList} activeChat={value} />)}
+				</ActiveChatContext.Consumer>
 				<FormInput sendMessage={this.sendMessage} />
 			</div>
 		);

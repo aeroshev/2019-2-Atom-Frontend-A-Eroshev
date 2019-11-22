@@ -6,7 +6,6 @@ import { ButtonNewChat } from './ButtonNewChat';
 export class ManagerChatList extends React.Component {
 	constructor(props) {
 		super(props);
-		// this.loadTest();
 
 		const info = this.parseData();
 

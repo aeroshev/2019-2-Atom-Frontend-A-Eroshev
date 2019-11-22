@@ -1,5 +1,5 @@
 import React from 'react';
 
-const MyContext = React.createContext(null);
+const ActiveChatContext = React.createContext(null);
 
-export default MyContext;
+export default ActiveChatContext;
