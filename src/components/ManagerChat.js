@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { HeaderChat } from './HeaderChat';
 import { MessageList } from './MessageList';
 import { FormInput } from './FormInput';
@@ -9,12 +9,14 @@ import styles from '../styles/ManagerChat.module.css';
 export class ManagerChat extends React.Component {
 	constructor(props) {
 		super(props);
+		this.loadTest();
 
 		const info = this.parseData();
 
 		this.state = {
-			messageList: info.messageList,
-			statusInfo: info.statusInfo,
+			messageList: info.messageMap,
+			activeChat: props.activeChat,
+			// statusInfo: info.statusInfo,
 		};
 
 		this.sendMessage = this.sendMessage.bind(this);
@@ -42,8 +44,9 @@ export class ManagerChat extends React.Component {
 		const map = new Map();
 		map.set(0, arr0);
 		map.set(1, arr1);
-		localStorage.setItem('messageList', JSON.stringify(map));
-		localStorage.setItem('statusInfo', JSON.stringify([{id: 0, status: 'online'}, {id: 1, status: 'ofline'}]))
+		localStorage.setItem('messageMap', JSON.stringify(map));
+		console.log(map);
+		// localStorage.setItem('statusInfo', JSON.stringify([{id: 0, status: 'online'}, {id: 1, status: 'ofline'}]))
 
 		return;
 	}
@@ -52,38 +55,42 @@ export class ManagerChat extends React.Component {
 		let data;
 		try {
 			data = {
-				messageList: JSON.parse(localStorage.getItem('messageList')),
-				statusInfo: JSON.parse(localStorage.getItem('statusInfo')),
+				messageMap: JSON.parse(localStorage.getItem('messageMap')),
+				// statusInfo: JSON.parse(localStorage.getItem('statusInfo')),
 			};
 		} catch (Error) {
 			localStorage.clear();
 			console.log('Error local storage');
 			data = {
-				messageList: null,
-				statusInfo: null,
+				messageMap: null,
+				// statusInfo: null,
 			};
 		}
+
+		console.log(data);
 		return data;
 	}
 
 	sendMessage(message) {
-		const { messageList } = this.state;
-		this.setState({messageList: [...messageList, { 
-			id: messageList.length, 
+		const { messageMap } = this.state;
+
+		this.setState({messageMap: [...messageMap, { 
+			id: messageMap.length, 
 			chatID: 0,
 			content: message,
 			time: new Date().getTime(),
 		}]});
-		localStorage.setItem('messageList', JSON.stringify(messageList));
+
+		const map = new Map();
+		map.set(useContext(ActiveChatContext), messageMap)
+		localStorage.setItem('messageMap', JSON.stringify(map));
 	}
 
 	render() {
 		return(
 			<div>
 				<HeaderChat status={this.state.statusInfo} />
-				<ActiveChatContext.Consumer>
-					{value => (<MessageList messageList={this.state.messageList} activeChat={value} />)}
-				</ActiveChatContext.Consumer>
+				<MessageList messageMap={this.state.messageMap} activeChat={this.activeChat}/>
 				<FormInput sendMessage={this.sendMessage} />
 			</div>
 		);

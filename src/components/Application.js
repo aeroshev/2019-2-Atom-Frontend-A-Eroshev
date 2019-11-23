@@ -16,6 +16,8 @@ export class Application extends React.Component {
 		this.state = {
 			activeChat: -1,
 		}
+
+		this.setActiveChat.bind(this);
 	}
 
 	setActiveChat(id) {
@@ -29,13 +31,15 @@ export class Application extends React.Component {
 		return (
 			<Router>
 				<Switch>
-					<Route path="/" exact>
-						<ManagerChatList  />
-					</Route>
-					<Route path="/chat">
-						<ManagerChat />
-					</Route>
-					<Route path="/profile" component={ UserProfile } />
+					<ActiveChatContext.Provider value={this.setActiveChat}>
+						<Route path="/" exact>
+							<ManagerChatList  />
+						</Route>
+						<Route path="/chat">
+							<ManagerChat activeChat={this.activeChat}/>
+						</Route>
+						<Route path="/profile" component={ UserProfile } />
+					</ActiveChatContext.Provider>
 				</Switch>
 			</Router>
 		)
