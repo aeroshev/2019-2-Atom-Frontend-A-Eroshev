@@ -1,10 +1,17 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import styles from '../styles/Profile.module.css';
 
 export function UserProfile(props) {
 	return (
 		<div className={styles.paper}>
-			<div className={styles.toolBar}></div>
+			<div className={styles.toolBar}>
+				<Link to="/">
+					<div className={styles.backButton}></div>
+				</Link>
+				<div className={styles.title}>Edit Profile</div>
+				<div className={styles.ok}></div>
+			</div>
 			<div className={styles.avatar}></div>
 			<div className={styles.Box}>
 				<div className={styles.info}>Full name</div>
