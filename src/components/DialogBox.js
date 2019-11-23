@@ -10,7 +10,6 @@ export function DialogBox(props) {
 		// event.preventDefault();
 		setActiveChat(boxInfo.id);
 	}
-	
 
 	return (
 		<Link to={`/chat/${boxInfo.id}`}>

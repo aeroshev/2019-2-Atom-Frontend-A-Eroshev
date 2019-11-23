@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
-import MyContext from './Context';
+import React from 'react';
 import styles from '../styles/FormInput.module.css';
-import { thisTypeAnnotation } from 'babel-types';
+// import { thisTypeAnnotation } from 'babel-types';
 
 
 export class FormInput extends React.Component {
@@ -12,7 +11,7 @@ export class FormInput extends React.Component {
 			message: '',
 		};
 		this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	handleSubmit(event) {

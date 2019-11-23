@@ -8,7 +8,6 @@ import styles from '../styles/ManagerChat.module.css';
 export class ManagerChat extends React.Component {
 	constructor(props) {
 		super(props);
-		this.loadTest();
 
 		const info = this.parseData();
 
@@ -18,35 +17,6 @@ export class ManagerChat extends React.Component {
 		};
 
 		this.sendMessage = this.sendMessage.bind(this);
-	}
-
-	loadTest() {
-		const time = new Date();
-
-		const dialogBox1 = {
-			id: 0,
-			chatID: 0,
-			content: 'Hello',
-			time: time.getTime(),
-		};
-
-		const dialogBox2 = {
-			id: 1,
-			chatID: 1,
-			content: 'Wold!',
-			time: time.getTime(),
-		};
-
-		const arr0 = [dialogBox1];
-		const arr1 = [dialogBox2];
-		const map = new Map();
-		map.set(0, arr0);
-		map.set(1, arr1);
-		localStorage.setItem('messageMap', JSON.stringify(map));
-		console.log(map);
-		// localStorage.setItem('statusInfo', JSON.stringify([{id: 0, status: 'online'}, {id: 1, status: 'ofline'}]))
-
-		return;
 	}
 
 	parseData() {
@@ -65,30 +35,30 @@ export class ManagerChat extends React.Component {
 			};
 		}
 
-		console.log(data);
 		return data;
 	}
 
 	sendMessage(message) {
-		const { messageMap } = this.state;
+		const { messageMap, activeChat } = this.state;
+		console.log(messageMap);
+		if (activeChat !== null ){
+			messageMap[activeChat].push({ 
+				id: messageMap[activeChat].length, 
+				content: message,
+				time: new Date().getTime(),
+			});
+			this.setState({messageMap,})
+			console.log(messageMap);
 
-		this.setState({messageMap: [...messageMap, { 
-			id: messageMap.length, 
-			chatID: 0,
-			content: message,
-			time: new Date().getTime(),
-		}]});
-
-		const map = new Map();
-		map.set(this.activeChat, messageMap)
-		localStorage.setItem('messageMap', JSON.stringify(map));
+			localStorage.setItem('messageMap', JSON.stringify(messageMap));
+		}
 	}
 
 	render() {
 		return(
 			<div>
 				<HeaderChat status={this.state.statusInfo} />
-				<MessageList messageMap={this.state.messageMap} activeChat={this.activeChat}/>
+				<MessageList messageList={this.state.messageMap} activeChat={this.state.activeChat}/>
 				<FormInput sendMessage={this.sendMessage} />
 			</div>
 		);

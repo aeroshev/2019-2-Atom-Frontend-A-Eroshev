@@ -6,7 +6,6 @@ import { ButtonNewChat } from './ButtonNewChat';
 export class ManagerChatList extends React.Component {
 	constructor(props) {
 		super(props);
-		this.loadTest();
 
 		const info = this.parseData();
 
@@ -15,31 +14,6 @@ export class ManagerChatList extends React.Component {
 		};
 
 		this.createChat = this.createChat.bind(this);
-	}
-
-	loadTest() {
-		const time = new Date();
-
-		const dialogBox1 = {
-			id: 0,
-			dialogName: 'some',
-			lastMessage: '',
-			timeLastMessage: time.getTime(),
-			messageStatus: 'read',
-		};
-
-		const dialogBox2 = {
-			id: 1,
-			dialogName: 'some',
-			lastMessage: '',
-			timeLastMessage: time.getTime(),
-			messageStatus: 'read',
-		};
-
-		const arr = [dialogBox1, dialogBox2];
-		localStorage.setItem('chatList', JSON.stringify(arr));
-
-		return;
 	}
 
 	parseData() {
