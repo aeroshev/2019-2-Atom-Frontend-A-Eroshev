@@ -11,7 +11,7 @@ export function ChatList (props) {
 		list.push(<div className={styles.noMessage}>No chats</div>);
 	} else {
 	props.chatList.forEach(item => {
-		const Chat = <DialogBox key={ iter++ } boxInfo = { item } />;
+		const Chat = <DialogBox key={ iter++ } boxInfo = { item } setActiveChat={props.setActiveChat}/>;
 
 		list.push(Chat);
 		});

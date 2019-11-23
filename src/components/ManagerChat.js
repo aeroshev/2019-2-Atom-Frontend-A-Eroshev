@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { HeaderChat } from './HeaderChat';
 import { MessageList } from './MessageList';
 import { FormInput } from './FormInput';
-import ActiveChatContext from './Context';
 import styles from '../styles/ManagerChat.module.css';
 
 
@@ -14,9 +13,8 @@ export class ManagerChat extends React.Component {
 		const info = this.parseData();
 
 		this.state = {
-			messageList: info.messageMap,
+			messageMap: info.messageMap,
 			activeChat: props.activeChat,
-			// statusInfo: info.statusInfo,
 		};
 
 		this.sendMessage = this.sendMessage.bind(this);
@@ -82,7 +80,7 @@ export class ManagerChat extends React.Component {
 		}]});
 
 		const map = new Map();
-		map.set(useContext(ActiveChatContext), messageMap)
+		map.set(this.activeChat, messageMap)
 		localStorage.setItem('messageMap', JSON.stringify(map));
 	}
 

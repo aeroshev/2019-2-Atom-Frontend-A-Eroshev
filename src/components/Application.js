@@ -2,7 +2,6 @@ import React from 'react';
 import { ManagerChatList } from './ManagerChatList';
 import { ManagerChat } from './ManagerChat';
 import { UserProfile } from './Profile';
-import ActiveChatContext from './Context';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -17,13 +16,13 @@ export class Application extends React.Component {
 			activeChat: -1,
 		}
 
-		this.setActiveChat.bind(this);
+		this.setActiveChat = this.setActiveChat.bind(this);
 	}
 
 	setActiveChat(id) {
 		const { activeChat } = this.state;
 		this.setState(
-			{activeChat: activeChat},
+			{activeChat: id},
 		);
 	}
 
@@ -31,15 +30,13 @@ export class Application extends React.Component {
 		return (
 			<Router>
 				<Switch>
-					<ActiveChatContext.Provider value={this.setActiveChat}>
-						<Route path="/" exact>
-							<ManagerChatList  />
-						</Route>
-						<Route path="/chat">
-							<ManagerChat activeChat={this.activeChat}/>
-						</Route>
-						<Route path="/profile" component={ UserProfile } />
-					</ActiveChatContext.Provider>
+					<Route path="/" exact>
+						<ManagerChatList  setActiveChat={this.setActiveChat}/>
+					</Route>
+					<Route path="/chat">
+						<ManagerChat activeChat={this.activeChat}/>
+					</Route>
+					<Route path="/profile" component={ UserProfile } />
 				</Switch>
 			</Router>
 		)

@@ -74,7 +74,7 @@ export class ManagerChatList extends React.Component {
 		return (
 			<div>
 				<HeaderDialogList/>
-				<ChatList chatList={this.state.chatList} />
+				<ChatList chatList={this.state.chatList} setActiveChat={this.props.setActiveChat}/>
 				<ButtonNewChat createChat={this.createChat} />
 			</div>
 		);

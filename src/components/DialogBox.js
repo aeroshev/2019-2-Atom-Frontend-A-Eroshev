@@ -1,16 +1,20 @@
 import React, { useContext } from 'react';
 import styles from '../styles/DialogBox.module.css'
 import { Link } from 'react-router-dom';
-import ActiveChatContext from './Context';
 
 
 export function DialogBox(props) {
-	const { boxInfo } = props;
-	const { setActiveChat } = useContext(ActiveChatContext);
+	const { boxInfo, setActiveChat } = props;
+
+	function handlerClick(event) {
+		// event.preventDefault();
+		setActiveChat(boxInfo.id);
+	}
+	
 
 	return (
-		<Link to={`/chat/${boxInfo.id}`} onClick={setActiveChat.bind(null, boxInfo.id)}>
-			<div className={styles.dialogWrap}>
+		<Link to={`/chat/${boxInfo.id}`}>
+			<div className={styles.dialogWrap} onClick={handlerClick}>
 				<div className={styles.dialogName}>{ boxInfo.dialogName }</div>						
 				<div className={styles.dialogAvatar}/>
 				<div className={styles.messageTime}>{ boxInfo.messageTime }</div>					
