@@ -1,4 +1,4 @@
-import correctSentence from './correctSentence';
+import correctSentence from '../../correctSentence';
 
 test('returns correct sentence', () => {
   expect(correctSentence("greetings, friends")).toBe("Greetings, friends.");

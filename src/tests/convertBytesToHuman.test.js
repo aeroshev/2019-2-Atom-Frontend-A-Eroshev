@@ -1,4 +1,4 @@
-import convertBytesToHuman from './convertBytesToHuman'
+import convertBytesToHuman from '../../convertBytesToHuman'
 
 /*
  * Необходимо покрыть все возможные

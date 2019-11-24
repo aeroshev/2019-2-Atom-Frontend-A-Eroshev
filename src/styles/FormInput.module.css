@@ -42,8 +42,8 @@
 	left: 10px;
 	list-style: none;
 	padding: 0px;
-	border: 2px solid black;
-	border-radius: 2px;
+	/* border: 2px solid black;
+	border-radius: 2px; */
 }
 .li{
 	background: white;
@@ -58,10 +58,14 @@
 
 .li:first-child{
 	border-bottom: 1px solid black;
+	border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
 }
 
 .li:last-child{
 	border-top: 1px solid black;
+	border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
 }
 .sendButton {
 	height: 100%;
