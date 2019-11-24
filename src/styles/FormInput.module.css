@@ -28,6 +28,37 @@
 	background-size: 90%;
 	z-index: 1;
 }
+
+.additionalButton:hover{
+	background: black;
+	color: white;
+}
+
+.listStyle{
+	flex-direction: column;
+	justify-content: center;
+	padding: 10px;
+	position: absolute;
+	top: -110px;
+	left: 10px;
+	list-style: none;
+	padding: 0px;
+	border: 2px solid black;
+	border-radius: 2px;
+}
+.li{
+	background: white;
+	padding: 4px;
+	
+}
+
+.li:first-child{
+	border-bottom: 1px solid black;
+}
+
+.li:last-child{
+	border-top: 1px solid black;
+}
 .sendButton {
 	height: 100%;
 	width: 50px;
