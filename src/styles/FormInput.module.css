@@ -31,7 +31,6 @@
 
 .additionalButton:hover{
 	background: black;
-	color: white;
 }
 
 .listStyle{
@@ -50,6 +49,11 @@
 	background: white;
 	padding: 4px;
 	
+}
+
+.li:hover{
+	background: black;
+	color: white;
 }
 
 .li:first-child{
