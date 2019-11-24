@@ -9,16 +9,11 @@ export class ManagerChat extends React.Component {
 	constructor(props) {
 		super(props);
 
-		console.log(props);
-
 		const info = this.parseData();
 
 		this.state = {
 			messageMap: info.messageMap,
-			activeChat: props.activeChat,
 		};
-
-		console.log(this.state);
 
 		this.sendMessage = this.sendMessage.bind(this);
 	}
@@ -59,7 +54,6 @@ export class ManagerChat extends React.Component {
 	render() {
 		const {
 			messageMap,
-			activeChat,
 		} = this.state;
 
 		return(

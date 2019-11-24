@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from '../styles/FormInput.module.css';
-// import { thisTypeAnnotation } from 'babel-types';
 
 
 export class FormInput extends React.Component {

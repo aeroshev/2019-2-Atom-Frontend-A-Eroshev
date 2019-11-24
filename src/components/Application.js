@@ -33,23 +33,13 @@ export class Application extends React.Component {
 		state.animations.displayChat = { display: 'block' };
 
 		this.setState(state);
-		console.log(this.state.activeChat);
 	}
-
-	// setActiveChat(id) {
-	// 	this.setState(
-	// 		{activeChat: id},
-	// 	);
-	// }
-
-
 
 	closeChat() {
 		const { state } = this;
 		state.activeChat = null;
 		state.animations.displayMenu = { display: 'block' };
 		state.animations.displayChat = { display: 'none' };
-
 
 		this.setState(state);
 	}
@@ -59,8 +49,6 @@ export class Application extends React.Component {
 			activeChat,
 			animations,
 		} = this.state;
-
-		console.log(activeChat);
 
 		return (
 			<div>

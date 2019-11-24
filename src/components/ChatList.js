@@ -13,11 +13,10 @@ export function ChatList (props) {
 	} else {
 		chatList.forEach(item => {
 			const Chat = <DialogBox 
-							key={ iter++ } 
-							boxInfo = { item } 
-							setActiveChat={setActiveChat} o
-							openChat={props.openChat} />;
-
+						key={ iter++ } 
+						boxInfo = { item } 
+						setActiveChat={setActiveChat}
+						openChat={props.openChat} />;
 			list.push(Chat);
 		});
 	}

@@ -49,6 +49,7 @@ export class ManagerChatList extends React.Component {
 		const {
 			chatList,
 		} = this.state;
+
 		return (
 			<div className={styles.dialogList} style={this.props.displayMenu}>
 				<HeaderDialogList/>
