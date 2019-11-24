@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styles from '../styles/HeaderChat.module.css';
 
 
 export function HeaderChat(props) {
+	function handlerClick(event) {
+		props.closeChat();
+	}
 	return (
 		<div className={styles.header}>
 			<div className={styles.headerButton}>
-				<Link to='/'>
-					<div className={styles.backButton}/>
-				</Link>
+				<div className={styles.backButton} onClick={handlerClick} />
 			</div>
 			<div className={styles.statusConteiner}>
 				<div className={styles.userAvatar} />

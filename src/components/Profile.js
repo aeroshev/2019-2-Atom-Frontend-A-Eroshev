@@ -6,9 +6,9 @@ export function UserProfile(props) {
 	return (
 		<div className={styles.paper}>
 			<div className={styles.toolBar}>
-				<Link to="/">
+				{/* <Link to="/"> */}
 					<div className={styles.backButton} />
-				</Link>
+				{/* </Link> */}
 				<div className={styles.title}>Edit Profile</div>
 				<div className={styles.ok} />
 			</div>

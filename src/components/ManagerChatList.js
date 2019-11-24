@@ -2,6 +2,7 @@ import React from 'react';
 import { ChatList } from './ChatList';
 import { HeaderDialogList } from './HeaderDialogList';
 import { ButtonNewChat } from './ButtonNewChat';
+import styles from '../styles/ManagerChatList.module.css';
 
 export class ManagerChatList extends React.Component {
 	constructor(props) {
@@ -11,6 +12,7 @@ export class ManagerChatList extends React.Component {
 
 		this.state = {
 			chatList: info.chatList,
+			animations: props.animations,
 		};
 
 		this.createChat = this.createChat.bind(this);
@@ -48,9 +50,9 @@ export class ManagerChatList extends React.Component {
 			chatList,
 		} = this.state;
 		return (
-			<div>
+			<div className={styles.dialogList} style={this.props.displayMenu}>
 				<HeaderDialogList/>
-				<ChatList chatList={chatList} setActiveChat={this.props.setActiveChat}/>
+				<ChatList chatList={chatList} openChat={this.props.openChat}/>
 				<ButtonNewChat createChat={this.createChat} />
 			</div>
 		);

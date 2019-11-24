@@ -1,0 +1,19 @@
+.wrap{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    animation-name: smoothOpen;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+ }
+ 
+  @keyframes smoothOpen {
+    from {
+        transform: translate(-100%) scaleX(0)
+    }
+
+    to {
+        transform: translate(0) scaleX(1)
+    }
+}

@@ -2,11 +2,14 @@ import React from 'react';
 import { HeaderChat } from './HeaderChat';
 import { MessageList } from './MessageList';
 import { FormInput } from './FormInput';
+import styles from '../styles/ManagerChat.module.css';
 
 
 export class ManagerChat extends React.Component {
 	constructor(props) {
 		super(props);
+
+		console.log(props);
 
 		const info = this.parseData();
 
@@ -14,6 +17,8 @@ export class ManagerChat extends React.Component {
 			messageMap: info.messageMap,
 			activeChat: props.activeChat,
 		};
+
+		console.log(this.state);
 
 		this.sendMessage = this.sendMessage.bind(this);
 	}
@@ -37,10 +42,11 @@ export class ManagerChat extends React.Component {
 
 	sendMessage(message) {
 		const { messageMap, activeChat } = this.state;
+		console.log(activeChat);
 
-		if (activeChat !== null ){
-			messageMap[activeChat].push({ 
-				id: messageMap[activeChat].length, 
+		if (this.props.activeChat !== null ){
+			messageMap[this.props.activeChat].push({ 
+				id: messageMap[this.props.activeChat].length, 
 				content: message,
 				time: new Date().getTime(),
 			});
@@ -57,9 +63,9 @@ export class ManagerChat extends React.Component {
 		} = this.state;
 
 		return(
-			<div>
-				<HeaderChat />
-				<MessageList messageList={messageMap} activeChat={activeChat} />
+			<div className={styles.wrap} style={this.props.displayChat}>
+				<HeaderChat closeChat={this.props.closeChat} />
+				<MessageList messageList={messageMap} activeChat={this.props.activeChat} />
 				<FormInput sendMessage={this.sendMessage} />
 			</div>
 		);

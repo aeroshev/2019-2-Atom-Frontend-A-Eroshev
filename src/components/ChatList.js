@@ -12,7 +12,11 @@ export function ChatList (props) {
 		list.push(<div className={styles.noMessage}>No chats</div>);
 	} else {
 		chatList.forEach(item => {
-			const Chat = <DialogBox key={ iter++ } boxInfo = { item } setActiveChat={setActiveChat}/>;
+			const Chat = <DialogBox 
+							key={ iter++ } 
+							boxInfo = { item } 
+							setActiveChat={setActiveChat} o
+							openChat={props.openChat} />;
 
 			list.push(Chat);
 		});
