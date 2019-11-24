@@ -42,6 +42,7 @@
 	left: 10px;
 	list-style: none;
 	padding: 0px;
+	box-shadow: 0 0 6px 0 black;
 }
 
 .li{
