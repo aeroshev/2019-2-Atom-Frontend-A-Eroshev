@@ -24,7 +24,6 @@ export class ManagerChatList extends React.Component {
 			};
 		} catch (Error) {
 			localStorage.clear();
-			console.log('Error local storage');
 			data = {
 				chatList: null,
 			};
@@ -45,10 +44,13 @@ export class ManagerChatList extends React.Component {
 	}
 
 	render() {
+		const {
+			chatList,
+		} = this.state;
 		return (
 			<div>
 				<HeaderDialogList/>
-				<ChatList chatList={this.state.chatList} setActiveChat={this.props.setActiveChat}/>
+				<ChatList chatList={chatList} setActiveChat={this.props.setActiveChat}/>
 				<ButtonNewChat createChat={this.createChat} />
 			</div>
 		);

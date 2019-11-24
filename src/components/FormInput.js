@@ -23,9 +23,9 @@ export class FormInput extends React.Component {
 	}
 
 	handleChange(event) {
-        this.setState({
+		this.setState({
 			message: event.target.value,
-        })
+		});
     }
 
 	render() {
@@ -35,13 +35,12 @@ export class FormInput extends React.Component {
 					<div className={styles.additionalButton}/>
 				</div>
 				<form className={styles.customInput}
-				onSubmit={this.handleSubmit}
-				>
+					onSubmit={this.handleSubmit}>
 					<input className={styles.customInput}
-					onChange={this.handleChange}
-					value={this.state.message}
-					placeholder={'Message'}
-					type={'text'} />
+						onChange={this.handleChange}
+						value={this.state.message}
+						placeholder='Message'
+						type='text' />
 				</form>
 				<div className={styles.inputButton}>
 					<div className={styles.sendButton} onClick={this.handleSubmit}/>

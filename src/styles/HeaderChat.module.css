@@ -11,8 +11,6 @@
 
 .headerButton{
 	height: 100%;
-	/*width: 120px;*/
-	/*margin: 0 5px;*/
 	cursor: pointer;
 }
 .statusConteiner{
@@ -56,17 +54,14 @@
 }
 
 .headerButton .searchButton{
-	background-size: 100%;
 	display: inline-block;
 	height: 100%;
 	width: 40px;
-	float: left;
 	background: url(https://static.thenounproject.com/png/424968-200.png) no-repeat center center;
 	background-size: 70%;
 }
 
 .headerButton .optionsButton{
-	background-size: 100%;
 	display: inline-block;
 	height: 100%;
 	width: 50px;

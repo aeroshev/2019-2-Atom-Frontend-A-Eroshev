@@ -6,14 +6,15 @@ import styles from '../styles/ChatList.module.css';
 export function ChatList (props) {
 	const list = [];
 	let iter = 0;
+	const { chatList, setActiveChat } = props;
 
-	if (!props.chatList) {
+	if (!chatList) {
 		list.push(<div className={styles.noMessage}>No chats</div>);
 	} else {
-	props.chatList.forEach(item => {
-		const Chat = <DialogBox key={ iter++ } boxInfo = { item } setActiveChat={props.setActiveChat}/>;
+		chatList.forEach(item => {
+			const Chat = <DialogBox key={ iter++ } boxInfo = { item } setActiveChat={setActiveChat}/>;
 
-		list.push(Chat);
+			list.push(Chat);
 		});
 	}
 

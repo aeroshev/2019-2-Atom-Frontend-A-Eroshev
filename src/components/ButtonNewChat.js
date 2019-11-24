@@ -7,7 +7,6 @@ export function ButtonNewChat (props){
 	function handleClick(event){
         event.preventDefault();
         const nameChat = prompt('Name new chat', 'NewChat');
-
         props.createChat(nameChat);
     }
 

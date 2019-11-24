@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { HeaderChat } from './HeaderChat';
 import { MessageList } from './MessageList';
 import { FormInput } from './FormInput';
-import styles from '../styles/ManagerChat.module.css';
 
 
 export class ManagerChat extends React.Component {
@@ -24,14 +23,12 @@ export class ManagerChat extends React.Component {
 		try {
 			data = {
 				messageMap: JSON.parse(localStorage.getItem('messageMap')),
-				// statusInfo: JSON.parse(localStorage.getItem('statusInfo')),
 			};
 		} catch (Error) {
 			localStorage.clear();
 			console.log('Error local storage');
 			data = {
 				messageMap: null,
-				// statusInfo: null,
 			};
 		}
 
@@ -40,25 +37,29 @@ export class ManagerChat extends React.Component {
 
 	sendMessage(message) {
 		const { messageMap, activeChat } = this.state;
-		console.log(messageMap);
+
 		if (activeChat !== null ){
 			messageMap[activeChat].push({ 
 				id: messageMap[activeChat].length, 
 				content: message,
 				time: new Date().getTime(),
 			});
-			this.setState({messageMap,})
-			console.log(messageMap);
+			this.setState({messageMap,});
 
 			localStorage.setItem('messageMap', JSON.stringify(messageMap));
 		}
 	}
 
 	render() {
+		const {
+			messageMap,
+			activeChat,
+		} = this.state;
+
 		return(
 			<div>
-				<HeaderChat status={this.state.statusInfo} />
-				<MessageList messageList={this.state.messageMap} activeChat={this.state.activeChat}/>
+				<HeaderChat />
+				<MessageList messageList={messageMap} activeChat={activeChat} />
 				<FormInput sendMessage={this.sendMessage} />
 			</div>
 		);
