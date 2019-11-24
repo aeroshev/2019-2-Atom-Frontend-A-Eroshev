@@ -42,13 +42,11 @@
 	left: 10px;
 	list-style: none;
 	padding: 0px;
-	/* border: 2px solid black;
-	border-radius: 2px; */
 }
+
 .li{
 	background: white;
 	padding: 4px;
-	
 }
 
 .li:hover{
