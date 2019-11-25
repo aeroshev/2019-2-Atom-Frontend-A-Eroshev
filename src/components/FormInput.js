@@ -1,147 +1,108 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SendButton } from './SendButton';
 import { getMedia, startRecord, stopRecord } from '../lib/AudioHelper';
 import styles from '../styles/FormInput.module.css';
 
 
-export class FormInput extends React.Component {
-	constructor (props) {
-		super(props);
+export function FormInput(props) {
+		const { sendMessage } = props;
 
-		this.state = {
-			message: '',
-			additional: {
-				path: '',
-				file: '',
-			},
-			addStyle: {
-				// animationName: 'smoothAppear',
-				display: 'none',	
-			},
-			typeSendButton: 'send',
-			mediaRecorder: getMedia().then((stream) => {
-				return new MediaRecorder(stream);
-			}).catch(() => {return null;}),
-		};
+		const [message, setMessage] = useState('');
+		const [additional, setAdditional] = useState(null);
+		const [styleMenu, setStyleMenu] = useState({display: 'none'});
+		const [typeSendButton, setTypeSendButton] = useState('send');
+		const [mediaRecorder, setMediaRecorder] = useState(getMedia().then((stream) => {
+			return new MediaRecorder(stream);
+		}).catch(() => {return null;}));
+	
 
-		console.log(this.state);
-
-		this.audioMessage = this.audioMessage.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-
-		this.handleAdditional = this.handleAdditional.bind(this);
-		this.handlerGeo = this.handlerGeo.bind(this);
-		this.handlerAudio = this.handlerAudio.bind(this);
-		this.handlerImage = this.handlerImage.bind(this);
-
-		this.handlerCancel = this.handlerCancel.bind(this);
-		this.handlerRecord = this.handlerRecord.bind(this);
-		
-	}
-
-	handleSubmit(event) {
+	function handleSubmit(event) {
 		event.preventDefault();
-		this.props.sendMessage(this.state.message);
-		this.setState({
-			message: '',
-		});
+		sendMessage(message);
+		setMessage('');
 	}
 
-	handlerCancel(event) {
-		this.setState({
-			typeSendButton: 'send',
-		});
-		this.state.mediaRecorder.then(media => { return stopRecord(media); });
-		this.props.sendMessage(this.state.additional);
-		
+	function handlerCancel(event) {
+		setTypeSendButton('send');
+
+		mediaRecorder.then(media => { return stopRecord(media); });
+		sendMessage(additional);
+
+		console.log(additional);
+	
 		alert('Cancel');
-		console.log(this.state);
 	}
 
-	handlerRecord(event) {
+	function handlerRecord(event) {
 		alert('Reacord');
 	}
 
-	handleAdditional(event) {
-		const { display } = this.state.addStyle;
-		this.setState({
-				addStyle: {
-					// animationName: (animationName === 'smoothAppear')? 'smoothDisappear': 'smoothAppear',
-					display: (display === 'none')? 'flex': 'none',
-				}
-			}
-		);
-	}
-
-	handleChange(event) {
-		this.setState({
-			message: event.target.value,
+	function handleAdditional(event) {
+		const { display } = styleMenu;
+		setStyleMenu({
+			display: (display === 'none')? 'flex': 'none',
 		});
 	}
+
+	function handleChange(event) {
+		setMessage(event.target.value);
+	}
 	
-	handlerGeo(event) {
+	function handlerGeo(event) {
 		navigator.geolocation.getCurrentPosition(position => {
 			const geoMessage = `https://www.openstreetmap.org/#map=17/${position.coords.latitude}/${position.coords.longitude}`;
 			const geoObject = <a href={geoMessage}>{geoMessage}</a>;
-			this.props.sendMessage(geoObject);
+			sendMessage(geoObject);
 		});
 	}
 
-	audioMessage(Url, blob) {
-			this.setState({additional: {
-				path: Url,
-				file: blob,
-			}
-		});
-	}
+	function handlerAudio(event) {
+		setTypeSendButton('cancel');
 
-	handlerAudio(event) {
-		this.setState({
-			typeSendButton: 'cancel',
-		});
-		this.state.mediaRecorder.then(media => { return startRecord(media, this.audioMessage) });
+		mediaRecorder.then(media => { return startRecord(media, (Url, blob) => {
+			setAdditional({
+				type: 'audio',
+				meta: [
+					{
+						path: Url,
+						file: blob,
+					},
+				],
+			});
+		}) }).catch(console.log);
 		alert('Click audio');
 	}
 
 
 
-	handlerImage(event) {
+	function handlerImage(event) {
 		alert('Click image');
 	}
 
-	render() {
-		const {
-			message,
-			addStyle,
-			typeSendButton,
-		} = this.state;
-
-		return (
-			<div className={styles.footer}>
-				<div className={styles.inputButton}>
-					<div className={styles.additionalButton} onClick={this.handleAdditional}>
-						<ul className={styles.listStyle} style={addStyle}>
-							<li className={styles.li} onClick={this.handlerGeo}>Geolocation</li>
-							<li className={styles.li} onClick={this.handlerAudio}>AudioMessage</li>
-							<li className={styles.li} onClick={this.handlerImage}>Image</li>
-						</ul>
-					</div>
+	return (
+		<div className={styles.footer}>
+			<div className={styles.inputButton}>
+				<div className={styles.additionalButton} onClick={handleAdditional}>
+					<ul className={styles.listStyle} style={styleMenu}>
+						<li className={styles.li} onClick={handlerGeo}>Geolocation</li>
+						<li className={styles.li} onClick={handlerAudio}>AudioMessage</li>
+						<li className={styles.li} onClick={handlerImage}>Image</li>
+					</ul>
 				</div>
-				<form className={styles.customInput}
-					onSubmit={this.handleSubmit}>
-					<input className={styles.customInput}
-						onChange={this.handleChange}
-						value={message}
-						placeholder='Message'
-						type='text' />
-				</form>
-				<SendButton
-					send={this.handleSubmit}
-					record={this.handlerRecord}
-					cancel={this.handlerCancel}
-					type={typeSendButton} />
 			</div>
-		);
-	}
+			<form className={styles.customInput}
+				onSubmit={handleSubmit}>
+				<input className={styles.customInput}
+					onChange={handleChange}
+					value={message}
+					placeholder='Message'
+					type='text' />
+			</form>
+			<SendButton
+				send={handleSubmit}
+				record={handlerRecord}
+				cancel={handlerCancel}
+				type={typeSendButton} />
+		</div>
+	);
 }

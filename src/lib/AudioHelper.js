@@ -21,8 +21,9 @@ export async function startRecord(mediaRecorder, callbackExtract) {
             const audioURL = URL.createObjectURL(blob);
             // audio.src = audioURL;
 
-            // console.log(audio);
-            // console.log(callbackExtract);
+            console.log(audioURL);
+            console.log(blob)
+            console.log(callbackExtract);
             
             if (callbackExtract) { callbackExtract(audioURL, blob); }
 		});
