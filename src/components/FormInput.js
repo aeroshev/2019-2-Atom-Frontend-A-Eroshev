@@ -12,6 +12,10 @@ export class FormInput extends React.Component {
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+
+		this.handlerGeo = this.handlerGeo.bind(this);
+		this.handlerAudio = this.handlerAudio.bind(this);
+		this.handlerImage = this.handlerImage.bind(this);
 	}
 
 	handleSubmit(event) {
@@ -26,7 +30,23 @@ export class FormInput extends React.Component {
 		this.setState({
 			message: event.target.value,
 		});
-    }
+	}
+	
+	handlerGeo(event) {
+		navigator.geolocation.getCurrentPosition(position => {
+			const geoMessage = `https://www.openstreetmap.org/#map=17/${position.coords.latitude}/${position.coords.longitude}`;
+			const geoObject = <a href={geoMessage}>{geoMessage}</a>;
+			this.props.sendMessage(geoObject);
+		});
+	}
+
+	handlerAudio(event) {
+		alert('Click audio');
+	}
+
+	handlerImage(event) {
+		alert('Click image');
+	}
 
 	render() {
 		return (
@@ -34,9 +54,9 @@ export class FormInput extends React.Component {
 				<div className={styles.inputButton}>
 					<div className={styles.additionalButton}>
 						<ul className={styles.listStyle}>
-							<li className={styles.li}>Gelocation</li>
-							<li className={styles.li}>AudioMessage</li>
-							<li className={styles.li}>Image</li>
+							<li className={styles.li} onClick={this.handlerGeo}>Gelocation</li>
+							<li className={styles.li} onClick={this.handlerAudio}>AudioMessage</li>
+							<li className={styles.li} onClick={this.handlerImage}>Image</li>
 						</ul>
 					</div>
 				</div>
