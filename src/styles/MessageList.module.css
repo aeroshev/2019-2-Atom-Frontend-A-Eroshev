@@ -1,6 +1,7 @@
 ::-webkit-scrollbar {
 	width: 0px;
 }
+
 .messageWrap{
 	padding-top: 60px;
 	padding-bottom: 50px;
@@ -9,8 +10,6 @@
 	height: 100%;
 	background-size: 50px;
 	flex-direction: column;
-	height: 100%;
-	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	align-content: flex-start;
@@ -43,4 +42,16 @@
 	to {
 		transform: translate(0) scaleX(1)
 	}
+}
+
+.dropZone{
+    width: 100%;
+    height: 100%;
+	margin: 15px;
+	margin-right: 15px;
+	padding: 20px;
+	background: gray;
+	opacity: 0.2;
+	border-radius: 10px;
+    border: 10px solid black;
 }

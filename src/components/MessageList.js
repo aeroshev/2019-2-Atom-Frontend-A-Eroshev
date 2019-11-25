@@ -4,7 +4,7 @@ import { MessageBox } from './MessageBox';
 
 
 export function MessageList(props) {
-	const { messageList, activeChat } = props;
+	const { messageList, activeChat, dropStyle } = props;
 	const list = [];
 	let iter = 0;
 
@@ -17,6 +17,7 @@ export function MessageList(props) {
 
 	return (
 		<div className={styles.messageWrap}>
+			<div className={styles.dropZone} style={dropStyle}></div>
 			<div className={styles.messageBox}>{ list }</div>
 		</div>
 	);

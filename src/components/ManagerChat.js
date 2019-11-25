@@ -2,6 +2,7 @@ import React from 'react';
 import { HeaderChat } from './HeaderChat';
 import { MessageList } from './MessageList';
 import { FormInput } from './FormInput';
+import styles from '../styles/ManagerChat.module.css';
 
 
 export class ManagerChat extends React.Component {
@@ -13,9 +14,13 @@ export class ManagerChat extends React.Component {
 		this.state = {
 			messageMap: info.messageMap,
 			activeChat: props.activeChat,
+			activeDrop: {
+				display: 'none',
+			},
 		};
 
 		this.sendMessage = this.sendMessage.bind(this);
+		this.activateDropZone = this.activateDropZone.bind(this);
 	}
 
 	parseData() {
@@ -33,6 +38,15 @@ export class ManagerChat extends React.Component {
 		}
 
 		return data;
+	}
+
+	activateDropZone() {
+		const { display } = this.state.activeDrop;
+		this.setState({
+			activeDrop: {
+				display: (display === 'none')? 'block' : 'none',
+			}
+		});
 	}
 
 	sendMessage(message) {
@@ -56,13 +70,14 @@ export class ManagerChat extends React.Component {
 		const {
 			messageMap,
 			activeChat,
+			activeDrop,
 		} = this.state;
 
 		return(
-			<div>
+			<div className={styles.wrap}>
 				<HeaderChat />
-				<MessageList messageList={messageMap} activeChat={activeChat} />
-				<FormInput sendMessage={this.sendMessage} />
+				<MessageList messageList={messageMap} activeChat={activeChat} dropStyle={activeDrop}/>
+				<FormInput sendMessage={this.sendMessage} activateDropZone={this.activateDropZone}/>
 			</div>
 		);
 	}

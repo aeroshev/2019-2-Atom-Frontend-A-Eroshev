@@ -5,7 +5,7 @@ import styles from '../styles/FormInput.module.css';
 
 
 export function FormInput(props) {
-		const { sendMessage } = props;
+		const { sendMessage, activateDropZone } = props;
 
 		const [message, setMessage] = useState('');
 		const [additional, setAdditional] = useState(null);
@@ -77,6 +77,7 @@ export function FormInput(props) {
 
 	function handlerImage(event) {
 		alert('Click image');
+		activateDropZone();
 	}
 
 	return (
