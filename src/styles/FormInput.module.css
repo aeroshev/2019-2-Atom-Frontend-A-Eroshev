@@ -43,10 +43,31 @@
 	list-style: none;
 	padding: 0px;
 	box-shadow: 0 0 6px 0 black;
+	animation-name: smoothAppear;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+}
+@keyframes smoothAppear {
+	from {
+		transform: translate(-100%) scaleY(0)
+	}
+	to {
+		transform: translate(0) scaleY(1)
+	}
+}
+
+@keyframes smoothDisappear {
+	from {
+		transform: translate(0) scaleX(1)
+	}
+	to {
+		transform: translate(-100%) scaleX(0)
+	}
 }
 
 .li{
-	background: white;
+	background-color: #e6e6e6;
 	padding: 4px;
 }
 
@@ -66,13 +87,7 @@
 	border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
 }
-.sendButton {
-	height: 100%;
-	width: 50px;
-	z-index: 1;
-	background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4nLrdWTWhP1h2cPfOyG-PLg9zT4scHHlkdkBCFJpfXbFps7Ji&s) no-repeat center center;
-	background-size: 90%;
-}
+
 .inputButton {
 	height: 100%;
 	width: 30px;

@@ -8,11 +8,11 @@
     word-break: break-all;
     background-color: #f4d3ee;
     width: 100%;
-	  padding: 0 10px 0 10px;
-	  animation-name: smoothDrop;
-	  animation-duration: 0.5s;
-	  animation-timing-function: ease-in-out;
-	  animation-fill-mode: forwards;
+	padding: 0 10px 0 10px;
+	animation-name: smoothDrop;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
 }
 @keyframes smoothDrop {
 	from {

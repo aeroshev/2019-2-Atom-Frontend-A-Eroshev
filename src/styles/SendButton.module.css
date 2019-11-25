@@ -1,0 +1,36 @@
+.send {
+    height: 100%;
+	width: 30px;
+	margin: 0 15px;
+	cursor: pointer;
+	opacity: 0.85;
+	transition-duration: 0.15s;
+	width: 50px;
+	z-index: 1;
+	background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4nLrdWTWhP1h2cPfOyG-PLg9zT4scHHlkdkBCFJpfXbFps7Ji&s) no-repeat center center;
+	background-size: 90%;
+}
+
+.cancel {
+    height: 100%;
+	width: 30px;
+	margin: 0 15px;
+	cursor: pointer;
+	opacity: 0.85;
+	transition-duration: 0.15s;
+	width: 50px;
+	z-index: 1;
+	background: red;
+}
+
+.mic {
+    height: 100%;
+    width: 30px;
+    margin: 0 15px;
+    cursor: pointer;
+    opacity: 0.85;
+    transition-duration: 0.15s;
+    width: 50px;
+    z-index: 1;
+    background: black;
+}

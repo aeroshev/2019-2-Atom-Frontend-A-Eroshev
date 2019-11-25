@@ -38,6 +38,8 @@ export class ManagerChat extends React.Component {
 	sendMessage(message) {
 		const { messageMap, activeChat } = this.state;
 
+		console.log(message);
+
 		if (activeChat !== null ){
 			messageMap[activeChat].push({ 
 				id: messageMap[activeChat].length, 

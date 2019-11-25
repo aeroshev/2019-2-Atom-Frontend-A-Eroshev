@@ -10,7 +10,8 @@ html {
 
 body {
 	margin: 0;
-	background-color: #373338;
+	background: url(https://wallpaperaccess.com/full/186461.jpg) no-repeat #373338;
+	background-size: 200%;
 	font-size: 15px;
 	font-family: Helvetica, Arial, sans-serif;
 	font-weight: 400;
