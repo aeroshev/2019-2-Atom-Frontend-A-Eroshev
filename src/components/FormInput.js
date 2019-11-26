@@ -5,15 +5,20 @@ import styles from '../styles/FormInput.module.css';
 
 
 export function FormInput(props) {
-		const { sendMessage, activateDropZone } = props;
+		const { sendMessage, activateDropZone, mediaRecorder } = props;
 
 		const [message, setMessage] = useState('');
-		const [additional, setAdditional] = useState(null);
+		const [additional, setAdditional] = useState({type: 'audio', meta: [{path: '', file: ''}]});
 		const [styleMenu, setStyleMenu] = useState({display: 'none'});
-		const [typeSendButton, setTypeSendButton] = useState('send');
-		const [mediaRecorder, setMediaRecorder] = useState(getMedia().then((stream) => {
-			return new MediaRecorder(stream);
-		}).catch(() => {return null;}));
+		const [audioURL, setAudioURL] = useState('');
+		const [audioFile, setAudioFile] = useState('');
+		const [typeSendButton, setTypeSendButton] = useState('audio');
+		const [isRecorded, setIsRecorded] = useState(false);
+		// const [mediaRecorder, setMediaRecorder] = useState(getMedia().then((stream) => {
+		// 	const mr = new MediaRecorder(stream)
+		// 	console.log(mr)
+		// 	return mr
+		// }).catch(() => {console.log('AAAAAAAAAAAAA')}));
 	
 
 	function handleSubmit(event) {
@@ -24,17 +29,15 @@ export function FormInput(props) {
 
 	function handlerCancel(event) {
 		setTypeSendButton('send');
+		console.log(mediaRecorder);
+		// debugger;
+		
 
-		mediaRecorder.then(media => { return stopRecord(media); });
-		sendMessage(additional);
+		mediaRecorder.then(media => { stopRecord(media, () => {recordStatus(false)}); });
+		setIsRecorded(false);
 
-		console.log(additional);
 	
 		alert('Cancel');
-	}
-
-	function handlerRecord(event) {
-		alert('Reacord');
 	}
 
 	function handleAdditional(event) {
@@ -56,20 +59,47 @@ export function FormInput(props) {
 		});
 	}
 
+	const recordStatus = (status) => {
+		if (isRecorded !== status) {
+			setIsRecorded(status);
+		}
+	};
+
 	function handlerAudio(event) {
 		setTypeSendButton('cancel');
+		// debugger;
+		console.log(mediaRecorder);
+		setIsRecorded(true);
 
-		mediaRecorder.then(media => { return startRecord(media, (Url, blob) => {
-			setAdditional({
-				type: 'audio',
-				meta: [
-					{
-						path: Url,
-						file: blob,
-					},
-				],
-			});
-		}) }).catch(console.log);
+		mediaRecorder.then(media => { 
+			startRecord(media, () => {
+					recordStatus(true);
+				}, () => {
+					recordStatus(false);
+				}, (audio) => {
+				debugger;
+				console.log(isRecorded);
+				// console.log();
+				// console.log(blob);
+				setAudioURL((prevState) => (audio));
+				// setAudioFile({blob});
+					// setAdditional({
+					// 	meta: [
+					// 		{
+					// 			path: Url,
+					// 			file: blob,
+					// 		},
+					// 	],
+					// });
+					// sendMessage(additional);
+					// debugger;
+					// console.log(audioURL);
+					// console.log(audioFile);
+			
+					console.log(audioURL);
+				})
+		 }).catch(err => {console.log('problem')});
+		// debugger;
 		alert('Click audio');
 	}
 
@@ -101,7 +131,7 @@ export function FormInput(props) {
 			</form>
 			<SendButton
 				send={handleSubmit}
-				record={handlerRecord}
+				record={handlerAudio}
 				cancel={handlerCancel}
 				type={typeSendButton} />
 		</div>

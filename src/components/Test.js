@@ -1,19 +1,20 @@
 export function Test() {
-    const time = new Date();
+	let date = new Date(parseInt(new Date().getTime(), 10));
+    date = date.toString().split(' ')[4].split(':');
     
 	const dialogBox1 = {
-        id: 0,
-		dialogName: 'some',
-		lastMessage: '',
-        timeLastMessage: time.getTime(),
-    	messageStatus: 'read',
+        id: 1,
+		dialogName: 'Chat number 1',
+		lastMessage: 'Last Message',
+        timeLastMessage: date[0] + ':' + date[1],
+    	messageStatus: 'no read',
 	};
 
 	const dialogBox2 = {
-        id: 1,
-        dialogName: 'some',
-		lastMessage: '',
-		timeLastMessage: time.getTime(),
+        id: 2,
+        dialogName: 'Chat number 2',
+		lastMessage: 'Last message',
+		timeLastMessage: date[0] + ':' + date[1],
 		messageStatus: 'read',
 	};
 
@@ -21,17 +22,19 @@ export function Test() {
 	localStorage.setItem('chatList', JSON.stringify(arr));
 
 	const messageBox1 = {
-		id: 0,
+		id: 1,
+		attachment: null,
 		content: 'Hello',
-		time: time.getTime(),
+		time: date[0] + ':' + date[1],
 	};
 
 	const messageBox2 = {
-		id: 1,
-		content: 'Wold!',
-		time: time.getTime(),
+		id: 2,
+		attachment: null,
+		content: 'World!',
+		time: date[0] + ':' + date[1],
 	};
 
-	const map = {0: [messageBox1], 1: [messageBox2]};
+	const map = {1: [messageBox1], 2: [messageBox2]};
     localStorage.setItem('messageMap', JSON.stringify(map));
 }

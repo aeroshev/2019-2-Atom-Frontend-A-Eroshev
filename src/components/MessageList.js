@@ -6,10 +6,10 @@ import { MessageBox } from './MessageBox';
 export function MessageList(props) {
 	const { messageList, activeChat, dropStyle } = props;
 	const list = [];
-	let iter = 0;
+	let iter = 1;
 
-	if (activeChat !== null ){
-		messageList[activeChat].forEach(item => {	
+	if (activeChat && messageList[activeChat]) {
+		messageList[activeChat].map(item => {	
 			const Message = <MessageBox key={iter++} content={item.content} time={item.time} />;
 			list.push(Message);
 		});

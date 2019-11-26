@@ -2,6 +2,7 @@ import React from 'react';
 import { HeaderChat } from './HeaderChat';
 import { MessageList } from './MessageList';
 import { FormInput } from './FormInput';
+import { getMedia, startRecord, stopRecord } from '../lib/AudioHelper';
 import styles from '../styles/ManagerChat.module.css';
 
 
@@ -12,6 +13,11 @@ export class ManagerChat extends React.Component {
 		const info = this.parseData();
 
 		this.state = {
+			mediaRecorder: getMedia().then((stream) => {
+				const mr = new MediaRecorder(stream)
+				console.log(mr)
+				return mr
+			}).catch(() => {console.log('AAAAAAAAAAAAA')}),
 			messageMap: info.messageMap,
 			activeChat: props.activeChat,
 			activeDrop: {
@@ -52,14 +58,15 @@ export class ManagerChat extends React.Component {
 	sendMessage(message) {
 		const { messageMap, activeChat } = this.state;
 
-		console.log(message);
+		let date = new Date(parseInt(new Date().getTime(), 10));
+        date = date.toString().split(' ')[4].split(':');
 
-		if (activeChat !== null ){
-			messageMap[activeChat].push({ 
+		if (activeChat && message) {
+			messageMap[activeChat] = [...messageMap[activeChat], { 
 				id: messageMap[activeChat].length, 
 				content: message,
-				time: new Date().getTime(),
-			});
+				time: date[0] + ':' + date[1],
+			}];
 			this.setState({messageMap,});
 
 			localStorage.setItem('messageMap', JSON.stringify(messageMap));
@@ -77,7 +84,7 @@ export class ManagerChat extends React.Component {
 			<div className={styles.wrap}>
 				<HeaderChat />
 				<MessageList messageList={messageMap} activeChat={activeChat} dropStyle={activeDrop}/>
-				<FormInput sendMessage={this.sendMessage} activateDropZone={this.activateDropZone}/>
+				<FormInput sendMessage={this.sendMessage} activateDropZone={this.activateDropZone} mediaRecorder={this.state.mediaRecorder}/>
 			</div>
 		);
 	}
