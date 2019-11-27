@@ -37,6 +37,15 @@ export function Test() {
 		time: date[0] + ':' + date[1],
 	};
 
-	const map = {1: [messageBox1], 2: [messageBox2]};
+	const messageBox3 = {
+		id: 3,
+		attachment: null,
+		owner: 'outside',
+		content: 'World!',
+		time: date[0] + ':' + date[1],
+	};
+	
+
+	const map = {1: [messageBox1, messageBox3], 2: [messageBox2]};
     localStorage.setItem('messageMap', JSON.stringify(map));
 }
