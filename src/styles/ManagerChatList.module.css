@@ -1,0 +1,39 @@
+message-form {
+	position: absolute;
+	display: none;
+	/*overflow: hidden;*/
+	z-index: 1;
+	animation-name: smoothOpen;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+}
+
+@keyframes smoothOpen {
+	from {
+		transform: translate(-100%) scaleX(0)
+	}
+
+	to {
+		transform: translate(0) scaleX(1)
+	}
+}
+
+.dialogList {
+	position: absolute;
+	overflow: visible;
+	z-index: 1;
+	animation-name: smoothClose;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+}
+@keyframes smoothClose {
+	from {
+		transform: translate(-100%) scaleX(0)
+	}
+
+	to {
+		transform: translate(0) scaleX(1)
+	}
+}

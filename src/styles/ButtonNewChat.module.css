@@ -1,0 +1,45 @@
+.buttonNew{
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	width: 60px;
+	height: 60px;
+	opacity: 0.6;
+	background-color: #fff91e;
+	border-radius: 30px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	animation: pulse 2s infinite;
+	box-shadow: 0 0 0 rgba(204,169,44, 0.4);
+	background-image: url(http://simpleicon.com/wp-content/uploads/pencil.png);
+	background-size: 77%;
+	background-position: center;
+
+}
+
+.pulse:hover {
+	animation: none;
+}
+
+@-webkit-keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+	}
+	70% {
+		box-shadow: 0 0 0 10px rgba(204,169,44, 0);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+	}
+}
+@keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+	}
+	70% {
+		box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+	}
+}

@@ -1,0 +1,23 @@
+::-webkit-scrollbar {
+	width: 0px;
+}
+
+.wrap{
+	padding-top: 60px;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	background-color: #373338;
+	background-size: 50px;
+	flex-direction: column;
+	list-style: none;
+	flex-wrap: wrap;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.noMessage{
+	text-align:  center;
+	color: white;
+	margin: 0px 40p 0px 40px;
+}

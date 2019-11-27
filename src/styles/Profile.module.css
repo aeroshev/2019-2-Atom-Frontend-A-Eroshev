@@ -1,0 +1,101 @@
+.paper {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.toolBar{
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    width: 100%;
+    height: 60px;
+    background-color: #8E24AA;
+    box-shadow: 0 0 4px 0 #131313;
+}
+
+.backButton{
+    height: 100%;
+    width: 60px;
+    padding: 4px;
+    cursor: pointer;
+    background: url(https://cdn2.iconfinder.com/data/icons/simple-circular-icons-line/84/Left_Carrot-512.png) no-repeat center center;
+    background-size: 70%;
+}
+
+.title{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    font-size: 18px;
+    color: white;
+    align-items: center;
+    padding-left: 30px;
+}
+
+.ok{
+    height: 100%;
+    width: 60px;
+    cursor: pointer;
+    background: url(http://simpleicon.com/wp-content/uploads/ok.png) no-repeat center center;
+    background-size: 70%;
+}
+
+.avatar{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100px;
+	height: 100px;
+    border-radius: 100px;
+    background: url(https://www.freepngimg.com/thumb/face/8-will-smith-face-png-image.png) no-repeat center center;
+    background-size: 70%;
+    border: 1px solid #d9d9d9;
+    z-index: 2;
+}
+
+.Box{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    height: 80px;
+    background-color: #e6e6e6;
+    border-bottom: 4px solid #a6a6a6;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    margin-bottom: 50px;
+}
+
+.extra{
+    padding-top: 6px;
+    background: transparent;
+    font-size: 12px;
+    color:  #8c8c8c;
+    padding-left: 20px;
+}
+
+.info{
+    background: transparent;
+    font-size: 14px;
+    color:  #8c8c8c;
+    padding-top: 6px;
+    padding-left: 20px;
+}
+
+.customInput {
+    font-size: 14px;
+    /* color: #373434; */
+    display: block;
+    background: transparent;
+    flex: auto;
+    height: 70%;
+    width: 100%;
+    padding: 10px;
+    padding-left: 20px;
+    border: none;
+	flex: auto;
+}
+
