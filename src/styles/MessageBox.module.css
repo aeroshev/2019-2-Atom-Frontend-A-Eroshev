@@ -1,6 +1,6 @@
 .messageBox {
+	float: right;
     box-sizing: border-box;
-    display: inline-block;
     border-radius: 5px;
     padding: 10px;
     margin: 5px 0 5px 0;

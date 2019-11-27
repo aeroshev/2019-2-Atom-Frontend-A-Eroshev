@@ -6,7 +6,7 @@ export function Test() {
         id: 1,
 		dialogName: 'Chat number 1',
 		lastMessage: 'Last Message',
-        timeLastMessage: date[0] + ':' + date[1],
+        messageTime: date[0] + ':' + date[1],
     	messageStatus: 'no read',
 	};
 
@@ -14,7 +14,7 @@ export function Test() {
         id: 2,
         dialogName: 'Chat number 2',
 		lastMessage: 'Last message',
-		timeLastMessage: date[0] + ':' + date[1],
+		messageTime: date[0] + ':' + date[1],
 		messageStatus: 'read',
 	};
 
@@ -24,6 +24,7 @@ export function Test() {
 	const messageBox1 = {
 		id: 1,
 		attachment: null,
+		owner: 'self',
 		content: 'Hello',
 		time: date[0] + ':' + date[1],
 	};
@@ -31,6 +32,7 @@ export function Test() {
 	const messageBox2 = {
 		id: 2,
 		attachment: null,
+		owner: 'self',
 		content: 'World!',
 		time: date[0] + ':' + date[1],
 	};

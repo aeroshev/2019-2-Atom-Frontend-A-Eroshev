@@ -14,6 +14,7 @@
 
 .customInput {
 	color: #050000;
+	outline: none;
 	border: none;
 	flex: auto;
 	height: 100%;

@@ -87,7 +87,7 @@
 
 .customInput {
     font-size: 14px;
-    /* color: #373434; */
+    outline: none;
     display: block;
     background: transparent;
     flex: auto;

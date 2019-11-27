@@ -41,7 +41,7 @@ export class ManagerChatList extends React.Component {
 			id: chatList.length + 1,
 			dialogName: nameChat,
 			lastMessage: '',
-			timeLastMessage: date[0] + ':' + date[1],
+			messageTime: date[0] + ':' + date[1],
 			messageStatus: '',
 		}]});
 		localStorage.setItem('chatList', JSON.stringify(chatList));

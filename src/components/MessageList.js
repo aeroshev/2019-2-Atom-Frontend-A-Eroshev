@@ -10,8 +10,19 @@ export function MessageList(props) {
 
 	if (activeChat && messageList[activeChat]) {
 		messageList[activeChat].map(item => {	
-			const Message = <MessageBox key={iter++} content={item.content} time={item.time} />;
-			list.push(Message);
+			if (item.owner === 'self') {
+				const Message = (<div className={styles.selF}>
+										<MessageBox key={iter++} content={item.content} time={item.time} />
+								</div>);
+				list.push(Message);
+			} else if (item.owner === 'outside') {
+				const Message = (<div className={styles.outSide}>
+										<MessageBox key={iter++} content={item.content} time={item.time} />
+								</div>);
+				list.push(Message);
+			} else {
+				console.log('Error');
+			}
 		});
 	}
 

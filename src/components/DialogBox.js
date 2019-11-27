@@ -16,7 +16,7 @@ export function DialogBox(props) {
 				<div className={styles.dialogAvatar} />
 				<div className={styles.textContent}>
 					<div className={styles.dialogName}>{boxInfo.dialogName}</div>
-					<div className={styles.lastMessage}>{boxInfo.lastMessage}></div>
+					<div className={styles.lastMessage}>{boxInfo.lastMessage}</div>
 				</div>	
 				<div className={styles.status}>			
 					<div className={styles.messageTime}>{boxInfo.messageTime}</div>					

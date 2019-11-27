@@ -9,31 +9,42 @@
 	width: 100%;
 	height: 100%;
 	background-size: 50px;
-	flex-direction: column;
+	/* flex-direction: column;
 	display: flex;
 	flex-wrap: wrap;
-	align-content: flex-start;
+	align-content: flex-start; */
 	overflow: hidden;
 	overflow-y: scroll;
 }
 .messageBox{
-	float: right;
+	/* display: flex;
+	flex-direction: column; */
+
 	margin-top: 10px;
 	margin-bottom: 10px;
     padding-bottom: 100px;
     list-style: none;
 	max-width: 60%;
+	float: right;
 	word-break: break-all;
-    box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	/*overflow: hidden;*/
 	width: 100%;
 	padding: 0 10px 0 10px;
 	animation-name: smoothDrop;
 	animation-duration: 0.5s;
 	animation-timing-function: ease-in-out;
 	animation-fill-mode: forwards;
+}
+
+.selF {
+	/* position: absolute;
+	right: 0px; */
+	/* float: right; */
+}
+
+.outSide {
+	/* position: absolute;
+	left: 0px; */
+	/* float: left; */
 }
 @keyframes smoothDrop {
 	from {

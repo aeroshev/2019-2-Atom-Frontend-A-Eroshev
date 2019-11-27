@@ -64,6 +64,8 @@ export class ManagerChat extends React.Component {
 		if (activeChat && message) {
 			messageMap[activeChat] = [...messageMap[activeChat], { 
 				id: messageMap[activeChat].length, 
+				attachment: null,
+				owner: 'self',
 				content: message,
 				time: date[0] + ':' + date[1],
 			}];
