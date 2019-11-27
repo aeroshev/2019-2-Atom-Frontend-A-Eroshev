@@ -28,6 +28,43 @@
 	background-size: 90%;
 	z-index: 1;
 }
+
+.additionalButton:hover{
+	background: black;
+}
+
+.listStyle{
+	flex-direction: column;
+	justify-content: center;
+	padding: 10px;
+	position: absolute;
+	top: -110px;
+	left: 10px;
+	list-style: none;
+	padding: 0px;
+}
+
+.li{
+	background: white;
+	padding: 4px;
+}
+
+.li:hover{
+	background: black;
+	color: white;
+}
+
+.li:first-child{
+	border-bottom: 1px solid black;
+	border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+.li:last-child{
+	border-top: 1px solid black;
+	border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
 .sendButton {
 	height: 100%;
 	width: 50px;

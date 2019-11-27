@@ -31,7 +31,13 @@ export class FormInput extends React.Component {
 		return (
 			<div className={styles.footer}>
 				<div className={styles.inputButton}>
-					<div className={styles.additionalButton}/>
+					<div className={styles.additionalButton}>
+						<ul className={styles.listStyle}>
+							<li className={styles.li}>Gelocation</li>
+							<li className={styles.li}>AudioMessage</li>
+							<li className={styles.li}>Image</li>
+						</ul>
+					</div>
 				</div>
 				<form className={styles.customInput}
 					onSubmit={this.handleSubmit}>
