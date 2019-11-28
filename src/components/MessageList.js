@@ -10,7 +10,8 @@ export function MessageList(props) {
 
 	console.log(activeChat);
 	console.log(messageList);
-	if (activeChat && messageList[activeChat]) {
+	console.log(messageList[activeChat]);
+	if (activeChat >= 0 && messageList[activeChat]) {
 		messageList[activeChat].map(item => {	
 			if (item.owner === 'self') {
 				const Message = (<div className={styles.messageBox} key={iter++}>

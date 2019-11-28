@@ -58,13 +58,14 @@ export class ManagerChat extends React.Component {
 	sendMessage(message) {
 		const { messageMap, activeChat } = this.state;
 		console.log(messageMap);
+		console.log(activeChat);
 		let date = new Date(parseInt(new Date().getTime(), 10));
         date = date.toString().split(' ')[4].split(':');
 
-		if (activeChat && message) {
+		if (activeChat >= 0 && message) {
 			if (messageMap[activeChat]) {
 				messageMap[activeChat] = [...messageMap[activeChat], { 
-					id: messageMap[activeChat].length, 
+					id: messageMap[activeChat].length + 2, 
 					attachment: null,
 					owner: 'self',
 					content: message,
