@@ -31,19 +31,24 @@ export class ManagerChatList extends React.Component {
 		return data;
 	}
 
-	createChat(nameChat) {
+	createChat(nameChat, username) {
 		const { chatList } = this.state;
 
 		let date = new Date(parseInt(new Date().getTime(), 10));
 		date = date.toString().split(' ')[4].split(':');
 	
 		this.setState({chatList: [...chatList, {
-			id: chatList.length + 1,
+			id: chatList.length,
 			dialogName: nameChat,
 			lastMessage: '',
 			messageTime: date[0] + ':' + date[1],
 			messageStatus: '',
+			isGroup: false,
+			isOnline: false,
+			userName: username,
 		}]});
+		console.log(this.state.chatList);
+		console.log(chatList);
 		localStorage.setItem('chatList', JSON.stringify(chatList));
 	}
 

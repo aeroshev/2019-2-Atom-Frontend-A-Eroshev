@@ -8,6 +8,8 @@ export function MessageList(props) {
 	const list = [];
 	let iter = 1;
 
+	console.log(activeChat);
+	console.log(messageList);
 	if (activeChat && messageList[activeChat]) {
 		messageList[activeChat].map(item => {	
 			if (item.owner === 'self') {

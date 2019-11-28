@@ -3,17 +3,56 @@ import { SendButton } from './SendButton';
 import { getMedia, startRecord, stopRecord } from '../lib/AudioHelper';
 import styles from '../styles/FormInput.module.css';
 
+const send = {
+	height: '100%',
+	width: '30px',
+	margin: '0 15px',
+	cursor: 'pointer',
+	opacity: '0.85',
+	transitionDuration: '0.15s',
+	width: '50px',
+	zIndex: 1,
+	background: 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4nLrdWTWhP1h2cPfOyG-PLg9zT4scHHlkdkBCFJpfXbFps7Ji&s) no-repeat center center',
+	backgroundSize: '90%',
+}
+
+const cancel = {
+	height: '100%',
+	width: '30px',
+	margin: '0 15px',
+	cursor: 'pointer',
+	opacity: '0.85',
+	transitionDuration: '0.15s',
+	width: '50px',
+	zIndex: 1,
+	background: 'red',
+}
+
+const mic = {
+	height: '100%',
+	width: '30px',
+	margin: '0 15px',
+	cursor: 'pointer',
+	opacity: '0.85',
+	transitionDuration: '0.15s',
+	width: '50px',
+	zIndex: 1,
+	background: 'black',
+}
 
 export function FormInput(props) {
-		const { sendMessage, activateDropZone, mediaRecorder } = props;
+		const { sendMessage, activateDropZone } = props;
 
 		const [message, setMessage] = useState('');
 		const [additional, setAdditional] = useState({type: 'audio', meta: [{path: '', file: ''}]});
 		const [styleMenu, setStyleMenu] = useState({display: 'none'});
 		const [audioURL, setAudioURL] = useState('');
 		const [audioFile, setAudioFile] = useState('');
-		const [typeSendButton, setTypeSendButton] = useState('audio');
-		const [isRecorded, setIsRecorded] = useState(false);
+		const [typeSendButton, setTypeSendButton] = useState(mic);
+		const [isRecorded, setIsRecorded] = useState([false]);
+		const [mediaRecorder, setMediaRecorder] = useState(null);
+		const [isAudioMessage, setIsAudioMessage] = useState(false);
+		const [files, setFiles] = useState([]);
 		// const [mediaRecorder, setMediaRecorder] = useState(getMedia().then((stream) => {
 		// 	const mr = new MediaRecorder(stream)
 		// 	console.log(mr)
@@ -65,42 +104,70 @@ export function FormInput(props) {
 		}
 	};
 
-	function handlerAudio(event) {
-		setTypeSendButton('cancel');
-		// debugger;
-		console.log(mediaRecorder);
-		setIsRecorded(true);
+	const handleRecord = (event) => {
+		if (isRecorded) {
+			let chuncks = [];
+			const constrains = { audio: true };
 
-		mediaRecorder.then(media => { 
-			startRecord(media, () => {
-					recordStatus(true);
-				}, () => {
-					recordStatus(false);
-				}, (audio) => {
+			navigator.mediaDevices.getUserMedia(constrains).then((stream) => {
+				setMediaRecorder(new MediaRecorder(stream));
 				debugger;
-				console.log(isRecorded);
-				// console.log();
-				// console.log(blob);
-				setAudioURL((prevState) => (audio));
-				// setAudioFile({blob});
-					// setAdditional({
-					// 	meta: [
-					// 		{
-					// 			path: Url,
-					// 			file: blob,
-					// 		},
-					// 	],
-					// });
-					// sendMessage(additional);
-					// debugger;
-					// console.log(audioURL);
-					// console.log(audioFile);
-			
-					console.log(audioURL);
-				})
-		 }).catch(err => {console.log('problem')});
-		// debugger;
-		alert('Click audio');
+
+				mediaRecorder.addEventListener('stop', (event) => {
+					const blob = new Blob(chuncks, {
+						type: mediaRecorder.mimeType,
+					});
+
+					const data = new FormData();
+					data.append('audio', blob);
+					fetch('https://tt-front.now.sh/upload', {
+						method: 'POST',
+						body: data,
+					})
+						.then(() => {
+							alert('Голосовое сообщение отправлено');
+						})
+						.catch(console.log);
+
+					chuncks = [];
+					const audioURL = URL.createObjectURL(blob);
+					setIsAudioMessage(true);
+					setFiles([...files, {audioURL}]);
+					console.log(files);
+					debugger;
+					// this.state.files.push(audioURL);
+					// this.sendMessage();
+					// this.state.files.pop();
+					setMediaRecorder(null);
+					stream.getTracks().forEach((track) => track.stop());
+					setIsAudioMessage(false);
+				});
+
+				mediaRecorder.addEventListener('dataavailable', (event) => {
+					chuncks.push(event.data);
+				});
+
+				if (mediaRecorder) {
+					mediaRecorder.start();
+				}
+			});
+		}
+	}
+
+	function handlerAudio(event) {
+		if (!isRecorded[0]) {
+			setTypeSendButton(cancel);
+			isRecorded.pop();
+			isRecorded.push(true);
+			handleRecord(event);
+		} else {
+			if (mediaRecorder) {
+				mediaRecorder.stop();
+			}
+			isRecorded.pop()
+			isRecorded.push(false);
+			setTypeSendButton(mic);
+		}
 	}
 
 
@@ -129,11 +196,7 @@ export function FormInput(props) {
 					placeholder='Message'
 					type='text' />
 			</form>
-			<SendButton
-				send={handleSubmit}
-				record={handlerAudio}
-				cancel={handlerCancel}
-				type={typeSendButton} />
+			<div style={typeSendButton} onClick={handlerAudio} />
 		</div>
 	);
 }

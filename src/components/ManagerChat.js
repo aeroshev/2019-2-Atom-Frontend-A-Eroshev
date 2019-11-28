@@ -57,19 +57,31 @@ export class ManagerChat extends React.Component {
 
 	sendMessage(message) {
 		const { messageMap, activeChat } = this.state;
-
+		console.log(messageMap);
 		let date = new Date(parseInt(new Date().getTime(), 10));
         date = date.toString().split(' ')[4].split(':');
 
 		if (activeChat && message) {
-			messageMap[activeChat] = [...messageMap[activeChat], { 
-				id: messageMap[activeChat].length, 
-				attachment: null,
-				owner: 'self',
-				content: message,
-				time: date[0] + ':' + date[1],
-			}];
-			this.setState({messageMap,});
+			if (messageMap[activeChat]) {
+				messageMap[activeChat] = [...messageMap[activeChat], { 
+					id: messageMap[activeChat].length, 
+					attachment: null,
+					owner: 'self',
+					content: message,
+					time: date[0] + ':' + date[1],
+				}];
+				this.setState({messageMap: messageMap,});
+			} else {
+				const map = [...messageMap, [{
+					id: 1, 
+					attachment: null,
+					owner: 'self',
+					content: message,
+					time: date[0] + ':' + date[1],
+				}]];
+				console.log(map);
+				this.setState({messageMap: map,});
+			}
 
 			localStorage.setItem('messageMap', JSON.stringify(messageMap));
 		}

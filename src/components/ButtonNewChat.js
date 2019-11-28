@@ -2,12 +2,16 @@ import React from 'react';
 import styles from '../styles/ButtonNewChat.module.css';
 
 
-export function ButtonNewChat (props){
+export function ButtonNewChat (props) {
+    const { createChat } = props;
 
 	function handleClick(event){
-        event.preventDefault();
+        // event.preventDefault();
         const nameChat = prompt('Name new chat', 'NewChat');
-        props.createChat(nameChat);
+        const userName = prompt('Input username', '');
+        if (userName) {
+            createChat(nameChat, userName);
+        }
     }
 
 	return (
