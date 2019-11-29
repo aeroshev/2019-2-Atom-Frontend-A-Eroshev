@@ -20,9 +20,7 @@ export class ManagerChat extends React.Component {
 			}).catch(() => {console.log('AAAAAAAAAAAAA')}),
 			messageMap: info.messageMap,
 			activeChat: props.activeChat,
-			activeDrop: {
-				display: 'none',
-			},
+			setVisibleDropZone: false,
 		};
 
 		this.sendMessage = this.sendMessage.bind(this);
@@ -47,12 +45,8 @@ export class ManagerChat extends React.Component {
 	}
 
 	activateDropZone() {
-		const { display } = this.state.activeDrop;
-		this.setState({
-			activeDrop: {
-				display: (display === 'none')? 'block' : 'none',
-			}
-		});
+		const { setVisibleDropZone } = this.state;
+		this.setState({setVisibleDropZone: true});
 	}
 
 	sendMessage(message) {
@@ -92,13 +86,13 @@ export class ManagerChat extends React.Component {
 		const {
 			messageMap,
 			activeChat,
-			activeDrop,
+			setVisibleDropZone,
 		} = this.state;
 
 		return(
 			<div className={styles.wrap}>
 				<HeaderChat />
-				<MessageList messageList={messageMap} activeChat={activeChat} dropStyle={activeDrop}/>
+				<MessageList messageList={messageMap} activeChat={activeChat} dropAllowed={setVisibleDropZone}/>
 				<FormInput sendMessage={this.sendMessage} activateDropZone={this.activateDropZone} mediaRecorder={this.state.mediaRecorder}/>
 			</div>
 		);

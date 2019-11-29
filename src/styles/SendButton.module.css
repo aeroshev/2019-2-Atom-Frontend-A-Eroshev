@@ -20,7 +20,10 @@
 	transition-duration: 0.15s;
 	width: 50px;
 	z-index: 1;
-	background: red;
+	background: url(https://img.icons8.com/small/452/cancel--v1.png) no-repeat center center;
+	background-size: 70%;
+	border: none;
+	outline: none;
 }
 
 .mic {
@@ -32,5 +35,8 @@
     transition-duration: 0.15s;
     width: 50px;
     z-index: 1;
-    background: black;
+    background: url(http://s1.iconbird.com/ico/2013/9/450/w256h2561380453883Audio2256x25632.png) no-repeat center center;
+	background-size: 60%;
+	border: none;
+	outline: none;
 }
