@@ -7,6 +7,7 @@
 	background-color: #8E24AA;
 	width: 100%;
 	z-index: 1;
+	box-shadow: 0 0 4px 0 #131313;
 }
 
 .headerButton{

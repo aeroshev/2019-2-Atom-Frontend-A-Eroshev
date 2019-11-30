@@ -7,7 +7,6 @@ export function ChatList (props) {
 	const list = [];
 	let iter = 0;
 	const { chatList, setActiveChat } = props;
-	console.log(chatList);
 
 	if (!chatList) {
 		list.push(<div className={styles.noMessage}>No chats</div>);
@@ -19,7 +18,7 @@ export function ChatList (props) {
 		});
 	}
 
-	return(			
+	return (			
 		<div>
 			<div className={styles.wrap}>{ list }</div>
 		</div>

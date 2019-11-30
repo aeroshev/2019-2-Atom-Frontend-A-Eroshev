@@ -31,7 +31,7 @@ export function Test() {
 		id: 1,
 		attachment: null,
 		owner: 'self',
-		content: 'Hello',
+		text: 'Hello',
 		time: date[0] + ':' + date[1],
 	};
 
@@ -39,7 +39,7 @@ export function Test() {
 		id: 2,
 		attachment: null,
 		owner: 'self',
-		content: 'World!',
+		text: 'World!',
 		time: date[0] + ':' + date[1],
 	};
 
@@ -47,7 +47,7 @@ export function Test() {
 		id: 3,
 		attachment: null,
 		owner: 'outside',
-		content: 'World!',
+		text: 'World!',
 		time: date[0] + ':' + date[1],
 	};
 	

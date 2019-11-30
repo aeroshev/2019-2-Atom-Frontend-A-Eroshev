@@ -55,13 +55,13 @@ export class SendButton extends React.Component {
 
   saveAudio() {
     const { audios } = this.state;
-      debugger;
     // convert saved chunks to blob
     const blob = new Blob(this.chunks, {type: audioType});
     // generate audio url from blob
     const audioURL = window.URL.createObjectURL(blob);
     // append audioURL to list of saved audios for rendering
     audios.push([audioURL]);
+    this.props.getAudio(null, audios);
     // audios.push(new_audio);
     this.setState({audios: audios});
   }

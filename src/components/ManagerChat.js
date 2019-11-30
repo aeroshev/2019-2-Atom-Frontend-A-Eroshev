@@ -2,7 +2,6 @@ import React from 'react';
 import { HeaderChat } from './HeaderChat';
 import { MessageList } from './MessageList';
 import { FormInput } from './FormInput';
-import { getMedia, startRecord, stopRecord } from '../lib/AudioHelper';
 import styles from '../styles/ManagerChat.module.css';
 
 
@@ -20,6 +19,25 @@ export class ManagerChat extends React.Component {
 
 		this.sendMessage = this.sendMessage.bind(this);
 		this.activateDropZone = this.activateDropZone.bind(this);
+	}
+
+	componentDidMount() {
+		try {
+			const json = localStorage.getItem('messageMap');
+			const messageList = JSON.parse(json);
+
+			if (messageList) {
+				this.setState({
+					messageMap: messageList,
+				});
+			}
+		} catch(Error) {
+			localStorage.clear();
+			console.log('Error parse');
+			this.setState({
+				messageMap: null,
+			})
+		}
 	}
 
 	componentDidUpdate(prevProps) {
@@ -48,32 +66,32 @@ export class ManagerChat extends React.Component {
 	}
 
 	activateDropZone() {
-		const { setVisibleDropZone } = this.state;
 		this.setState({setVisibleDropZone: true});
 	}
 
-	sendMessage(message) {
+	sendMessage(message, newAttachment) {
 		const { messageMap, activeChat } = this.state;
+		debugger;
 
 		let date = new Date(parseInt(new Date().getTime(), 10));
         date = date.toString().split(' ')[4].split(':');
 
-		if (activeChat >= 0 && message) {
+		if (activeChat >= 0 && (message || newAttachment)) {
 			if (messageMap[activeChat]) {
 				messageMap[activeChat] = [...messageMap[activeChat], { 
 					id: messageMap[activeChat].length + 2, 
-					attachment: null,
+					attachment: /*messageMap.attachment = */newAttachment,
 					owner: 'self',
-					content: message,
+					text: message,
 					time: date[0] + ':' + date[1],
 				}];
 				this.setState({messageMap: messageMap,});
 			} else {
 				const map = [...messageMap, [{
 					id: 1, 
-					attachment: null,
+					attachment: newAttachment,
 					owner: 'self',
-					content: message,
+					text: message,
 					time: date[0] + ':' + date[1],
 				}]];
 	
@@ -94,7 +112,7 @@ export class ManagerChat extends React.Component {
 		return(
 			<div className={styles.wrap}>
 				<HeaderChat />
-				<MessageList messageList={messageMap} activeChat={activeChat} dropAllowed={setVisibleDropZone}/>
+				<MessageList messageMap={messageMap} activeChat={activeChat} dropAllowed={setVisibleDropZone}/>
 				<FormInput sendMessage={this.sendMessage} activateDropZone={this.activateDropZone} mediaRecorder={this.state.mediaRecorder}/>
 			</div>
 		);
