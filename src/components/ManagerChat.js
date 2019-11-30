@@ -21,24 +21,25 @@ export class ManagerChat extends React.Component {
 		this.activateDropZone = this.activateDropZone.bind(this);
 	}
 
-	componentDidMount() {
-		try {
-			const json = localStorage.getItem('messageMap');
-			const messageList = JSON.parse(json);
+	// componentDidMount() {
+	// 	debugger;
+	// 	try {
+	// 		const json = localStorage.getItem('messageMap');
+	// 		const messageList = JSON.parse(json);
 
-			if (messageList) {
-				this.setState({
-					messageMap: messageList,
-				});
-			}
-		} catch(Error) {
-			localStorage.clear();
-			console.log('Error parse');
-			this.setState({
-				messageMap: null,
-			})
-		}
-	}
+	// 		if (messageList) {
+	// 			this.setState({
+	// 				messageMap: messageList,
+	// 			});
+	// 		}
+	// 	} catch(Error) {
+	// 		localStorage.clear();
+	// 		console.log('Error parse');
+	// 		this.setState({
+	// 			messageMap: null,
+	// 		})
+	// 	}
+	// }
 
 	componentDidUpdate(prevProps) {
 		if (this.props.activeChat !== prevProps.activeChat){
@@ -69,7 +70,7 @@ export class ManagerChat extends React.Component {
 		this.setState({setVisibleDropZone: true});
 	}
 
-	sendMessage(message, newAttachment) {
+	sendMessage(message, newAttachment = null) {
 		const { messageMap, activeChat } = this.state;
 		debugger;
 
@@ -80,7 +81,7 @@ export class ManagerChat extends React.Component {
 			if (messageMap[activeChat]) {
 				messageMap[activeChat] = [...messageMap[activeChat], { 
 					id: messageMap[activeChat].length + 2, 
-					attachment: /*messageMap.attachment = */newAttachment,
+					attachment: newAttachment,
 					owner: 'self',
 					text: message,
 					time: date[0] + ':' + date[1],
@@ -112,8 +113,13 @@ export class ManagerChat extends React.Component {
 		return(
 			<div className={styles.wrap}>
 				<HeaderChat />
-				<MessageList messageMap={messageMap} activeChat={activeChat} dropAllowed={setVisibleDropZone}/>
-				<FormInput sendMessage={this.sendMessage} activateDropZone={this.activateDropZone} mediaRecorder={this.state.mediaRecorder}/>
+				<MessageList 
+					messageMap={messageMap} 
+					activeChat={activeChat} 
+					dropAllowed={setVisibleDropZone} />
+				<FormInput 
+					sendMessage={this.sendMessage} 
+					activateDropZone={this.activateDropZone} />
 			</div>
 		);
 	}

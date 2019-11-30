@@ -12,13 +12,11 @@ export function FormInput(props) {
 	const [styleMenu, setStyleMenu] = useState(null);
 
 
-	function handlerSubmit(event, attachment = null) {
-		if (event) {
-			event.prevenDefault();
+	function handleSubmit(event, attachment = null) {
+		if (event.charCode === 13) {
+			sendMessage(message, attachment);
+			setMessage('');
 		}
-		
-		sendMessage(message, attachment);
-		setMessage('');
 	}
 
 	function handlerAudio(audioURL) {
@@ -28,7 +26,7 @@ export function FormInput(props) {
 				type: 'audio',
 				path: audioURL,
 			}
-			handlerSubmit(null, object);
+			sendMessage(null, object);
 		}	
 	}
 
@@ -64,7 +62,7 @@ export function FormInput(props) {
 			path: [window.URL.createObjectURL(additionsList[0])],
 		}
 
-		handlerSubmit(null, object);
+		sendMessage(null, object);
 	}
 
 	function handlerDocument(event) {
@@ -79,7 +77,7 @@ export function FormInput(props) {
 			path: [window.URL.createObjectURL(additionsList[0])],
 		}
 
-		handlerSubmit(null, object);
+		sendMessage(null, object);
 	}
 
 	return (
@@ -110,14 +108,13 @@ export function FormInput(props) {
 					</ul>
 				</div>
 			</div>
-			<form className={styles.customInput}
-				onSubmit={handlerSubmit}>
-				<input className={styles.customInput}
-					onChange={handleChange}
-					value={message}
-					placeholder='Message'
-					type='text' />
-			</form>
+			<input 
+				className={styles.customInput}
+				onKeyPress={handleSubmit}
+				onChange={handleChange}
+				value={message}
+				placeholder='Message'
+				type='text' />
 			<SendButton handlerAudio={handlerAudio} />
 		</div>
 	);
