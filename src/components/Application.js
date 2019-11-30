@@ -22,10 +22,28 @@ export class Application extends React.Component {
 		Test();
 	}
 
+	componentDidMount() {
+		try {
+			const json = localStorage.getItem('activeChat');
+			const chatId = JSON.parse(json);
+
+
+			if (chatId >= 0) {
+				this.setState({
+					activeChat: chatId,
+				});
+			}
+		} catch(Error) {
+			localStorage.clear();
+			console.log('Error parse');
+		}
+	}
+
 	setActiveChat(id) {
 		this.setState(
 			{activeChat: id},
 		);
+		localStorage.setItem('activeChat', JSON.stringify(id));
 	}
 
 	render() {

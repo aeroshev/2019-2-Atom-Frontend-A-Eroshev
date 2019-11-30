@@ -4,44 +4,6 @@ import styles from '../styles/SendButton.module.css';
 
 const audioType = 'audio/webm';
 
-const send = {
-	height: '100%',
-	width: '30px',
-	margin: '0 15px',
-	cursor: 'pointer',
-	opacity: '0.85',
-	transitionDuration: '0.15s',
-	width: '50px',
-	zIndex: 1,
-	background: 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4nLrdWTWhP1h2cPfOyG-PLg9zT4scHHlkdkBCFJpfXbFps7Ji&s) no-repeat center center',
-	backgroundSize: '90%',
-}
-
-const cancel = {
-	height: '100%',
-	width: '30px',
-	margin: '0 15px',
-	cursor: 'pointer',
-	opacity: '0.85',
-	transitionDuration: '0.15s',
-	width: '50px',
-	zIndex: 1,
-	background: 'red',
-}
-
-const mic = {
-	height: '100%',
-	width: '30px',
-	margin: '0 15px',
-	cursor: 'pointer',
-	opacity: '0.85',
-	transitionDuration: '0.15s',
-	width: '50px',
-	zIndex: 1,
-  background: 'url(http://s1.iconbird.com/ico/2013/9/450/w256h2561380453883Audio2256x25632.png) noRepeat center center',
-  backgroundSize: '50%',
-}
-
 export class SendButton extends React.Component {
   constructor(props) {
     super(props);
@@ -99,10 +61,9 @@ export class SendButton extends React.Component {
     // generate audio url from blob
     const audioURL = window.URL.createObjectURL(blob);
     // append audioURL to list of saved audios for rendering
-    const new_audio = this.state.audios.concat([audioURL]);
-    audios.push(new_audio);
+    audios.push([audioURL]);
+    // audios.push(new_audio);
     this.setState({audios: audios});
-    console.log(this.state.audios);
   }
 
 //   deleteaudio(audioURL) {

@@ -13,11 +13,6 @@ export class ManagerChat extends React.Component {
 		const info = this.parseData();
 
 		this.state = {
-			mediaRecorder: getMedia().then((stream) => {
-				const mr = new MediaRecorder(stream)
-				console.log(mr)
-				return mr
-			}).catch(() => {console.log('AAAAAAAAAAAAA')}),
 			messageMap: info.messageMap,
 			activeChat: props.activeChat,
 			setVisibleDropZone: false,
@@ -25,6 +20,14 @@ export class ManagerChat extends React.Component {
 
 		this.sendMessage = this.sendMessage.bind(this);
 		this.activateDropZone = this.activateDropZone.bind(this);
+	}
+
+	componentDidUpdate(prevProps) {
+		if (this.props.activeChat !== prevProps.activeChat){
+			this.setState({
+				activeChat: this.props.activeChat,
+			});
+		}
 	}
 
 	parseData() {
@@ -51,8 +54,7 @@ export class ManagerChat extends React.Component {
 
 	sendMessage(message) {
 		const { messageMap, activeChat } = this.state;
-		console.log(messageMap);
-		console.log(activeChat);
+
 		let date = new Date(parseInt(new Date().getTime(), 10));
         date = date.toString().split(' ')[4].split(':');
 
@@ -74,7 +76,7 @@ export class ManagerChat extends React.Component {
 					content: message,
 					time: date[0] + ':' + date[1],
 				}]];
-				console.log(map);
+	
 				this.setState({messageMap: map,});
 			}
 

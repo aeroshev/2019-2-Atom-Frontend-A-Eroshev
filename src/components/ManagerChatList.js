@@ -47,8 +47,7 @@ export class ManagerChatList extends React.Component {
 			isOnline: false,
 			userName: username,
 		}]});
-		console.log(this.state.chatList);
-		console.log(chatList);
+	
 		localStorage.setItem('chatList', JSON.stringify(chatList));
 	}
 
