@@ -35,7 +35,6 @@ export class Application extends React.Component {
 			}
 		} catch(Error) {
 			localStorage.clear();
-			console.log('Error parse');
 		}
 	}
 
