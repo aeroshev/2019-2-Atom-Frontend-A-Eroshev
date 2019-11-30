@@ -11,6 +11,7 @@ export function ChatList (props) {
 	if (!chatList) {
 		list.push(<div className={styles.noMessage}>No chats</div>);
 	} else {
+		// eslint-disable-next-line
 		chatList.map(item => {
 			const Chat = <DialogBox key={ iter++ } boxInfo = { item } setActiveChat={setActiveChat}/>;
 

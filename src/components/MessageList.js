@@ -9,7 +9,8 @@ export function MessageList(props) {
 	let iter = 1;
 
 	if (activeChat >= 0 && messageMap[activeChat]) {
-		messageMap[activeChat].map(item => {	
+		// eslint-disable-next-line
+		messageMap[activeChat].map(item => {
 			if (item.owner === 'self') {
 				const Message = (<div className={styles.messageBox} key={iter++}>
 										<MessageBox shift={'self'} content={item} />
