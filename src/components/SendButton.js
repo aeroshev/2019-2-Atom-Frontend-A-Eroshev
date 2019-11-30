@@ -60,6 +60,8 @@ export class SendButton extends React.Component {
     // generate audio url from blob
     const audioURL = window.URL.createObjectURL(blob);
     // append audioURL to list of saved audios for rendering
+    debugger;
+    audios.pop();
     audios.push([audioURL]);
     this.props.getAudio(null, audios);
     // audios.push(new_audio);

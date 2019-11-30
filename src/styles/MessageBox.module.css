@@ -32,7 +32,15 @@
 	font-size: small;
 }
 .messageBox .text{
-  padding-top: 5px;
-  text-align: justify;
+	padding-top: 5px;
+	text-align: justify;
 	color: black;
+}
+
+audio {
+	display: block;
+	padding-top: 5px;
+	width: 100%;
+	size: 70%;
+	outline: none;
 }

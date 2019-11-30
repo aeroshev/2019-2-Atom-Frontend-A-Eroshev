@@ -12,11 +12,6 @@ export function MessageBox(props) {
 		style = {float: 'right'};
 	}
 
-	// const attachmentRender = () => {
-	// 	if (content.attachment.type === 'audio') {
-	// 		<audio src={content.attachment.path[0]} controls />
-	// 	}
-	// }
 	return (
 		<div className={styles.messageBox} style={style}>
 			{!attachment && <div className={styles.text}>{content.text}</div>}
