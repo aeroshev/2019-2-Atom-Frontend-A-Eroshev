@@ -15,6 +15,7 @@ export function ChatList (props) {
 			const Chat = <DialogBox key={ iter++ } boxInfo = { item } setActiveChat={setActiveChat}/>;
 
 			list.push(Chat);
+
 		});
 	}
 

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from '../styles/MessageList.module.css';
 import { MessageBox } from './MessageBox';
 
 
 export function MessageList(props) {
-	const { messageMap, activeChat, dropAllowed } = props;
+	const { messageMap, activeChat } = props;
 	const list = [];
 	let iter = 1;
 
@@ -28,8 +28,7 @@ export function MessageList(props) {
 
 	return (
 		<div className={styles.messageWrap}>
-			{dropAllowed && <div className={styles.dropZone} />}
-			{!dropAllowed && <div>{ list }</div>}
+			{ list }
 		</div>
 	);
 }

@@ -15,31 +15,15 @@ export class ManagerChat extends React.Component {
 			messageMap: info.messageMap,
 			activeChat: props.activeChat,
 			setVisibleDropZone: false,
+			dropFiles: [],
 		};
 
 		this.sendMessage = this.sendMessage.bind(this);
-		this.activateDropZone = this.activateDropZone.bind(this);
+		this.triggerDropZone = this.triggerDropZone.bind(this);
+		this.dragOver = this.dragOver.bind(this);
+		this.dragLeave = this.dragLeave.bind(this);
+		this.drop = this.drop.bind(this);
 	}
-
-	// componentDidMount() {
-	// 	debugger;
-	// 	try {
-	// 		const json = localStorage.getItem('messageMap');
-	// 		const messageList = JSON.parse(json);
-
-	// 		if (messageList) {
-	// 			this.setState({
-	// 				messageMap: messageList,
-	// 			});
-	// 		}
-	// 	} catch(Error) {
-	// 		localStorage.clear();
-	// 		console.log('Error parse');
-	// 		this.setState({
-	// 			messageMap: null,
-	// 		})
-	// 	}
-	// }
 
 	componentDidUpdate(prevProps) {
 		if (this.props.activeChat !== prevProps.activeChat){
@@ -66,13 +50,37 @@ export class ManagerChat extends React.Component {
 		return data;
 	}
 
-	activateDropZone() {
-		this.setState({setVisibleDropZone: true});
+	triggerDropZone(status) {
+		this.setState({setVisibleDropZone: status});
+	}
+
+	dragOver(event) {
+		event.preventDefault();
+		event.stopPropagation();
+
+		this.triggerDropZone(true);
+	}
+
+	dragLeave(event) {
+		this.triggerDropZone(false);
+	}
+
+	drop(event) {
+		event.preventDefault();
+		event.stopPropagation();
+
+		this.triggerDropZone(false);
+
+		const attachment = {
+			name: 'drop',
+			type: 'image',
+			path: [window.URL.createObjectURL(event.dataTransfer.files[0])],
+		}
+		this.sendMessage(null, attachment);
 	}
 
 	sendMessage(message, newAttachment = null) {
 		const { messageMap, activeChat } = this.state;
-		debugger;
 
 		let date = new Date(parseInt(new Date().getTime(), 10));
         date = date.toString().split(' ')[4].split(':');
@@ -107,19 +115,20 @@ export class ManagerChat extends React.Component {
 		const {
 			messageMap,
 			activeChat,
-			setVisibleDropZone,
 		} = this.state;
 
 		return(
-			<div className={styles.wrap}>
+			<div 
+				className={styles.wrap}
+				onDrop={this.drop}
+				onDragOver={this.dragOver}
+				onDragLeave={this.dragLeave}>
 				<HeaderChat />
 				<MessageList 
 					messageMap={messageMap} 
-					activeChat={activeChat} 
-					dropAllowed={setVisibleDropZone} />
+					activeChat={activeChat} />
 				<FormInput 
-					sendMessage={this.sendMessage} 
-					activateDropZone={this.activateDropZone} />
+					sendMessage={this.sendMessage} />
 			</div>
 		);
 	}

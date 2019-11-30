@@ -4,7 +4,7 @@ import styles from '../styles/FormInput.module.css';
 
 
 export function FormInput(props) {
-	const { sendMessage, activateDropZone } = props;
+	const { sendMessage } = props;
 
 	const image = useRef();
 	const document = useRef();
@@ -91,7 +91,6 @@ export function FormInput(props) {
 							<input
 								ref={document}
 								type='file'
-								// multiple
 								onChange={handlerDocument} 
 								style={{display: 'none'}} />
 							</li>
@@ -100,7 +99,6 @@ export function FormInput(props) {
 							<input
 								ref={image}
 								type='file'
-								// multiple
 								accept='image/*'
 								onChange={handlerImage} 
 								style={{display: 'none'}} />

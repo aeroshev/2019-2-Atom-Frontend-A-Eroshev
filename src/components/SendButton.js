@@ -16,10 +16,8 @@ export class SendButton extends React.Component {
   async componentDidMount() {
     const stream = await navigator.mediaDevices.getUserMedia({audio: true});
     this.audio = document.createElement('audio');
-    // show it to user
     this.audio.srcObject = stream;
-    // this.audio.play();
-    // init recording
+
     this.mediaRecorder = new MediaRecorder(stream, {
       mimeType: audioType,
     });
@@ -59,20 +57,13 @@ export class SendButton extends React.Component {
     const blob = new Blob(this.chunks, {type: audioType});
     // generate audio url from blob
     const audioURL = window.URL.createObjectURL(blob);
-    // append audioURL to list of saved audios for rendering
-    debugger;
+ 
     audios.pop();
     audios.push([audioURL]);
     this.props.handlerAudio(audios);
-    // audios.push(new_audio);
+
     this.setState({audios: audios});
   }
-
-//   deleteaudio(audioURL) {
-//     // filter out current audioURL from the list of saved audios
-//     const audios = this.state.audios.filter(v => v !== audioURL);
-//     this.setState({audios});
-//   }
 
   render() {
     const { recording } = this.state;
