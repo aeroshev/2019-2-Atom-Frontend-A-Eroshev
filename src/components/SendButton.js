@@ -63,7 +63,7 @@ export class SendButton extends React.Component {
     debugger;
     audios.pop();
     audios.push([audioURL]);
-    this.props.getAudio(null, audios);
+    this.props.handlerAudio(audios);
     // audios.push(new_audio);
     this.setState({audios: audios});
   }

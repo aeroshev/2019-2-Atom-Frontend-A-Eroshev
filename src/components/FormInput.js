@@ -10,23 +10,26 @@ export function FormInput(props) {
 	const document = useRef();
 	const [message, setMessage] = useState('');
 	const [styleMenu, setStyleMenu] = useState(null);
-	const [attachment, setAttachment] = useState([]);
-	// const [styleMenu, setStyleMenu] = useState({display: 'none'});
 
-	
-	function handleSubmit(event, audioURL = null) {
-		if (event) {	
-			event.preventDefault();
-		}	
-		let object = null;
+
+	function handlerSubmit(event, attachment = null) {
+		if (event) {
+			event.prevenDefault();
+		}
+		
+		sendMessage(message, attachment);
+		setMessage('');
+	}
+
+	function handlerAudio(audioURL) {
 		if (audioURL) {
-			object = {
+			const object = {
+				name: 'AudioMessage',
 				type: 'audio',
 				path: audioURL,
 			}
-		}
-		sendMessage(message, object);
-		setMessage('');
+			handlerSubmit(null, object);
+		}	
 	}
 
 	function handleAdditional(event) {
@@ -50,12 +53,33 @@ export function FormInput(props) {
 	}
 
 	function handlerImage(event) {
-		alert('Click image');
-		activateDropZone();
+		let additionsList = event.target.files;
+		if (!additionsList.length) {
+			return false;
+		}
+
+		const object = {
+			name: additionsList[0].name,
+			type: 'image',
+			path: [window.URL.createObjectURL(additionsList[0])],
+		}
+
+		handlerSubmit(null, object);
 	}
 
 	function handlerDocument(event) {
-		alert('Documnet');
+		let additionsList = event.target.files;
+		if (!additionsList.length) {
+			return false;
+		}
+
+		const object = {
+			name: additionsList[0].name,
+			type: 'document',
+			path: [window.URL.createObjectURL(additionsList[0])],
+		}
+
+		handlerSubmit(null, object);
 	}
 
 	return (
@@ -69,7 +93,7 @@ export function FormInput(props) {
 							<input
 								ref={document}
 								type='file'
-								multiple
+								// multiple
 								onChange={handlerDocument} 
 								style={{display: 'none'}} />
 							</li>
@@ -78,7 +102,7 @@ export function FormInput(props) {
 							<input
 								ref={image}
 								type='file'
-								multiple
+								// multiple
 								accept='image/*'
 								onChange={handlerImage} 
 								style={{display: 'none'}} />
@@ -87,14 +111,14 @@ export function FormInput(props) {
 				</div>
 			</div>
 			<form className={styles.customInput}
-				onSubmit={handleSubmit}>
+				onSubmit={handlerSubmit}>
 				<input className={styles.customInput}
 					onChange={handleChange}
 					value={message}
 					placeholder='Message'
 					type='text' />
 			</form>
-			<SendButton getAudio={handleSubmit} />
+			<SendButton handlerAudio={handlerAudio} />
 		</div>
 	);
 }

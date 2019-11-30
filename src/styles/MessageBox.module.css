@@ -44,3 +44,13 @@ audio {
 	size: 70%;
 	outline: none;
 }
+
+a {
+	padding-top: 10px;
+	text-align: justify;
+}
+
+.img {
+  /* padding: 5px; */
+  text-align: center;
+}
