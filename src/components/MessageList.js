@@ -8,7 +8,7 @@ export function MessageList(props) {
 	const list = [];
 	let iter = 1;
 
-	if (activeChat >= 0 && messageMap[activeChat]) {
+	if (activeChat > 0 && messageMap[activeChat]) {
 		// eslint-disable-next-line
 		messageMap[activeChat].map(item => {
 			if (item.owner === 'self') {

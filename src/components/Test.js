@@ -3,7 +3,7 @@ export function Test() {
     date = date.toString().split(' ')[4].split(':');
     
 	const dialogBox1 = {
-        id: 0,
+        id: 1,
 		dialogName: 'Chat number 1',
 		lastMessage: 'Last Message',
         messageTime: date[0] + ':' + date[1],
@@ -14,7 +14,7 @@ export function Test() {
 	};
 
 	const dialogBox2 = {
-        id: 1,
+        id: 2,
         dialogName: 'Chat number 2',
 		lastMessage: 'Last message',
 		messageTime: date[0] + ':' + date[1],
@@ -52,6 +52,6 @@ export function Test() {
 	};
 	
 
-	const map = [[messageBox1, messageBox3], [messageBox2]];
+	const map = {1: [messageBox1, messageBox3], 2: [messageBox2]};
     localStorage.setItem('messageMap', JSON.stringify(map));
 }
