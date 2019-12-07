@@ -6,7 +6,7 @@ export function UserProfile(props) {
 	return (
 		<div className={styles.paper}>
 			<div className={styles.toolBar}>
-				<Link to="/2019-2-Atom-Frontend-A-Eroshev" style={{padding: '0'}}>
+				<Link to="/" style={{padding: '0'}}>
 					<div className={styles.backButton} />
 				</Link>
 				<div className={styles.title}>Edit Profile</div>
