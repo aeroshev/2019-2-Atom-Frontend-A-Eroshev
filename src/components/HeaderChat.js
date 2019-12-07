@@ -7,7 +7,7 @@ export function HeaderChat(props) {
 	return (
 		<div className={styles.header}>
 			<div className={styles.headerButton}>
-				<Link to='/'>
+				<Link to='/2019-2-Atom-Frontend-A-Eroshev'>
 					<div className={styles.backButton}/>
 				</Link>
 			</div>

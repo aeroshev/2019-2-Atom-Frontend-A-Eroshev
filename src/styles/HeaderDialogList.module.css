@@ -40,6 +40,11 @@
 	background: url(https://static.thenounproject.com/png/703781-200.png);
 	background-size: 100%;
 }
+
+.header .menu:hover{
+	box-shadow: 0 0 60px 10px #151716;
+	background-color: #521E60;
+}
 .header .search{
 	display: inline-block;
 	height: 100%;

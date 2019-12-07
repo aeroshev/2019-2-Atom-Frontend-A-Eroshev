@@ -14,6 +14,10 @@
 	cursor: pointer;
 }
 
+.dialogWrap:hover{
+	background-color: #F8F0F8;
+}
+
 a { 
     text-decoration: none;
 }
@@ -35,14 +39,14 @@ a {
 
 .dialogAvatar {
 	display: flex;
-	height: 90%;
-	width: 30%;
-	border-radius: 80px;
-	margin-top: auto;
-	margin-bottom: auto;
-	background: url(https://cdn.iconscout.com/icon/free/png-256/avatar-367-456319.png) no-repeat center center;
-	border: 1px solid gray;
-	background-size: 125%;
+	height: 70px;
+	width: 70px;
+	min-width: 70px;
+	border-radius: 50px;
+	margin: auto;
+	background-image: url(https://cdn.iconscout.com/icon/free/png-256/avatar-367-456319.png);
+	/* border: 1px solid gray; */
+	background-size: cover;
 }
 
 .status {

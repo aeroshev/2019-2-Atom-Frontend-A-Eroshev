@@ -11,7 +11,7 @@ export function DialogBox(props) {
 	}
 
 	return (
-		<Link to={`/chat/${boxInfo.id}`} onClick={handlerClick}>
+		<Link to={`/2019-2-Atom-Frontend-A-Eroshev/chat/${boxInfo.id}`} onClick={handlerClick}>
 			<div className={styles.dialogWrap}>
 				<div className={styles.dialogAvatar} />
 				<div className={styles.textContent}>

@@ -16,6 +16,24 @@ export class ManagerChatList extends React.Component {
 		this.createChat = this.createChat.bind(this);
 	}
 
+	// async getChats () {
+	// 	try {
+	// 		const response = await fetch('http://127.0.0.1:8000/chat/?usr=1', {
+	// 			method: 'GET',
+	// 			mode: 'cors',
+	// 			credentials: 'include',
+	// 		});
+	// 		const jsonResponse = await response.json();
+	// 		console.log(jsonResponse);
+	// 	} catch(error) {
+	// 		console.error(error);
+	// 	}
+	// }
+
+	// componentDidMount () {
+	// 	this.getChats();
+	// }
+
 	parseData() {
 		let data;
 		try {

@@ -9,14 +9,12 @@ export function ChatList (props) {
 	const { chatList, setActiveChat } = props;
 
 	if (!chatList) {
-		list.push(<div className={styles.noMessage}>No chats</div>);
+		list.push(<div key={iter} className={styles.noMessage}>No chats</div>);
 	} else {
 		// eslint-disable-next-line
 		chatList.map(item => {
-			const Chat = <DialogBox key={ iter++ } boxInfo = { item } setActiveChat={setActiveChat}/>;
-
+			const Chat = <DialogBox key={iter++} boxInfo = { item } setActiveChat={setActiveChat}/>;
 			list.push(Chat);
-
 		});
 	}
 

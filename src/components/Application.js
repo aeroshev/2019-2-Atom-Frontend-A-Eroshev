@@ -53,13 +53,13 @@ export class Application extends React.Component {
 		return (
 			<Router>
 				<Switch>
-					<Route path="/" exact>
+					<Route path="/2019-2-Atom-Frontend-A-Eroshev" exact>
 						<ManagerChatList  setActiveChat={this.setActiveChat}/>
 					</Route>
-					<Route path="/chat">
+					<Route path="/2019-2-Atom-Frontend-A-Eroshev/chat">
 						<ManagerChat activeChat={activeChat}/>
 					</Route>
-					<Route path="/profile" component={ UserProfile } />
+					<Route path="/2019-2-Atom-Frontend-A-Eroshev/profile" component={ UserProfile } />
 				</Switch>
 			</Router>
 		);
