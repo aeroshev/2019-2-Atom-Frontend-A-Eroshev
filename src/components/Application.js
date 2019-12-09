@@ -22,10 +22,27 @@ export class Application extends React.Component {
 		Test();
 	}
 
+	componentDidMount() {
+		try {
+			const json = localStorage.getItem('activeChat');
+			const chatId = JSON.parse(json);
+
+
+			if (chatId >= 0) {
+				this.setState({
+					activeChat: chatId,
+				});
+			}
+		} catch(Error) {
+			localStorage.clear();
+		}
+	}
+
 	setActiveChat(id) {
 		this.setState(
 			{activeChat: id},
 		);
+		localStorage.setItem('activeChat', JSON.stringify(id));
 	}
 
 	render() {
@@ -42,7 +59,7 @@ export class Application extends React.Component {
 					<Route path="/chat">
 						<ManagerChat activeChat={activeChat}/>
 					</Route>
-					<Route path="/profile" component={ UserProfile } />
+					<Route path="/profile" component={UserProfile} />
 				</Switch>
 			</Router>
 		);

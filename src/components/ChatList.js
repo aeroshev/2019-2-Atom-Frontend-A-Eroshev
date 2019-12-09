@@ -9,16 +9,16 @@ export function ChatList (props) {
 	const { chatList, setActiveChat } = props;
 
 	if (!chatList) {
-		list.push(<div className={styles.noMessage}>No chats</div>);
+		list.push(<div key={iter} className={styles.noMessage}>No chats</div>);
 	} else {
-		chatList.forEach(item => {
-			const Chat = <DialogBox key={ iter++ } boxInfo = { item } setActiveChat={setActiveChat}/>;
-
+		// eslint-disable-next-line
+		chatList.map(item => {
+			const Chat = <DialogBox key={iter++} boxInfo = { item } setActiveChat={setActiveChat}/>;
 			list.push(Chat);
 		});
 	}
 
-	return(			
+	return (			
 		<div>
 			<div className={styles.wrap}>{ list }</div>
 		</div>

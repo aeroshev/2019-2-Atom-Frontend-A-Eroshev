@@ -1,57 +1,119 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import { SendButton } from './SendButton';
 import styles from '../styles/FormInput.module.css';
-// import { thisTypeAnnotation } from 'babel-types';
 
 
-export class FormInput extends React.Component {
-	constructor (props) {
-		super(props);
+export function FormInput(props) {
+	const { sendMessage } = props;
 
-		this.state = {
-			message: '',
-		};
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+	const image = useRef();
+	const document = useRef();
+	const [message, setMessage] = useState('');
+	const [styleMenu, setStyleMenu] = useState(null);
+
+
+	function handleSubmit(event, attachment = null) {
+		if (event.charCode === 13) {
+			sendMessage(message, attachment);
+			setMessage('');
+		}
 	}
 
-	handleSubmit(event) {
-		event.preventDefault();
-		this.props.sendMessage(this.state.message);
-		this.setState({
-			message: '',
+	function handlerAudio(audioURL) {
+		if (audioURL) {
+			const object = {
+				name: 'AudioMessage',
+				type: 'audio',
+				path: audioURL,
+			}
+			sendMessage(null, object);
+		}	
+	}
+
+	function handleAdditional(event) {
+		!styleMenu && setStyleMenu({
+			height: '120px',
+			boxShadow: '0 0 60px 10px #151716',
+		});
+		styleMenu && setStyleMenu(null);
+	}
+
+	function handleChange(event) {
+		setMessage(event.target.value);
+	}
+	
+	function handlerGeo(event) {
+		navigator.geolocation.getCurrentPosition(position => {
+			const geoMessage = `https://www.openstreetmap.org/#map=17/${position.coords.latitude}/${position.coords.longitude}`;
+			const geoObject = <a href={geoMessage}>{geoMessage}</a>;
+			sendMessage(geoObject);
 		});
 	}
 
-	handleChange(event) {
-		this.setState({
-			message: event.target.value,
-		});
-    }
+	function handlerImage(event) {
+		let additionsList = event.target.files;
+		if (!additionsList.length) {
+			return false;
+		}
 
-	render() {
-		return (
-			<div className={styles.footer}>
-				<div className={styles.inputButton}>
-					<div className={styles.additionalButton}>
-						<ul className={styles.listStyle}>
-							<li className={styles.li}>Gelocation</li>
-							<li className={styles.li}>AudioMessage</li>
-							<li className={styles.li}>Image</li>
-						</ul>
-					</div>
-				</div>
-				<form className={styles.customInput}
-					onSubmit={this.handleSubmit}>
-					<input className={styles.customInput}
-						onChange={this.handleChange}
-						value={this.state.message}
-						placeholder='Message'
-						type='text' />
-				</form>
-				<div className={styles.inputButton}>
-					<div className={styles.sendButton} onClick={this.handleSubmit}/>
+		const object = {
+			name: additionsList[0].name,
+			type: 'image',
+			path: [window.URL.createObjectURL(additionsList[0])],
+		}
+
+		sendMessage(null, object);
+	}
+
+	function handlerDocument(event) {
+		let additionsList = event.target.files;
+		if (!additionsList.length) {
+			return false;
+		}
+
+		const object = {
+			name: additionsList[0].name,
+			type: 'document',
+			path: [window.URL.createObjectURL(additionsList[0])],
+		}
+
+		sendMessage(null, object);
+	}
+
+	return (
+		<div className={styles.footer}>
+			<div className={styles.inputButton}>
+				<div className={styles.additionalButton} onClick={handleAdditional}>
+					<ul style={styleMenu} className={styles.listStyle}>
+						<li className={styles.li} onClick={handlerGeo}>Geolocation</li>
+						<li className={styles.li} onClick={() => document.current.click()}>
+							Document
+							<input
+								ref={document}
+								type='file'
+								onChange={handlerDocument} 
+								style={{display: 'none'}} />
+							</li>
+						<li className={styles.li} onClick={() => image.current.click()}>
+							Image
+							<input
+								ref={image}
+								type='file'
+								accept='image/*'
+								onChange={handlerImage} 
+								style={{display: 'none'}} />
+							</li>
+					</ul>
 				</div>
 			</div>
-		);
-	}
+			<input 
+				className={styles.customInput}
+				onKeyPress={handleSubmit}
+				onChange={handleChange}
+				value={message}
+				placeholder='Message'
+				type='text' />
+			<SendButton handlerAudio={handlerAudio} />
+		</div>
+	);
 }

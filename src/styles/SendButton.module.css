@@ -1,0 +1,42 @@
+.send {
+    height: 100%;
+	width: 30px;
+	margin: 0 15px;
+	cursor: pointer;
+	opacity: 0.85;
+	transition-duration: 0.15s;
+	width: 50px;
+	z-index: 1;
+	background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4nLrdWTWhP1h2cPfOyG-PLg9zT4scHHlkdkBCFJpfXbFps7Ji&s) no-repeat center center;
+	background-size: 90%;
+}
+
+.cancel {
+    height: 100%;
+	width: 30px;
+	margin: 0 15px;
+	cursor: pointer;
+	opacity: 0.85;
+	transition-duration: 0.15s;
+	width: 50px;
+	z-index: 1;
+	background: url(https://img.icons8.com/small/452/cancel--v1.png) no-repeat center center;
+	background-size: 70%;
+	border: none;
+	outline: none;
+}
+
+.mic {
+    height: 100%;
+    width: 30px;
+    margin: 0 15px;
+    cursor: pointer;
+    opacity: 0.85;
+    transition-duration: 0.15s;
+    width: 50px;
+    z-index: 1;
+    background: url(http://s1.iconbird.com/ico/2013/9/450/w256h2561380453883Audio2256x25632.png) no-repeat center center;
+	background-size: 60%;
+	border: none;
+	outline: none;
+}

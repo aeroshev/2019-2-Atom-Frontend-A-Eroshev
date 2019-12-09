@@ -1,19 +1,19 @@
 .messageBox {
     box-sizing: border-box;
-    display: inline-block;
     border-radius: 5px;
     padding: 10px;
     margin: 5px 0 5px 0;
-    max-width: 60%;
+    max-width: 40%;
     word-break: break-all;
     background-color: #f4d3ee;
     width: 100%;
-	  padding: 0 10px 0 10px;
-	  animation-name: smoothDrop;
-	  animation-duration: 0.5s;
-	  animation-timing-function: ease-in-out;
-	  animation-fill-mode: forwards;
+	padding: 0 10px 0 10px;
+	animation-name: smoothDrop;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
 }
+
 @keyframes smoothDrop {
 	from {
 		transform: translate(-100%) scaleX(0)
@@ -23,7 +23,6 @@
 	}
 }
 
-
 .messageBox .time{
 	width: 100%;
 	text-align: right;
@@ -32,7 +31,24 @@
 	font-size: small;
 }
 .messageBox .text{
-  padding-top: 5px;
-  text-align: justify;
+	padding-top: 5px;
+	text-align: justify;
 	color: black;
+}
+
+audio {
+	display: block;
+	padding-top: 5px;
+	width: 100%;
+	size: 70%;
+	outline: none;
+}
+
+a {
+	padding-top: 10px;
+	text-align: justify;
+}
+
+.img {
+  text-align: center;
 }
