@@ -25,14 +25,6 @@ export class ManagerChat extends React.Component {
 		this.drop = this.drop.bind(this);
 	}
 
-	componentDidUpdate(prevProps) {
-		if (this.props.activeChat !== prevProps.activeChat){
-			this.setState({
-				activeChat: this.props.activeChat,
-			});
-		}
-	}
-
 	parseData() {
 		let data;
 		try {
@@ -56,7 +48,7 @@ export class ManagerChat extends React.Component {
 
 	dragOver(event) {
 		event.preventDefault();
-		event.stopPropagation();
+		// event.stopPropagation();
 
 		this.triggerDropZone(true);
 	}

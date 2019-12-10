@@ -7,32 +7,37 @@ export class ManagerChatList extends React.Component {
 	constructor(props) {
 		super(props);
 
-		const info = this.parseData();
+		// const info = this.parseData();
 
 		this.state = {
-			chatList: info.chatList,
+			chatList: null /*info.chatList*/,
 		};
 
 		this.createChat = this.createChat.bind(this);
 	}
 
-	// async getChats () {
-	// 	try {
-	// 		const response = await fetch('http://127.0.0.1:8000/chat/?usr=1', {
-	// 			method: 'GET',
-	// 			mode: 'cors',
-	// 			credentials: 'include',
-	// 		});
-	// 		const jsonResponse = await response.json();
-	// 		console.log(jsonResponse);
-	// 	} catch(error) {
-	// 		console.error(error);
-	// 	}
-	// }
+	async getChats () {
+		try {
+			const response = await fetch('https://127.0.0.1:8000/chat/', {
+				method: 'GET',
+				mode: 'cors',
+				credentials: 'include',
+			});
+			const jsonResponse = await response.json();
+			try {
+				const unpacketData = JSON.stringify(jsonResponse);
+				console.log(unpacketData);
+			} catch(error) {
+				console.log('Error stringify JSON');
+			}
+		} catch(error) {
+			console.error(error);
+		}
+	}
 
-	// componentDidMount () {
-	// 	this.getChats();
-	// }
+	componentDidMount () {
+		this.getChats();
+	}
 
 	parseData() {
 		let data;
