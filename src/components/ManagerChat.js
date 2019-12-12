@@ -9,10 +9,8 @@ export class ManagerChat extends React.Component {
 	constructor(props) {
 		super(props);
 
-		const info = this.parseData();
-
 		this.state = {
-			messageMap: info.messageMap,
+			messageMap: [],
 			activeChat: props.activeChat,
 			setVisibleDropZone: false,
 			dropFiles: [],
@@ -25,21 +23,40 @@ export class ManagerChat extends React.Component {
 		this.drop = this.drop.bind(this);
 	}
 
-	parseData() {
-		let data;
+	async getMessages() {
+		const { messageMap } = this.state.messageMap;
 		try {
-			data = {
-				messageMap: JSON.parse(localStorage.getItem('messageMap')),
-			};
-		} catch (Error) {
-			localStorage.clear();
-			console.log('Error local storage');
-			data = {
-				messageMap: null,
-			};
+			const response = await fetch(`https://127.0.0.1:8000/message/?chat=${this.state.activeChat}`, {
+				method: 'GET',
+				mode: 'cors',
+				credentials: 'include',
+			});
+			const jsonResponse = await response.json();
+			
+			this.setState({messageMap: [...messageMap, ...jsonResponse['response']]});
+		} catch(error) {
+			console.error(error);
 		}
+	}
 
-		return data;
+	async postMessage(data) {
+		const formData = new FormData();
+		try {
+			const response = await fetch('https://127.0.0.1:8000/message/new/', {
+				method: 'POST',
+				body: formData,
+				mode: 'cors',
+				credentials: 'include',
+			});
+			const jsonResponse = await response.json();
+			return jsonResponse['id'];
+		} catch(error) {
+			console.error(error);
+		}
+	}
+
+	componentDidMount() {
+		this.getMessages();
 	}
 
 	triggerDropZone(status) {
@@ -48,7 +65,6 @@ export class ManagerChat extends React.Component {
 
 	dragOver(event) {
 		event.preventDefault();
-		// event.stopPropagation();
 
 		this.triggerDropZone(true);
 	}

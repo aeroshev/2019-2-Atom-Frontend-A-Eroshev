@@ -7,7 +7,7 @@ export function ButtonNewChat (props) {
 
 	function handleClick(event){
         const nameChat = prompt('Name new chat', 'NewChat');
-        const userName = prompt('Input username', '');
+        const userName = prompt('Input member', '');
         if (userName) {
             createChat(nameChat, userName);
         }
