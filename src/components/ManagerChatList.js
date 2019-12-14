@@ -3,6 +3,7 @@ import { ChatList } from './ChatList';
 import { HeaderDialogList } from './HeaderDialogList';
 import { ButtonNewChat } from './ButtonNewChat';
 
+
 export class ManagerChatList extends React.Component {
 	constructor(props) {
 		super(props);
@@ -45,8 +46,10 @@ export class ManagerChatList extends React.Component {
 				credentials: 'include',
 			});
 			const jsonResponse = await response.json();
-
-			return jsonResponse['id']
+			
+			if (response.status === 400) {
+				alert(jsonResponse['error']);
+			}
 		} catch(error) {
 			console.error(error);
 		}
@@ -59,17 +62,14 @@ export class ManagerChatList extends React.Component {
 	createChat(nameChat, username) {
 		const { chatList } = this.state;
 		const data = {
-			id: 0,
 			title: nameChat,
 			last_message: '',
 			is_group_chat: false,
 			member: username,
 		}
-		const idServer = this.postChat(data);
-		data['id'] = idServer;
+		this.postChat(data);
 		this.setState({chatList: [...chatList, data]});
-		
-	
+
 		localStorage.setItem('chatList', JSON.stringify(chatList));
 	}
 

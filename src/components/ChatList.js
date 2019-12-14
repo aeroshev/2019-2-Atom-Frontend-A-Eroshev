@@ -13,7 +13,7 @@ export function ChatList (props) {
 	} else {
 		// eslint-disable-next-line
 		chatList.map(item => {
-			const Chat = <DialogBox key={iter++} boxInfo = { item } setActiveChat={setActiveChat}/>;
+			const Chat = <DialogBox key={iter++} boxInfo = {item} setActiveChat={setActiveChat}/>;
 			list.push(Chat);
 		});
 	}

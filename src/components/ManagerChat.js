@@ -10,7 +10,8 @@ export class ManagerChat extends React.Component {
 		super(props);
 
 		this.state = {
-			messageMap: [],
+			messageList: [],
+			currentUserId: 0,
 			activeChat: props.activeChat,
 			setVisibleDropZone: false,
 			dropFiles: [],
@@ -24,7 +25,6 @@ export class ManagerChat extends React.Component {
 	}
 
 	async getMessages() {
-		const { messageMap } = this.state.messageMap;
 		try {
 			const response = await fetch(`https://127.0.0.1:8000/message/?chat=${this.state.activeChat}`, {
 				method: 'GET',
@@ -32,8 +32,13 @@ export class ManagerChat extends React.Component {
 				credentials: 'include',
 			});
 			const jsonResponse = await response.json();
-			
-			this.setState({messageMap: [...messageMap, ...jsonResponse['response']]});
+
+			if (response.status === 400) {
+				console.error('This user do not have access to chat');
+			} else {
+				this.setState({messageList: jsonResponse['response']['messages_list']});
+				this.setState({currentUserId: jsonResponse['response']['current_user_id']});
+			}
 		} catch(error) {
 			console.error(error);
 		}
@@ -41,6 +46,13 @@ export class ManagerChat extends React.Component {
 
 	async postMessage(data) {
 		const formData = new FormData();
+		formData.append('chat', data.message.chat);
+		formData.append('text', data.message.text);
+		formData.append('attachment_type', data.attachment.attachment_type);
+		formData.append('file', data.attachment.file);
+		formData.append('image', data.attachment.image);
+		formData.append('audio', data.attachment.audio);
+
 		try {
 			const response = await fetch('https://127.0.0.1:8000/message/new/', {
 				method: 'POST',
@@ -49,14 +61,21 @@ export class ManagerChat extends React.Component {
 				credentials: 'include',
 			});
 			const jsonResponse = await response.json();
-			return jsonResponse['id'];
+			
+			if (response.status === 400) {
+				console.error(jsonResponse['error']);
+			}
 		} catch(error) {
 			console.error(error);
 		}
 	}
 
 	componentDidMount() {
-		this.getMessages();
+		this.pollingId = setInterval(() => this.getMessages(), 3000);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.pollingId)
 	}
 
 	triggerDropZone(status) {
@@ -88,41 +107,48 @@ export class ManagerChat extends React.Component {
 	}
 
 	sendMessage(message, newAttachment = null) {
-		const { messageMap, activeChat } = this.state;
-
-		let date = new Date(parseInt(new Date().getTime(), 10));
-        date = date.toString().split(' ')[4].split(':');
-
+		const { messageList, activeChat } = this.state;
 		if (activeChat >= 0 && (message || newAttachment)) {
-			if (messageMap[activeChat]) {
-				messageMap[activeChat] = [...messageMap[activeChat], { 
-					id: messageMap[activeChat].length + 2, 
-					attachment: newAttachment,
-					owner: 'self',
+			let data = {
+				message: {
+					user_id: this.state.currentUserId,
+					chat: this.state.activeChat,
 					text: message,
-					time: date[0] + ':' + date[1],
-				}];
-				this.setState({messageMap: messageMap,});
-			} else {
-				const map = [...messageMap, [{
-					id: 1, 
-					attachment: newAttachment,
-					owner: 'self',
-					text: message,
-					time: date[0] + ':' + date[1],
-				}]];
-	
-				this.setState({messageMap: map,});
-			}
+				},
+				attachment: {
+					attachment_type: '',
+					file: null,
+					image: null,
+					auido: null,
+				},
+			};
 
-			localStorage.setItem('messageMap', JSON.stringify(messageMap));
+			if (newAttachment){
+				if (newAttachment.type === 'image') {
+					data.attachment.attachment_type = 'image';
+					data.attachment.image = newAttachment.path[0];
+				}
+				if (newAttachment.type === 'document') {
+					data.attachment.attachment_type = 'document';
+					data.attachment.file = newAttachment.path[0];
+				}
+				if (newAttachment.type === 'audio') {
+					data.attachment.attachment_type = 'audio';
+					data.attachment.audio = newAttachment.path;
+				}
+			}
+			this.postMessage(data);
+		
+			this.setState({messageList: [...messageList, data]});
+			localStorage.setItem('messageList', JSON.stringify(messageList));
 		}
 	}
 
 	render() {
 		const {
-			messageMap,
+			messageList,
 			activeChat,
+			currentUserId,
 		} = this.state;
 
 		return(
@@ -133,8 +159,9 @@ export class ManagerChat extends React.Component {
 				onDragLeave={this.dragLeave}>
 				<HeaderChat />
 				<MessageList 
-					messageMap={messageMap} 
-					activeChat={activeChat} />
+					messageList={messageList} 
+					activeChat={activeChat} 
+					currentUserId={currentUserId} />
 				<FormInput 
 					sendMessage={this.sendMessage} />
 			</div>
