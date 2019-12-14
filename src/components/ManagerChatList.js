@@ -50,6 +50,8 @@ export class ManagerChatList extends React.Component {
 			if (response.status === 400) {
 				alert(jsonResponse['error']);
 			}
+
+			data['id'] = jsonResponse['response']['id'];
 		} catch(error) {
 			console.error(error);
 		}
@@ -62,11 +64,13 @@ export class ManagerChatList extends React.Component {
 	createChat(nameChat, username) {
 		const { chatList } = this.state;
 		const data = {
+			id: 0,
 			title: nameChat,
 			last_message: '',
 			is_group_chat: false,
 			member: username,
 		}
+
 		this.postChat(data);
 		this.setState({chatList: [...chatList, data]});
 

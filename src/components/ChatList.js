@@ -8,7 +8,7 @@ export function ChatList (props) {
 	let iter = 0;
 	const { chatList, setActiveChat } = props;
 
-	if (!chatList) {
+	if (chatList.length === 0) {
 		list.push(<div key={iter} className={styles.noMessage}>No chats</div>);
 	} else {
 		// eslint-disable-next-line
