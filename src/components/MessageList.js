@@ -1,10 +1,12 @@
 import React from 'react';
 import styles from '../styles/MessageList.module.css';
 import { MessageBox } from './MessageBox';
+import { useSelector } from 'react-redux';
 
 
 export function MessageList(props) {
-	const { messageList, activeChat, currentUserId } = props;
+	const { messageList, currentUserId } = props;
+	const activeChat = useSelector(state => state.chat);
 	const list = [];
 	let iter = 1;
 
