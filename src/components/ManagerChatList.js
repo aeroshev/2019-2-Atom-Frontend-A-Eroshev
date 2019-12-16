@@ -1,22 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChatList } from './ChatList';
 import { HeaderDialogList } from './HeaderDialogList';
 import { ButtonNewChat } from './ButtonNewChat';
 
 
-export class ManagerChatList extends React.Component {
-	constructor(props) {
-		super(props);
+export function ManagerChatList(props) {
+	const [chatList, setChatList] = useState([]);
 
-		this.state = {
-			chatList: [],
-		};
-
-		this.createChat = this.createChat.bind(this);
-	}
-
-	async getChats() {
-		const { chatList } = this.state;
+	async function getChats() {
 		try {
 			const response = await fetch('https://127.0.0.1:8000/chat/', {
 				method: 'GET',
@@ -25,13 +16,13 @@ export class ManagerChatList extends React.Component {
 			});
 			const jsonResponse = await response.json();
 
-			this.setState({chatList: [...chatList, ...jsonResponse['response']]});
+			setChatList(jsonResponse['response']);
 		} catch(error) {
 			console.error(error);
 		}
 	}
 
-	async postChat(data) {
+	async function postChat(data) {
 		const formData = new FormData();
 		formData.append('title', data.title);
 		formData.append('last_message', data.last_message);
@@ -57,12 +48,11 @@ export class ManagerChatList extends React.Component {
 		}
 	}
 
-	componentDidMount () {
-		this.getChats();	
-	}
+	useEffect(() => {
+		getChats();
+	});
 
-	createChat(nameChat, username) {
-		const { chatList } = this.state;
+	const createChat = (nameChat, username) => {
 		const data = {
 			id: 0,
 			title: nameChat,
@@ -71,23 +61,16 @@ export class ManagerChatList extends React.Component {
 			member: username,
 		}
 
-		this.postChat(data);
-		this.setState({chatList: [...chatList, data]});
-
+		postChat(data);
+		setChatList([...chatList, data]);
 		localStorage.setItem('chatList', JSON.stringify(chatList));
 	}
 
-	render() {
-		const {
-			chatList,
-		} = this.state;
-		return (
-			<div>
-				<HeaderDialogList/>
-				<ChatList chatList={chatList}/>
-				<ButtonNewChat createChat={this.createChat}/>
-			</div>
-		);
-	}
+	return (
+		<div>
+			<HeaderDialogList/>
+			<ChatList chatList={chatList}/>
+			<ButtonNewChat createChat={createChat}/>
+		</div>
+	);
 }
-
