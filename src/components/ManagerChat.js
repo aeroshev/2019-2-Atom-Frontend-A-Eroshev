@@ -6,15 +6,13 @@ import { useSelector } from 'react-redux';
 import styles from '../styles/ManagerChat.module.css';
 
 
-export function ManagerChat (props) {
+export function ManagerChat (props){
 
 	const activeChat = useSelector(state => state.chat);
 	console.log(`ACTIVECHAT -> ${activeChat}`);
 
 	const [messageList, setMessageList] = useState([]);
 	const [currentUserId, setCurrentUserId] = useState(0);
-	const [VisibleDropZone, setVisibleDropZone] = useState(false);
-	const [dropFiles, setDropFiles] = useState([]);
 
 	async function getMessages() {
 		try {
@@ -72,7 +70,6 @@ export function ManagerChat (props) {
 	});
 
 	const triggerDropZone = (status) => {
-		setVisibleDropZone(status);
 	}
 
 	const dragOver = (event) => {

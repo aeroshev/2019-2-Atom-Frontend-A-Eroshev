@@ -50,6 +50,7 @@ export function ManagerChatList(props) {
 
 	useEffect(() => {
 		getChats();
+		// eslint-disable-next-line react-hooks/exhaustive-deps 
 	}, [1]);
 
 	const createChat = (nameChat, username) => {
