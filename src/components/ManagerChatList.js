@@ -50,7 +50,7 @@ export function ManagerChatList(props) {
 
 	useEffect(() => {
 		getChats();
-	});
+	}, [1]);
 
 	const createChat = (nameChat, username) => {
 		const data = {
