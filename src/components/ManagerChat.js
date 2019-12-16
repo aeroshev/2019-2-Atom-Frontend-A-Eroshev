@@ -32,6 +32,7 @@ export class ManagerChat extends React.Component {
 				credentials: 'include',
 			});
 			const jsonResponse = await response.json();
+			console.log(jsonResponse);
 
 			if (response.status === 400) {
 				console.error('This user do not have access to chat');
@@ -48,8 +49,8 @@ export class ManagerChat extends React.Component {
 		const formData = new FormData();
 		formData.append('chat', data.message.chat);
 		formData.append('text', data.message.text);
-		formData.append('attachment_type', data.attachment.attachment_type);
-		formData.append('file', data.attachment.file);
+		formData.append('type', data.attachment.type);
+		formData.append('document', data.attachment.document);
 		formData.append('image', data.attachment.image);
 		formData.append('audio', data.attachment.audio);
 
@@ -62,6 +63,7 @@ export class ManagerChat extends React.Component {
 			});
 			const jsonResponse = await response.json();
 			
+			console.log(jsonResponse);
 			if (response.status === 400) {
 				console.error(jsonResponse['error']);
 			}
@@ -102,6 +104,7 @@ export class ManagerChat extends React.Component {
 			name: 'drop',
 			type: 'image',
 			path: [window.URL.createObjectURL(event.dataTransfer.files[0])],
+			file: event.dataTransfer.files[0],
 		}
 		this.sendMessage(null, attachment);
 	}
@@ -116,25 +119,27 @@ export class ManagerChat extends React.Component {
 					text: message,
 				},
 				attachment: {
-					attachment_type: '',
-					file: null,
+					path: '',
+					type: '',
+					document: null,
 					image: null,
 					auido: null,
 				},
 			};
 
 			if (newAttachment){
+				data.attachment.path = newAttachment.path;
 				if (newAttachment.type === 'image') {
-					data.attachment.attachment_type = 'image';
-					data.attachment.image = newAttachment.path[0];
+					data.attachment.type = 'image';
+					data.attachment.image = newAttachment.file;
 				}
 				if (newAttachment.type === 'document') {
-					data.attachment.attachment_type = 'document';
-					data.attachment.file = newAttachment.path[0];
+					data.attachment.type = 'document';
+					data.attachment.document= newAttachment.file;
 				}
 				if (newAttachment.type === 'audio') {
-					data.attachment.attachment_type = 'audio';
-					data.attachment.audio = newAttachment.path;
+					data.attachment.type = 'audio';
+					data.attachment.audio = newAttachment.file;
 				}
 			}
 			this.postMessage(data);
