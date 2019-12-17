@@ -7,9 +7,7 @@ import styles from '../styles/ManagerChat.module.css';
 
 
 export function ManagerChat (props){
-
 	const activeChat = useSelector(state => state.chat);
-	console.log(`ACTIVECHAT -> ${activeChat}`);
 
 	const [messageList, setMessageList] = useState([]);
 	const [currentUserId, setCurrentUserId] = useState(0);
@@ -22,7 +20,6 @@ export function ManagerChat (props){
 				credentials: 'include',
 			});
 			const jsonResponse = await response.json();
-			console.log(jsonResponse);
 
 			if (response.status === 400) {
 				console.error('This user do not have access to chat');
@@ -52,8 +49,6 @@ export function ManagerChat (props){
 				credentials: 'include',
 			});
 			const jsonResponse = await response.json();
-			
-			console.log(jsonResponse);
 			if (response.status === 400) {
 				console.error(jsonResponse['error']);
 			}
@@ -94,12 +89,16 @@ export function ManagerChat (props){
 	}
 
 	const sendMessage = (message, newAttachment = null) => {
+		let date = new Date(parseInt(new Date().getTime(), 10));
+		date = date.toString().split(' ')[4].split(':');
+	
 		if (activeChat >= 0 && (message || newAttachment)) {
 			let data = {
 				message: {
 					user_id: currentUserId,
 					chat: activeChat,
 					text: message,
+					added_at: date[0] + ':' + date[1],
 				},
 				attachment: {
 					path: '',

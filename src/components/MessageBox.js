@@ -3,10 +3,6 @@ import styles from '../styles/MessageBox.module.css';
 
 export function MessageBox(props) {
 	const { content, shift } = props;
-
-	console.log(content['attachment']['type']);
-	console.log(!content['attachment']['type']);
-
 	let style = null;
 	if (shift === 'self') {
 		style = {float: 'right'};
