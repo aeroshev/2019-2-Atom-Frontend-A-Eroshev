@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from '../styles/WeatherBlock.module.css';
 
 export function WeatherBlock(props) {
+    const { data } = props;
     const city = 'Moscow';
     return (
         <Link to={`/weather/${city}`}>
