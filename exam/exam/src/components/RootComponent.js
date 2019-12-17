@@ -14,10 +14,12 @@ export function RootComponent(props) {
         try {
             const response = await fetch(API_URL + GET_KEY);
             const jsonResponse = await response.json();
-            setData(jsonResponse['list']);
+            if (jsonResponse['list']) {
+                setData(jsonResponse['list']);
+            }
         } catch(error) {
             console.error(error);
-        } 
+        }
     }
 
     useEffect(() => {
@@ -25,8 +27,23 @@ export function RootComponent(props) {
     }, [1]);
 
     let listCities = [];
+    let bucket = {
+        temp: 0,
+        feels_like: 0,
+        temp_min: 0,
+        temp_max: 0,
+        pressure: 0,
+        sea_level: 0,
+        grnd_level: 0,
+        humidity: 0,
+        temp_kf: 0,
+    };
     for (let i = 0; i !== 4; i++) {
-        listCities.push(<WeatherBlock key={i} data={data[i]}/>);
+        console.log(data[i]);
+        if (data[i]) {
+            bucket = data[i]['main'];
+        }
+        listCities.push(<WeatherBlock key={i} data={bucket}/>);
     }
     return (
         <div className={styles.paper}>

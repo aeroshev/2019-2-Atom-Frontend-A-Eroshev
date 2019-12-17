@@ -5,6 +5,7 @@ import {
 	Route
 } from 'react-router-dom';
 import { RootComponent } from './RootComponent';
+import { DetailedInfo } from './DetailedInfo';
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
       <Switch>
         <Route path='/' exact>
           <RootComponent/>
+        </Route>
+        <Route path='/weather'>
+          <DetailedInfo/>
         </Route>
       </Switch>
     </Router> 

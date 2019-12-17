@@ -1,0 +1,7 @@
+.wallpaper{
+    width: 100%;
+    height: 100vh;
+    background: rgb(29,9,54);
+    background: linear-gradient(180deg, rgba(29,9,54,0.97) 35%, rgba(96,146,202,1) 100%);
+    background-size: cover;
+}
