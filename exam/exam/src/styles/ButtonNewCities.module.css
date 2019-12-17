@@ -1,0 +1,14 @@
+.buttonNew{
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	width: 60px;
+	height: 60px;
+	background-color: rgb(86, 151, 194);
+	border-radius: 30px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	background-size: 77%;
+    background-position: center;
+    outline: none;
+}
