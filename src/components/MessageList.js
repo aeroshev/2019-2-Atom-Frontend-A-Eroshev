@@ -1,28 +1,28 @@
 import React from 'react';
 import styles from '../styles/MessageList.module.css';
 import { MessageBox } from './MessageBox';
+import { useSelector } from 'react-redux';
 
 
 export function MessageList(props) {
-	const { messageMap, activeChat } = props;
+	const { messageList, currentUserId } = props;
+	const activeChat = useSelector(state => state.chat);
 	const list = [];
 	let iter = 1;
 
-	if (activeChat > 0 && messageMap[activeChat]) {
+	if (activeChat > 0 && messageList) {
 		// eslint-disable-next-line
-		messageMap[activeChat].map(item => {
-			if (item.owner === 'self') {
+		messageList.map(item => {
+			if (item['message']['user_id'] === currentUserId) {
 				const Message = (<div className={styles.messageBox} key={iter++}>
 										<MessageBox shift={'self'} content={item} />
 								</div>);
 				list.push(Message);
-			} else if (item.owner === 'outside') {
+			} else {
 				const Message = (<div className={styles.messageBox} key={iter++}>
 										<MessageBox shift={'outside'} content={item} />
 								</div>);
 				list.push(Message);
-			} else {
-				console.log('Error');
 			}
 		});
 	}

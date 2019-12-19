@@ -17,6 +17,9 @@
 .dialogWrap:hover{
 	background-color: #F8F0F8;
 }
+.dialogWrap:active{
+	background-color: #F8F0F8;
+}
 
 a { 
     text-decoration: none;

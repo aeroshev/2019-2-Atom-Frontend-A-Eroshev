@@ -1,85 +1,78 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChatList } from './ChatList';
 import { HeaderDialogList } from './HeaderDialogList';
 import { ButtonNewChat } from './ButtonNewChat';
 
-export class ManagerChatList extends React.Component {
-	constructor(props) {
-		super(props);
 
-		const info = this.parseData();
+export function ManagerChatList(props) {
+	const [chatList, setChatList] = useState([]);
+	const API_URL = 'https://127.0.0.1:8000';
 
-		this.state = {
-			chatList: info.chatList,
-		};
-
-		this.createChat = this.createChat.bind(this);
-	}
-
-	// async getChats () {
-	// 	try {
-	// 		const response = await fetch('http://127.0.0.1:8000/chat/?usr=1', {
-	// 			method: 'GET',
-	// 			mode: 'cors',
-	// 			credentials: 'include',
-	// 		});
-	// 		const jsonResponse = await response.json();
-	// 		console.log(jsonResponse);
-	// 	} catch(error) {
-	// 		console.error(error);
-	// 	}
-	// }
-
-	// componentDidMount () {
-	// 	this.getChats();
-	// }
-
-	parseData() {
-		let data;
+	async function getChats() {
 		try {
-			data = {
-				chatList: JSON.parse(localStorage.getItem('chatList')),
-			};
-		} catch (Error) {
-			localStorage.clear();
-			data = {
-				chatList: null,
-			};
+			const response = await fetch(API_URL + '/chat/', {
+				method: 'GET',
+				mode: 'cors',
+				credentials: 'include',
+			});
+			const jsonResponse = await response.json();
+
+			setChatList(jsonResponse['response']);
+		} catch(error) {
+			console.error(error);
 		}
-		return data;
 	}
 
-	createChat(nameChat, username) {
-		const { chatList } = this.state;
+	async function postChat(data) {
+		const formData = new FormData();
+		formData.append('title', data.title);
+		formData.append('last_message', data.last_message);
+		formData.append('is_group_chat', data.is_group_chat);
+		formData.append('members', data.member);
 
-		let date = new Date(parseInt(new Date().getTime(), 10));
-		date = date.toString().split(' ')[4].split(':');
-	
-		this.setState({chatList: [...chatList, {
-			id: chatList.length,
-			dialogName: nameChat,
-			lastMessage: '',
-			messageTime: date[0] + ':' + date[1],
-			messageStatus: '',
-			isGroup: false,
-			isOnline: false,
-			userName: username,
-		}]});
-	
+		try {
+			const response = await fetch(API_URL + '/chat/new/', {
+				method: 'POST',
+				body: formData,
+				mode: 'cors',
+				credentials: 'include',
+			});
+			const jsonResponse = await response.json();
+			
+			if (response.status === 400) {
+				alert(jsonResponse['error']);
+			}
+
+			data['id'] = jsonResponse['response']['id'];
+		} catch(error) {
+			console.error(error);
+		}
+	}
+
+	useEffect(() => {
+		getChats();
+		// eslint-disable-next-line react-hooks/exhaustive-deps 
+	}, [1]);
+
+	const createChat = (nameChat, username) => {
+		const data = {
+			id: 0,
+			title: nameChat,
+			last_message: '',
+			is_group_chat: false,
+			member: username,
+		}
+
+		postChat(data);
+		setChatList([...chatList, data]);
 		localStorage.setItem('chatList', JSON.stringify(chatList));
 	}
 
-	render() {
-		const {
-			chatList,
-		} = this.state;
-		return (
-			<div>
-				<HeaderDialogList/>
-				<ChatList chatList={chatList} setActiveChat={this.props.setActiveChat}/>
-				<ButtonNewChat createChat={this.createChat} />
-			</div>
-		);
-	}
+	return (
+		<div>
+			<HeaderDialogList/>
+			<ChatList chatList={chatList}/>
+			<ButtonNewChat createChat={createChat}/>
+		</div>
+	);
 }
-

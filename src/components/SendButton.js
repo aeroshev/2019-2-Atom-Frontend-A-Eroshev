@@ -46,7 +46,7 @@ export class SendButton extends React.Component {
     const audioURL = window.URL.createObjectURL(blob);
  
     audios.push([audioURL]);
-    this.props.handlerAudio(audios[audios.length - 1]);
+    this.props.handlerAudio(audios[audios.length - 1], blob);
 
     this.setState({audios: audios});
   }

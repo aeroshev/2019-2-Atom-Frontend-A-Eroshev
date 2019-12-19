@@ -19,12 +19,13 @@ export function FormInput(props) {
 		}
 	}
 
-	function handlerAudio(audioURL) {
+	function handlerAudio(audioURL, audioTrack) {
 		if (audioURL) {
 			const object = {
 				name: 'AudioMessage',
 				type: 'audio',
 				path: audioURL,
+				file: audioTrack,
 			}
 			sendMessage(null, object);
 		}	
@@ -52,6 +53,7 @@ export function FormInput(props) {
 
 	function handlerImage(event) {
 		let additionsList = event.target.files;
+		console.log(additionsList);
 		if (!additionsList.length) {
 			return false;
 		}
@@ -60,6 +62,7 @@ export function FormInput(props) {
 			name: additionsList[0].name,
 			type: 'image',
 			path: [window.URL.createObjectURL(additionsList[0])],
+			file: additionsList[0],
 		}
 
 		sendMessage(null, object);
@@ -75,6 +78,7 @@ export function FormInput(props) {
 			name: additionsList[0].name,
 			type: 'document',
 			path: [window.URL.createObjectURL(additionsList[0])],
+			file: additionsList[0],
 		}
 
 		sendMessage(null, object);
