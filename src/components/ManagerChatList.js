@@ -6,10 +6,11 @@ import { ButtonNewChat } from './ButtonNewChat';
 
 export function ManagerChatList(props) {
 	const [chatList, setChatList] = useState([]);
+	const API_URL = 'https://127.0.0.1:8000';
 
 	async function getChats() {
 		try {
-			const response = await fetch('https://127.0.0.1:8000/chat/', {
+			const response = await fetch(API_URL + '/chat/', {
 				method: 'GET',
 				mode: 'cors',
 				credentials: 'include',
@@ -30,7 +31,7 @@ export function ManagerChatList(props) {
 		formData.append('members', data.member);
 
 		try {
-			const response = await fetch('https://127.0.0.1:8000/chat/new/', {
+			const response = await fetch(API_URL + '/chat/new/', {
 				method: 'POST',
 				body: formData,
 				mode: 'cors',

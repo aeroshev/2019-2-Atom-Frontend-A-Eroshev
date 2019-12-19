@@ -8,13 +8,14 @@ import styles from '../styles/ManagerChat.module.css';
 
 export function ManagerChat (props){
 	const activeChat = useSelector(state => state.chat);
+	const API_URL = 'https://127.0.0.1:8000';
 
 	const [messageList, setMessageList] = useState([]);
 	const [currentUserId, setCurrentUserId] = useState(0);
 
 	async function getMessages() {
 		try {
-			const response = await fetch(`https://127.0.0.1:8000/message/?chat=${activeChat}`, {
+			const response = await fetch(API_URL + `/message/?chat=${activeChat}`, {
 				method: 'GET',
 				mode: 'cors',
 				credentials: 'include',
@@ -42,7 +43,7 @@ export function ManagerChat (props){
 		formData.append('audio', data.attachment.audio);
 
 		try {
-			const response = await fetch('https://127.0.0.1:8000/message/new/', {
+			const response = await fetch(API_URL + '/message/new/', {
 				method: 'POST',
 				body: formData,
 				mode: 'cors',
@@ -50,7 +51,7 @@ export function ManagerChat (props){
 			});
 			const jsonResponse = await response.json();
 			if (response.status === 400) {
-				console.error(jsonResponse['error']);
+				throw new Error(jsonResponse['error']);
 			}
 		} catch(error) {
 			console.error(error);
