@@ -9,18 +9,8 @@ const activeChatReducer = (state = 0, action) => {
     };
 }
 
-const currentUserReducer = (state = 0, action) => {
-    switch(action.type) {
-        case 'SET_USER':
-            return state = action.payload;
-        default:
-            return state;
-    };
-}
-
 const rootReducer = combineReducers({
     chat: activeChatReducer,
-    user: currentUserReducer,
 });
 
 export default rootReducer;
