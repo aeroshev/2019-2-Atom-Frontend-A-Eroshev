@@ -6,7 +6,7 @@ import styles from '../styles/RootComponent.module.css';
 
 export function RootComponent(props) {
     const API_URL = 'https://api.openweathermap.org/data/2.5/forecast?q=moscow,RU&appid=';
-    const GET_KEY = 'b41984b8b5135f1695c5faac30990138';
+    const GET_KEY = '8ffee88de89dd2aeca59137b0c268ef2';
 
     const [data, setData] = useState([]);
 
@@ -14,6 +14,7 @@ export function RootComponent(props) {
         try {
             const response = await fetch(API_URL + GET_KEY);
             const jsonResponse = await response.json();
+            console.log(jsonResponse);
             if (jsonResponse['list']) {
                 setData(jsonResponse['list']);
             }
@@ -22,26 +23,22 @@ export function RootComponent(props) {
         }
     }
 
+    const createNewCity = (name) => {
+
+    }
+
     useEffect(() => {
         getData();
     }, [1]);
 
+    let bucket = {};
     let listCities = [];
-    let bucket = {
-        temp: 0,
-        feels_like: 0,
-        temp_min: 0,
-        temp_max: 0,
-        pressure: 0,
-        sea_level: 0,
-        grnd_level: 0,
-        humidity: 0,
-        temp_kf: 0,
-    };
     for (let i = 0; i !== 4; i++) {
         console.log(data[i]);
         if (data[i]) {
-            bucket = data[i]['main'];
+            bucket = data[i];
+        } else {
+            continue;
         }
         listCities.push(<WeatherBlock key={i} data={bucket}/>);
     }
@@ -49,7 +46,7 @@ export function RootComponent(props) {
         <div className={styles.paper}>
             <ManagerCities/>
             <div className={styles.list}>{listCities}</div>
-            <ButtonNewCities/>
+            <ButtonNewCities newCity={createNewCity}/>
         </div>
     );
 }

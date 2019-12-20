@@ -1,7 +1,19 @@
 .wallpaper{
-    width: 100%;
+    width: auto;
     height: 100vh;
-    background: rgb(29,9,54);
     background: linear-gradient(180deg, rgba(29,9,54,0.97) 35%, rgba(96,146,202,1) 100%);
-    background-size: cover;
+    padding: 40px;
+}
+
+.extraBlock{
+    width: 100%;
+    height: 40%;
+    border-radius: 15px;
+    opacity: 0.2;
+    background-color: rgb(100, 143, 196);
+}
+
+.dayWeather{
+    height: 25%;
+    width: 100%;
 }
