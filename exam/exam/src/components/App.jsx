@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -9,19 +9,11 @@ import { DetailedInfo } from './DetailedInfo';
 
 
 function App() {
-  let coordinate = {latitude: 0, longitude: 0};
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(position => {
-      coordinate.latitude = position.coords.latitude;
-      coordinate.longitude = position.coords.longitude;
-    })
-  });
-
   return (
     <Router>
       <Switch>
         <Route path='/' exact>
-          <RootComponent position={coordinate}/>
+          <RootComponent/>
         </Route>
         <Route path='/weather'>
           <DetailedInfo/>
