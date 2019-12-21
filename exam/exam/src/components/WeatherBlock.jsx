@@ -36,12 +36,12 @@ export function WeatherBlock(props) {
         }
         return '';
     }
-    const city = 'Moscow';
+
     return (
-        <Link to={`/weather/${city}/`}>
+        <Link to={`/weather/${data.name}/`}>
             <div className={styles.block}>
                 <div className={styles.up}>
-                    <div className={styles.nameCity}>Moscow</div>
+                    <div className={styles.nameCity}>{data.name}</div>
                     <div className={styles.temperature}>{toCelius(data.main.temp)}</div>
                 </div>
                 <div className={styles.bottom}>

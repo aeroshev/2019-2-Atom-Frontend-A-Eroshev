@@ -4,3 +4,9 @@ export const setCoordinate = (latitude, longitude) => {
         payload: {latitude: latitude, longitude: longitude},
     };
 }
+
+export const getApiUrl = () => {
+    return {
+        type: 'GET_LOCATION_URL',
+    };
+}

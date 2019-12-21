@@ -4,28 +4,24 @@ import {
 	Switch,
 	Route
 } from 'react-router-dom';
-import { useDispatch, connect } from 'react-redux';
 import { RootComponent } from './RootComponent';
 import { DetailedInfo } from './DetailedInfo';
-import { setCoordinate } from '../actions';
 
 
 function App() {
-  const dispatch = useDispatch();
-
+  let coordinate = {latitude: 0, longitude: 0};
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
-      dispatch(setCoordinate(position.coords.latitude, position.coords.longitude));
-    });
+      coordinate.latitude = position.coords.latitude;
+      coordinate.longitude = position.coords.longitude;
+    })
   });
-
-  // const WrappedRootComponent = connect(RootComponent)()
 
   return (
     <Router>
       <Switch>
         <Route path='/' exact>
-          <RootComponent/>
+          <RootComponent position={coordinate}/>
         </Route>
         <Route path='/weather'>
           <DetailedInfo/>
