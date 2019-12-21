@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { WeatherBlock } from './WeatherBlock';
 import { ManagerCities } from './ManagerCities';
 import { ButtonNewCities } from './ButtonNewCities';
@@ -9,15 +10,20 @@ export function RootComponent(props) {
     const GET_KEY = '8ffee88de89dd2aeca59137b0c268ef2';
 
     const [data, setData] = useState([]);
+    const currentPosition = useSelector(state => state.coordinate);
+    const [position, setPosition] = useState(currentPosition);
+    console.log(position);
+    const API_LOCATION = `https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=`;
 
     async function getData() {
         try {
-            const response = await fetch(API_URL + GET_KEY);
+            console.log(API_LOCATION + GET_KEY)
+            const response = await fetch(API_LOCATION + GET_KEY);
             const jsonResponse = await response.json();
             console.log(jsonResponse);
-            if (jsonResponse['list']) {
-                setData(jsonResponse['list']);
-            }
+            // if (jsonResponse['list']) {
+            //     setData(jsonResponse['list']);
+            // }
         } catch(error) {
             console.error(error);
         }
@@ -29,6 +35,7 @@ export function RootComponent(props) {
 
     useEffect(() => {
         getData();
+        // eslint-disable-next-line
     }, [1]);
 
     let bucket = {};
