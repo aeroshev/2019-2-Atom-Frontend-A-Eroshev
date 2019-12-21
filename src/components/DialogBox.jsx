@@ -22,6 +22,7 @@ export function DialogBox(props) {
 					<div className={styles.messageStatus}></div>
 				</div>	
 			</div>
+			<div className={styles.border}/>
 		</Link>
 	);
 }
