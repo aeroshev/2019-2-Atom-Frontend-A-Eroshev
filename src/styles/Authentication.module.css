@@ -1,0 +1,40 @@
+.mainTheme{
+    width: 100vw;
+    height: 100vh;
+    background-color: #8E24AA;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title{
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.block{
+    height: 30vh;
+    width: 80vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+.button{
+    color: white;
+    height: 25%;
+    margin: 5vw;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 7px;
+}
+
+.icon{
+    border-bottom-left-radius: 7px;
+    border-top-left-radius: 7px;
+    height: 100%;
+    width: 18%;
+    margin-right: 5%;
+}

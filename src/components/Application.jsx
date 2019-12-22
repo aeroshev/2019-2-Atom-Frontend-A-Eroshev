@@ -7,20 +7,24 @@ import {
 import { ManagerChatList } from './ManagerChatList';
 import { ManagerChat } from './ManagerChat';
 import { UserProfile } from './Profile';
+import { Authentication } from './Authentication';
 
 
 export function Application(props) {
 	return (
 		<Router>
 			<Switch>
-				<Route path="/" exact>
+				<Route path='/' exact>
 					<ManagerChatList/>
 				</Route>
-				<Route path="/chat">
+				<Route path='/chat'>
 					<ManagerChat/>
 				</Route>
-				<Route path="/profile">
+				<Route path='/profile'>
 					<UserProfile/>
+				</Route>
+				<Route path='/auth'>
+					<Authentication/>
 				</Route>
 			</Switch>
 		</Router>
