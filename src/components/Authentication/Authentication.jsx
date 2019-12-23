@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/Authentication.module.css';
+import styles from '../../styles/Authentication.module.css';
 
 export function Authentication(props) {
     return (

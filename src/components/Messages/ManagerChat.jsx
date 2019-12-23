@@ -3,7 +3,7 @@ import { HeaderChat } from './HeaderChat';
 import { MessageList } from './MessageList';
 import { FormInput } from './FormInput';
 import { useSelector } from 'react-redux';
-import styles from '../styles/ManagerChat.module.css';
+import styles from '../../styles/ManagerChat.module.css';
 
 
 export function ManagerChat (props){
@@ -59,7 +59,7 @@ export function ManagerChat (props){
 	}
 
 	useEffect(() => {
-		const pollingID = setInterval(() => getMessages(), 3000);
+		const pollingID = setInterval(() => getMessages(), 800);
 		return () => {
 			clearInterval(pollingID);
 		};

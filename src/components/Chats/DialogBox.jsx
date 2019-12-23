@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setActiveChat } from '../actions';
-import styles from '../styles/DialogBox.module.css';
+import { setActiveChat } from '../../actions';
+import styles from '../../styles/DialogBox.module.css';
 
 
 export function DialogBox(props) {

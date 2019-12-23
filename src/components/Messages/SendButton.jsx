@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/SendButton.module.css';
+import styles from '../../styles/SendButton.module.css';
 
 
 const audioType = 'audio/webm';

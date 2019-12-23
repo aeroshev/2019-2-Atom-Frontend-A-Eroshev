@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { SendButton } from './SendButton';
-import styles from '../styles/FormInput.module.css';
+import styles from '../../styles/FormInput.module.css';
 
 
 export function FormInput(props) {

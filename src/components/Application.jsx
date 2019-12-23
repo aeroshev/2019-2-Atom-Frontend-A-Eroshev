@@ -4,10 +4,10 @@ import {
 	Switch,
 	Route
 } from 'react-router-dom';
-import { ManagerChatList } from './ManagerChatList';
-import { ManagerChat } from './ManagerChat';
-import { UserProfile } from './Profile';
-import { Authentication } from './Authentication';
+import { ManagerChatList } from './Chats/ManagerChatList';
+import { ManagerChat } from './Messages/ManagerChat';
+import { UserProfile } from './Profile/Profile';
+import { Authentication } from './Authentication/Authentication';
 
 
 export function Application(props) {

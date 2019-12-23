@@ -1,6 +1,6 @@
 import React from 'react';
 import { DialogBox } from './DialogBox';
-import styles from '../styles/ChatList.module.css';
+import styles from '../../styles/ChatList.module.css';
 
 
 export function ChatList (props) {
