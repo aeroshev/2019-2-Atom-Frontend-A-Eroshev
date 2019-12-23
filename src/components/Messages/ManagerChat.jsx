@@ -2,15 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { HeaderChat } from './HeaderChat';
 import { MessageList } from './MessageList';
 import { FormInput } from './FormInput';
-import { useSelector, useDispatch } from 'react-redux';
-import { putAttachment } from '../../actions';
+import { useSelector } from 'react-redux';
 import styles from '../../styles/ManagerChat.module.css';
 
 
 export function ManagerChat (props){
 	const activeChat = useSelector(state => state.chat);
-	const attachment = useSelector(state => state.attachment);
-	const dispatch = useDispatch();
 	const API_URL = 'https://127.0.0.1:8000';
 
 	const [messageList, setMessageList] = useState([]);
@@ -81,23 +78,22 @@ export function ManagerChat (props){
 	const drop = (event) => {
 		event.preventDefault();
 		event.stopPropagation();
-
 		triggerDropZone(false);
-		dispatch(putAttachment({
-				name: 'drop',
-				type: 'image',
-				path: [window.URL.createObjectURL(event.dataTransfer.files[0])],
-				file: event.dataTransfer.files[0],
-			})
-		);
-		sendMessage(null);
+
+		const object = {
+			name: 'drop',
+			type: 'image',
+			path: [window.URL.createObjectURL(event.dataTransfer.files[0])],
+			file: event.dataTransfer.files[0],
+		};
+		sendMessage(null, object);
 	}
 
-	const sendMessage = (message) => {
+	const sendMessage = (message, newAttachment = null) => {
 		let date = new Date(parseInt(new Date().getTime(), 10));
 		date = date.toString().split(' ')[4].split(':');
 	
-		if (activeChat >= 0 && (message || attachment)) {
+		if (activeChat >= 0 && (message || newAttachment)) {
 			let data = {
 				message: {
 					user_id: currentUserId,
@@ -114,19 +110,23 @@ export function ManagerChat (props){
 				},
 			};
 
-			if (attachment){
-				data.attachment.path = attachment.path;
-				if (attachment.type === 'image') {
-					data.attachment.type = 'image';
-					data.attachment.image = attachment.file;
-				}
-				if (attachment.type === 'document') {
-					data.attachment.type = 'document';
-					data.attachment.document= attachment.file;
-				}
-				if (attachment.type === 'audio') {
-					data.attachment.type = 'audio';
-					data.attachment.audio = attachment.file;
+			if (newAttachment) {
+				data.attachment.path = newAttachment.path;
+				switch(newAttachment.type) {
+					case 'image':
+						data.attachment.type = 'image';
+						data.attachment.image = newAttachment.file;
+						break;
+					case 'document':
+						data.attachment.type = 'document';
+						data.attachment.document= newAttachment.file;
+						break;
+					case 'audio':
+						data.attachment.type = 'audio';
+						data.attachment.audio = newAttachment.file;
+						break;
+					default:
+						console.error('Can not define type attachment');
 				}
 			}
 			postMessage(data);
@@ -138,16 +138,17 @@ export function ManagerChat (props){
 
 	return(
 		<div
-		className={styles.wrap}
-		onDrop={drop}
-		onDragOver={dragOver}
-		onDragLeave={dragLeave}>
-			<HeaderChat />
+			className={styles.wrap}
+			onDrop={drop}
+			onDragOver={dragOver}
+			onDragLeave={dragLeave}
+		>
+			<HeaderChat/>
 			<MessageList 
 				messageList={messageList} 
-				currentUserId={currentUserId} />
-			<FormInput 
-				sendMessage={sendMessage} />
+				currentUserId={currentUserId}
+			/>
+			<FormInput sendMessage={sendMessage}/>
 		</div>
 	);
 }
