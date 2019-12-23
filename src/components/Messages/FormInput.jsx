@@ -1,9 +1,12 @@
 import React, { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux'
 import { SendButton } from './SendButton';
+import { putAttachment } from '../../actions';
 import styles from '../../styles/FormInput.module.css';
 
 
 export function FormInput(props) {
+	const dispatch = useDispatch();
 	const { sendMessage } = props;
 
 	const image = useRef();
@@ -21,13 +24,14 @@ export function FormInput(props) {
 
 	function handlerAudio(audioURL, audioTrack) {
 		if (audioURL) {
-			const object = {
-				name: 'AudioMessage',
-				type: 'audio',
-				path: audioURL,
-				file: audioTrack,
-			}
-			sendMessage(null, object);
+			dispatch(putAttachment({
+					name: 'AudioMessage',
+					type: 'audio',
+					path: audioURL,
+					file: audioTrack,
+				})
+			);
+			sendMessage(null);
 		}	
 	}
 
@@ -58,14 +62,14 @@ export function FormInput(props) {
 			return false;
 		}
 
-		const object = {
-			name: additionsList[0].name,
-			type: 'image',
-			path: [window.URL.createObjectURL(additionsList[0])],
-			file: additionsList[0],
-		}
-
-		sendMessage(null, object);
+		dispatch(putAttachment({
+				name: additionsList[0].name,
+				type: 'image',
+				path: [window.URL.createObjectURL(additionsList[0])],
+				file: additionsList[0],
+			})
+		);
+		sendMessage(null);
 	}
 
 	function handlerDocument(event) {
@@ -74,14 +78,14 @@ export function FormInput(props) {
 			return false;
 		}
 
-		const object = {
-			name: additionsList[0].name,
-			type: 'document',
-			path: [window.URL.createObjectURL(additionsList[0])],
-			file: additionsList[0],
-		}
-
-		sendMessage(null, object);
+		dispatch(putAttachment({
+				name: additionsList[0].name,
+				type: 'document',
+				path: [window.URL.createObjectURL(additionsList[0])],
+				file: additionsList[0],
+			})
+		);
+		sendMessage(null);
 	}
 
 	return (

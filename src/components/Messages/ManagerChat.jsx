@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { HeaderChat } from './HeaderChat';
 import { MessageList } from './MessageList';
 import { FormInput } from './FormInput';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { putAttachment } from '../../actions';
 import styles from '../../styles/ManagerChat.module.css';
 
 
 export function ManagerChat (props){
 	const activeChat = useSelector(state => state.chat);
+	const attachment = useSelector(state => state.attachment);
+	const dispatch = useDispatch();
 	const API_URL = 'https://127.0.0.1:8000';
 
 	const [messageList, setMessageList] = useState([]);
@@ -80,20 +83,21 @@ export function ManagerChat (props){
 		event.stopPropagation();
 
 		triggerDropZone(false);
-		const attachment = {
-			name: 'drop',
-			type: 'image',
-			path: [window.URL.createObjectURL(event.dataTransfer.files[0])],
-			file: event.dataTransfer.files[0],
-		}
-		sendMessage(null, attachment);
+		dispatch(putAttachment({
+				name: 'drop',
+				type: 'image',
+				path: [window.URL.createObjectURL(event.dataTransfer.files[0])],
+				file: event.dataTransfer.files[0],
+			})
+		);
+		sendMessage(null);
 	}
 
-	const sendMessage = (message, newAttachment = null) => {
+	const sendMessage = (message) => {
 		let date = new Date(parseInt(new Date().getTime(), 10));
 		date = date.toString().split(' ')[4].split(':');
 	
-		if (activeChat >= 0 && (message || newAttachment)) {
+		if (activeChat >= 0 && (message || attachment)) {
 			let data = {
 				message: {
 					user_id: currentUserId,
@@ -110,19 +114,19 @@ export function ManagerChat (props){
 				},
 			};
 
-			if (newAttachment){
-				data.attachment.path = newAttachment.path;
-				if (newAttachment.type === 'image') {
+			if (attachment){
+				data.attachment.path = attachment.path;
+				if (attachment.type === 'image') {
 					data.attachment.type = 'image';
-					data.attachment.image = newAttachment.file;
+					data.attachment.image = attachment.file;
 				}
-				if (newAttachment.type === 'document') {
+				if (attachment.type === 'document') {
 					data.attachment.type = 'document';
-					data.attachment.document= newAttachment.file;
+					data.attachment.document= attachment.file;
 				}
-				if (newAttachment.type === 'audio') {
+				if (attachment.type === 'audio') {
 					data.attachment.type = 'audio';
-					data.attachment.audio = newAttachment.file;
+					data.attachment.audio = attachment.file;
 				}
 			}
 			postMessage(data);

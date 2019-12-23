@@ -1,16 +1,11 @@
 import { combineReducers } from 'redux';
+import { activeChatReducer } from './ActiveChat';
+import { attachmentReducer } from './Attachment';
 
-const activeChatReducer = (state = 0, action) => {
-    switch(action.type) {
-        case 'SET_CHAT':
-            return state = action.payload;
-        default:
-            return state;
-    };
-}
 
 const rootReducer = combineReducers({
     chat: activeChatReducer,
+    attachment: attachmentReducer,
 });
 
 export default rootReducer;
