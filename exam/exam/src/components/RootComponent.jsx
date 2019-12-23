@@ -3,18 +3,22 @@ import { WeatherBlock } from './WeatherBlock';
 import { useSelector, useDispatch } from 'react-redux';
 import { ManagerCities } from './ManagerCities';
 import { ButtonNewCities } from './ButtonNewCities';
-import { setCoordinate } from '../actions';
+import { setLocalWeather } from '../actions';
 import styles from '../styles/RootComponent.module.css';
 
 export function RootComponent(props) {
     const dispatch = useDispatch();
     const currentPosition = useSelector(state => state.coordinate);
-    const [data, setData] = useState([]);
+    const localWeather = useSelector(state => state.localWeather);
 
     const API_URL = 'https://api.openweathermap.org/data/2.5/weather';
     const GEO_KEY = `?lat=${currentPosition.latitude}&lon=${currentPosition.longitude}`;
     const GET_URL = '&appid=';
     const API_KEY = '8ffee88de89dd2aeca59137b0c268ef2';
+
+    const createNewCity = (name) => {
+
+    }
 
     async function getData() {
         try { 
@@ -22,35 +26,26 @@ export function RootComponent(props) {
                 console.log(API_URL + GEO_KEY + GET_URL + API_KEY);
                 const response = await fetch(API_URL + GEO_KEY + GET_URL + API_KEY);
                 const jsonResponse = await response.json();
+                dispatch(setLocalWeather(jsonResponse));
                 console.log(jsonResponse);
-                // setData(jsonResponse);
             }     
         } catch(error) {
             console.error(error);
         }
     }
-
-    const createNewCity = (name) => {
-
-    }
-
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition(position => {
-            dispatch(setCoordinate(position.coords.latitude, position.coords.longitude));
-          });
-    }, [1]);
-
-    useEffect(() => {
-        getData();
+    
+      useEffect(() => {
+        console.log('USEEFFECT GET DATA');
+        if (!localWeather) {
+            getData();
+        }
     });
 
-    // let bucket = {};
     let listCities = [];
-    // for (let i = 0; i !== 1; i++) {
-    //     if (data.length) {
-    //         listCities.push(<WeatherBlock key={i} data={data}/>);
-    //     }   
-    // }
+    if (localWeather) {
+        listCities.push(<WeatherBlock key={0} data={localWeather}/>);
+    }
+
     return (
         <div className={styles.paper}>
             <ManagerCities/>

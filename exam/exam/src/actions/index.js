@@ -10,3 +10,10 @@ export const getApiUrl = () => {
         type: 'GET_LOCATION_URL',
     };
 }
+
+export const setLocalWeather = (object) => {
+    return {
+        type: 'SET_LOCAL_WEATHER',
+        payload: object,
+    };
+}

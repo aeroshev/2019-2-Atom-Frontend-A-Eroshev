@@ -1,7 +1,7 @@
 const initialState = {
     latitude: 0,
     longitude: 0,
-}
+};
 
 export const coordinateReducer = (state = initialState, action) => {
     switch(action.type) {
@@ -13,3 +13,4 @@ export const coordinateReducer = (state = initialState, action) => {
             return state;
     };
 }
+
