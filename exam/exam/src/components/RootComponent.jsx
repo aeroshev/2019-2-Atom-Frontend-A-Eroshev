@@ -35,10 +35,10 @@ export function RootComponent(props) {
     async function getData() {
         try { 
             if (currentPosition.latitude !== 0 && currentPosition.longitude !== 0) {
-                console.log(API_URL + GEO_KEY + GET_URL + API_KEY);
                 const response = await fetch(API_URL + GEO_KEY + GET_URL + API_KEY);
                 const jsonResponse = await response.json();
                 dispatch(setLocalWeather(jsonResponse));
+
                 let responseWeatherByID;
                 let jsonResponseWeatherByID;
                 let list = [];
@@ -48,9 +48,7 @@ export function RootComponent(props) {
                     jsonResponseWeatherByID = await responseWeatherByID.json()
                     list.push(jsonResponseWeatherByID);
                 }
-                console.log(list);
                 dispatch(appendWeather(list));
-                console.log(jsonResponse);
             }     
         } catch(error) {
             console.error(error);
@@ -58,24 +56,18 @@ export function RootComponent(props) {
     }
     
       useEffect(() => {
-        console.log('USEEFFECT GET DATA');
-        if (!localWeather) {
+        if (!localWeather.length) {
             getData();
         }
     });
 
     let listCities = [];
-    if (localWeather) {
-        if (localWeather.length) {
-            console.log(localWeather);
-            for (let i = 0; i !== 10; i++){
-                console.log(localWeather[i]);
-                if (localWeather[i]) {
-                    listCities.push(<WeatherBlock key={i} data={localWeather[i]}/>);
-                } 
-            }
-        }  
-    }
+    if (localWeather.length) {
+        localWeather.map((item, index) => {
+            listCities.push(<WeatherBlock key={index} data={item}/>);
+            return 0;
+        });
+    }  
 
 
     return (

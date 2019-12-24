@@ -11,10 +11,8 @@ import { setCoordinate } from '../actions';
 
 
 function App() {
-
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log('SET COORDINATE');
     navigator.geolocation.getCurrentPosition(position => {
       dispatch(setCoordinate(position.coords.latitude, position.coords.longitude));
     });
