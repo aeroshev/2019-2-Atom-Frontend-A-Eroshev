@@ -17,3 +17,16 @@ export const setLocalWeather = (object) => {
         payload: object,
     };
 }
+
+export const appendWeather = (listWeather) => {
+    return {
+        type: 'APPEND_WEATHER',
+        payload: listWeather,
+    };
+}
+
+export const getListIDCity = () => {
+    return {
+        type: 'GET_CITY_LIST',
+    };
+}
