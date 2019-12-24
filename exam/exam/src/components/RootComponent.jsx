@@ -19,18 +19,18 @@ export function RootComponent(props) {
     const API_KEY = '8ffee88de89dd2aeca59137b0c268ef2';
 
     const createNewCity = (name) => {
-
+        getWeatherByName(name);
     }
 
-    // async function getWeatherByName(name) {
-    //     try {
-    //         const response = await fetch(API_URL + `?q=${name}` + GET_URL + API_KEY);
-    //         const jsonResponse = await response.json();
-    //         dispatch(appendWeather([jsonResponse]));
-    //     } catch(error) {
-    //         console.error(error);
-    //     }
-    // }
+    async function getWeatherByName(name) {
+        try {
+            const response = await fetch(API_URL + `?q=${name}` + GET_URL + API_KEY);
+            const jsonResponse = await response.json();
+            dispatch(appendWeather([jsonResponse]));
+        } catch(error) {
+            console.error(error);
+        }
+    }
 
     async function getData() {
         try { 
@@ -68,9 +68,11 @@ export function RootComponent(props) {
     if (localWeather) {
         if (localWeather.length) {
             console.log(localWeather);
-            for (let i = 0; i !== 6; i++){
+            for (let i = 0; i !== 10; i++){
                 console.log(localWeather[i]);
-                listCities.push(<WeatherBlock key={i} data={localWeather[i]}/>);
+                if (localWeather[i]) {
+                    listCities.push(<WeatherBlock key={i} data={localWeather[i]}/>);
+                } 
             }
         }  
     }
