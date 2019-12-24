@@ -26,7 +26,7 @@ export function RootComponent(props) {
     //     try {
     //         const response = await fetch(API_URL + `?q=${name}` + GET_URL + API_KEY);
     //         const jsonResponse = await response.json();
-
+    //         dispatch(appendWeather([jsonResponse]));
     //     } catch(error) {
     //         console.error(error);
     //     }
@@ -38,7 +38,7 @@ export function RootComponent(props) {
                 console.log(API_URL + GEO_KEY + GET_URL + API_KEY);
                 const response = await fetch(API_URL + GEO_KEY + GET_URL + API_KEY);
                 const jsonResponse = await response.json();
-                dispatch(setLocalWeather(jsonResponse));
+                dispatch(setLocalWeather([jsonResponse]));
                 let responseWeatherByID;
                 let jsonResponseWeatherByID;
                 let list = [];

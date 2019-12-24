@@ -7,7 +7,7 @@ export const localWeatherReducer = (state = initialState, action) => {
         case 'APPEND_WEATHER':
             console.log(state);
             return state = [
-                state,
+                ...state,
                 ...action.payload
             ];
         default:
