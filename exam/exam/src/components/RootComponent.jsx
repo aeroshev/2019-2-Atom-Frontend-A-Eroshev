@@ -22,13 +22,15 @@ export function RootComponent(props) {
 
     }
 
-    // async function getWeatherByName(name) {
-    //     try {
-    //         const response = 
-    //     } catch(error) {
-    //         console.error(error);
-    //     }
-    // }
+    async function getWeatherByName(name) {
+        try {
+            const response = await fetch(API_URL + `?q=${name}` + GET_URL + API_KEY);
+            const jsonResponse = await response.json();
+            
+        } catch(error) {
+            console.error(error);
+        }
+    }
 
     async function getData() {
         try { 
