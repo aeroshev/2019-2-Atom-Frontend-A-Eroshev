@@ -93,7 +93,7 @@ export function ManagerChat (props){
 		let date = new Date(parseInt(new Date().getTime(), 10));
 		date = date.toString().split(' ')[4].split(':');
 	
-		if (activeChat >= 0 && (message || newAttachment)) {
+		if (activeChat && (message || newAttachment)) {
 			let data = {
 				message: {
 					user_id: currentUserId,

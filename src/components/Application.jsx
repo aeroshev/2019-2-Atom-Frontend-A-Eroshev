@@ -12,7 +12,7 @@ import { Authentication } from './Authentication/Authentication';
 
 export function Application(props) {
 	return (
-		<Router>
+		<Router basename={process.env.NODE_ENV==='production' ? '/2019-2-Atom-Frontend-A-Eroshev' : undefined}>
 			<Switch>
 				<Route path='/' exact>
 					<ManagerChatList/>
