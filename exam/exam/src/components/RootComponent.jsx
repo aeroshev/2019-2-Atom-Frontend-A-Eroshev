@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { WeatherBlock } from './WeatherBlock';
 import { useSelector, useDispatch } from 'react-redux';
 import { ManagerCities } from './ManagerCities';
 import { ButtonNewCities } from './ButtonNewCities';
-import { setLocalWeather, getListIDCity, appendWeather } from '../actions';
+import { setLocalWeather, appendWeather } from '../actions';
 import styles from '../styles/RootComponent.module.css';
 
 export function RootComponent(props) {
@@ -22,6 +22,14 @@ export function RootComponent(props) {
 
     }
 
+    // async function getWeatherByName(name) {
+    //     try {
+    //         const response = 
+    //     } catch(error) {
+    //         console.error(error);
+    //     }
+    // }
+
     async function getData() {
         try { 
             if (currentPosition.latitude !== 0 && currentPosition.longitude !== 0) {
@@ -32,7 +40,7 @@ export function RootComponent(props) {
                 let responseWeatherByID;
                 let jsonResponseWeatherByID;
                 let list = [];
-                for (let i = 0; i != 5; i++) {
+                for (let i = 0; i !== 5; i++) {
                     ID = `?id=${listCitiesByID[i]}`;
                     responseWeatherByID = await fetch(API_URL + ID + GET_URL + API_KEY);
                     jsonResponseWeatherByID = await responseWeatherByID.json()
