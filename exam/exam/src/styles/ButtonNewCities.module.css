@@ -1,0 +1,40 @@
+.buttonNew{
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	width: 60px;
+	height: 60px;
+	background-color: rgb(86, 151, 194);
+	border-radius: 30px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	background-size: 77%;
+    background-position: center;
+	outline: none;
+	padding: 18px;
+}
+
+.plus_hr{
+	position: relative;
+	left: 0px;
+	top: 0px;
+	height: 2px;
+	width: 100%;
+	background-color: rgb(251, 253, 245);
+	margin-top: auto;
+	margin-bottom: auto;
+	border-radius: 5px;
+}
+
+.plus_vr{
+	position: relative;
+	left: 0px;
+	top: -2px;
+	height: 2px;
+	width: 100%;
+	background-color: rgb(251, 253, 245);
+	margin-top: auto;
+	margin-bottom: auto;
+	border-radius: 5px;
+	transform: rotate(90deg);
+}
