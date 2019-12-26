@@ -1,6 +1,23 @@
 import React, { useState, useRef } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { SendButton } from './SendButton';
+import { putAudio } from '../../actions';
 import styles from '../../styles/FormInput.module.css';
+
+const putStateToProps = (state) => {
+	return {
+		audios: state.audios,
+	};
+};
+
+const putDispatchToProps = (dispatch) => {
+	return {
+		putAudio: bindActionCreators(putAudio, dispatch),
+	};
+};
+
+const WrappedSendButton = connect(putStateToProps, putDispatchToProps)(SendButton);
 
 
 export function FormInput(props) {
@@ -102,7 +119,7 @@ export function FormInput(props) {
 								type='file'
 								accept='image/*'
 								onChange={handlerImage} 
-								style={{display: 'none'}} />
+								style={{display: 'none'}}/>
 							</li>
 					</ul>
 				</div>
@@ -114,7 +131,7 @@ export function FormInput(props) {
 				value={message}
 				placeholder='Message'
 				type='text' />
-			<SendButton handlerAudio={handlerAudio} />
+			<WrappedSendButton handlerAudio={handlerAudio}/>
 		</div>
 	);
 }

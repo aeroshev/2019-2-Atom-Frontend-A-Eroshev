@@ -31,9 +31,7 @@ export function ChatList (props) {
 	}
 
 	return (			
-		<div>
 			<div className={styles.wrap}>{list}</div>
-		</div>
 	);
 }
 

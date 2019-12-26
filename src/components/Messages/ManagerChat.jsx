@@ -12,11 +12,11 @@ const putStateToProps = (state) => {
 };
 
 const WrappedMessageList = connect(putStateToProps, null)(MessageList);
+const API_URL = 'https://127.0.0.1:8000';
 
 
 export function ManagerChat (props) {
 	const { activeChat } = props;
-	const API_URL = 'https://127.0.0.1:8000';
 
 	const [messageList, setMessageList] = useState([]);
 	const [currentUserId, setCurrentUserId] = useState(0);
@@ -67,21 +67,21 @@ export function ManagerChat (props) {
 	}
 
 	useEffect(() => {
-		const pollingID = setInterval(() => getMessages(), 800);
+		const pollingID = setInterval(() => getMessages(), 10000);
 		return () => {
 			clearInterval(pollingID);
 		};
 	});
 
 	const triggerDropZone = (status) => {
-	}
+	};
 
 	const dragOver = (event) => {
 		event.preventDefault();
-	}
+	};
 
 	const dragLeave = (event) => {
-	}
+	};
 
 	const drop = (event) => {
 		event.preventDefault();
@@ -95,11 +95,12 @@ export function ManagerChat (props) {
 			file: event.dataTransfer.files[0],
 		};
 		sendMessage(null, object);
-	}
+	};
 
 	const sendMessage = (message, newAttachment = null) => {
 		let date = new Date(parseInt(new Date().getTime(), 10));
 		date = date.toString().split(' ')[4].split(':');
+		const currentTime = `${date[0]} : ${date[1]}`;
 	
 		if (activeChat && (message || newAttachment)) {
 			let data = {
@@ -107,7 +108,7 @@ export function ManagerChat (props) {
 					user_id: currentUserId,
 					chat: activeChat,
 					text: message,
-					added_at: date[0] + ':' + date[1],
+					added_at:  currentTime,
 				},
 				attachment: {
 					path: '',
@@ -142,7 +143,7 @@ export function ManagerChat (props) {
 			setMessageList([...messageList, data]);
 			localStorage.setItem('messageList', JSON.stringify(messageList));
 		}
-	}
+	};
 
 	return(
 		<div
