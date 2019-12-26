@@ -4,10 +4,19 @@ import {
 	Switch,
 	Route
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { ManagerChatList } from './Chats/ManagerChatList';
 import { ManagerChat } from './Messages/ManagerChat';
 import { UserProfile } from './Profile/Profile';
 import { Authentication } from './Authentication/Authentication';
+
+const putStateToProps = (state) => {
+	return {
+		activeChat: state.chat,
+	};
+};
+
+const WrappedManagerChat = connect(putStateToProps, null)(ManagerChat);
 
 
 export function Application(props) {
@@ -18,7 +27,7 @@ export function Application(props) {
 					<ManagerChatList/>
 				</Route>
 				<Route path='/chat'>
-					<ManagerChat/>
+					<WrappedManagerChat/>
 				</Route>
 				<Route path='/profile'>
 					<UserProfile/>

@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { HeaderChat } from './HeaderChat';
 import { MessageList } from './MessageList';
 import { FormInput } from './FormInput';
-import { useSelector } from 'react-redux';
 import styles from '../../styles/ManagerChat.module.css';
 
+const putStateToProps = (state) => {
+	return {
+		activeChat: state.chat,
+	};
+};
 
-export function ManagerChat (props){
-	const activeChat = useSelector(state => state.chat);
+const WrappedMessageList = connect(putStateToProps, null)(MessageList);
+
+
+export function ManagerChat (props) {
+	const { activeChat } = props;
 	const API_URL = 'https://127.0.0.1:8000';
 
 	const [messageList, setMessageList] = useState([]);
@@ -144,7 +152,7 @@ export function ManagerChat (props){
 			onDragLeave={dragLeave}
 		>
 			<HeaderChat/>
-			<MessageList 
+			<WrappedMessageList 
 				messageList={messageList} 
 				currentUserId={currentUserId}
 			/>
