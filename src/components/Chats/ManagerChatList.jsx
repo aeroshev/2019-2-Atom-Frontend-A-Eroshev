@@ -38,9 +38,8 @@ export function ManagerChatList(props) {
 				credentials: 'include',
 			});
 			const jsonResponse = await response.json();
-			
 			if (response.status === 400) {
-				alert(jsonResponse['error']);
+				console.error(jsonResponse['error']);
 			}
 
 			data['id'] = jsonResponse['response']['id'];
@@ -51,8 +50,7 @@ export function ManagerChatList(props) {
 
 	useEffect(() => {
 		getChats();
-		// eslint-disable-next-line react-hooks/exhaustive-deps 
-	}, [1]);
+	}, []);
 
 	const createChat = (nameChat, username) => {
 		const data = {

@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { HeaderChat } from './HeaderChat';
 import { MessageList } from './MessageList';
 import { FormInput } from './FormInput';
-import { useSelector } from 'react-redux';
-import styles from '../styles/ManagerChat.module.css';
+import styles from '../../styles/ManagerChat.module.css';
+
+const putStateToProps = (state) => {
+	return {
+		activeChat: state.chat,
+	};
+};
+
+const WrappedMessageList = connect(putStateToProps, null)(MessageList);
+const API_URL = 'https://127.0.0.1:8000';
 
 
-export function ManagerChat (props){
-	const activeChat = useSelector(state => state.chat);
-	const API_URL = 'https://127.0.0.1:8000';
+export function ManagerChat (props) {
+	const { activeChat } = props;
 
 	const [messageList, setMessageList] = useState([]);
 	const [currentUserId, setCurrentUserId] = useState(0);
@@ -59,47 +67,48 @@ export function ManagerChat (props){
 	}
 
 	useEffect(() => {
-		const pollingID = setInterval(() => getMessages(), 3000);
+		const pollingID = setInterval(() => getMessages(), 10000);
 		return () => {
 			clearInterval(pollingID);
 		};
 	});
 
 	const triggerDropZone = (status) => {
-	}
+	};
 
 	const dragOver = (event) => {
 		event.preventDefault();
-	}
+	};
 
 	const dragLeave = (event) => {
-	}
+	};
 
 	const drop = (event) => {
 		event.preventDefault();
 		event.stopPropagation();
-
 		triggerDropZone(false);
-		const attachment = {
+
+		const object = {
 			name: 'drop',
 			type: 'image',
 			path: [window.URL.createObjectURL(event.dataTransfer.files[0])],
 			file: event.dataTransfer.files[0],
-		}
-		sendMessage(null, attachment);
-	}
+		};
+		sendMessage(null, object);
+	};
 
 	const sendMessage = (message, newAttachment = null) => {
 		let date = new Date(parseInt(new Date().getTime(), 10));
 		date = date.toString().split(' ')[4].split(':');
+		const currentTime = `${date[0]} : ${date[1]}`;
 	
-		if (activeChat >= 0 && (message || newAttachment)) {
+		if (activeChat && (message || newAttachment)) {
 			let data = {
 				message: {
 					user_id: currentUserId,
 					chat: activeChat,
 					text: message,
-					added_at: date[0] + ':' + date[1],
+					added_at:  currentTime,
 				},
 				attachment: {
 					path: '',
@@ -110,19 +119,23 @@ export function ManagerChat (props){
 				},
 			};
 
-			if (newAttachment){
+			if (newAttachment) {
 				data.attachment.path = newAttachment.path;
-				if (newAttachment.type === 'image') {
-					data.attachment.type = 'image';
-					data.attachment.image = newAttachment.file;
-				}
-				if (newAttachment.type === 'document') {
-					data.attachment.type = 'document';
-					data.attachment.document= newAttachment.file;
-				}
-				if (newAttachment.type === 'audio') {
-					data.attachment.type = 'audio';
-					data.attachment.audio = newAttachment.file;
+				switch(newAttachment.type) {
+					case 'image':
+						data.attachment.type = 'image';
+						data.attachment.image = newAttachment.file;
+						break;
+					case 'document':
+						data.attachment.type = 'document';
+						data.attachment.document= newAttachment.file;
+						break;
+					case 'audio':
+						data.attachment.type = 'audio';
+						data.attachment.audio = newAttachment.file;
+						break;
+					default:
+						console.error('Can not define type attachment');
 				}
 			}
 			postMessage(data);
@@ -130,20 +143,21 @@ export function ManagerChat (props){
 			setMessageList([...messageList, data]);
 			localStorage.setItem('messageList', JSON.stringify(messageList));
 		}
-	}
+	};
 
 	return(
 		<div
-		className={styles.wrap}
-		onDrop={drop}
-		onDragOver={dragOver}
-		onDragLeave={dragLeave}>
-			<HeaderChat />
-			<MessageList 
+			className={styles.wrap}
+			onDrop={drop}
+			onDragOver={dragOver}
+			onDragLeave={dragLeave}
+		>
+			<HeaderChat/>
+			<WrappedMessageList 
 				messageList={messageList} 
-				currentUserId={currentUserId} />
-			<FormInput 
-				sendMessage={sendMessage} />
+				currentUserId={currentUserId}
+			/>
+			<FormInput sendMessage={sendMessage}/>
 		</div>
 	);
 }

@@ -1,16 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setActiveChat } from '../actions';
-import styles from '../styles/DialogBox.module.css';
+import styles from '../../styles/DialogBox.module.css';
 
 
 export function DialogBox(props) {
-	const { boxInfo } = props;
-	const dispatch = useDispatch();
+	const { boxInfo, setChat } = props;
 
 	return (
-		<Link to={`/chat/${boxInfo.id}`} onClick={() => dispatch(setActiveChat(boxInfo.id))}>
+		<Link to={`/chat/${boxInfo.id}`} onClick={() => setChat(boxInfo.id)}>
 			<div className={styles.dialogWrap}>
 				<div className={styles.dialogAvatar}>{boxInfo.avatar}</div>
 				<div className={styles.textContent}>
@@ -22,6 +19,7 @@ export function DialogBox(props) {
 					<div className={styles.messageStatus}></div>
 				</div>	
 			</div>
+			<div className={styles.border}/>
 		</Link>
 	);
 }

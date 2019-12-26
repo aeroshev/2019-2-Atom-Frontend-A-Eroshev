@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from '../styles/Profile.module.css';
+import styles from '../../styles/Profile.module.css';
 
 export function UserProfile(props) {
 	return (

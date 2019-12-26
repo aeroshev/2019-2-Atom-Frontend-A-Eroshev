@@ -1,13 +1,13 @@
-export const setActiveChat = (new_id) => {
-    return {
-        type: 'SET_CHAT',
-        payload: new_id,
-    };
-}
+export const setActiveChat = (newID) => {
+	return {
+		type: 'SET_CHAT',
+		payload: newID,
+	};
+};
 
-export const setCurrentUser = (new_id) => {
-    return {
-        type: 'SET_USER',
-        payload: new_id,
-    };
-}
+export const putAudio = (newAudio) => {
+	return {
+		type: 'PUT_AUDIO_BLOB',
+		payload: newAudio,
+	};
+};
