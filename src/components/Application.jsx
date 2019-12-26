@@ -19,7 +19,7 @@ const putStateToProps = (state) => {
 const WrappedManagerChat = connect(putStateToProps, null)(ManagerChat);
 
 
-export function Application(props) {
+export function Application() {
 	return (
 		<Router basename={process.env.NODE_ENV==='production' ? '/2019-2-Atom-Frontend-A-Eroshev' : undefined}>
 			<Switch>

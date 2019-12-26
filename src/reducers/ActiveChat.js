@@ -1,10 +1,11 @@
 const initialState = 0;
 
 export const activeChatReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case 'SET_CHAT':
-            return state = action.payload;
-        default:
-            return state;
-    };
-}
+	switch(action.type) {
+		case 'SET_CHAT':
+			state = action.payload;
+			return state;
+		default:
+			return state;
+	};
+};
