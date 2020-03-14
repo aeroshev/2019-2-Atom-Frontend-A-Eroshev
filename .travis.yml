@@ -7,17 +7,10 @@ cache:
 script:
   - npm run build
 
-before_install:
-  - cd exam/exam
-
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $repo_token
-  local_dir: exam/exam/build
   on:
     branch:
       - master
-      - devel
-      - HW7
-      - exam
