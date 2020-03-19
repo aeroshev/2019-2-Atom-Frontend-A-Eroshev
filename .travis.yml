@@ -12,5 +12,4 @@ deploy:
   skip_cleanup: true
   github_token: $repo_token
   on:
-    branch:
-      - master
+    branch: master

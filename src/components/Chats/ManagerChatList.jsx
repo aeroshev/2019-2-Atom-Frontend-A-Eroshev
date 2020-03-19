@@ -6,7 +6,7 @@ import { ButtonNewChat } from './ButtonNewChat';
 
 export function ManagerChatList(props) {
 	const [chatList, setChatList] = useState([]);
-	const API_URL = 'https://127.0.0.1:8000';
+	const API_URL = 'https://aeroshev.chickenkiller.com';
 
 	async function getChats() {
 		try {
