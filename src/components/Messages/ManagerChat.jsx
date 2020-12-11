@@ -12,7 +12,7 @@ const putStateToProps = (state) => {
 };
 
 const WrappedMessageList = connect(putStateToProps, null)(MessageList);
-const API_URL = 'http://127.0.0.1:8000'';
+const API_URL = 'http://127.0.0.1:8000';
 
 
 export function ManagerChat (props) {
