@@ -1,0 +1,86 @@
+.dialogWrap {
+	width: 100%;
+	height: 90px;
+	text-align: center;
+	word-break: break-all;
+	display: flex;
+	flex-direction: row;
+	color: black;
+	border-radius: 2px;
+	box-sizing: border-box;
+	padding: 5px;
+	background-color: #f8fff4;
+	cursor: pointer;
+}
+
+.border {
+	width: 100%;
+	margin-left: 107px;
+	height: 1px;
+	background-color: rgb(229, 229, 229);
+}
+
+.dialogWrap:hover{
+	background-color: #F8F0F8;
+}
+.dialogWrap:active{
+	background-color: #F8F0F8;
+}
+
+a { 
+    text-decoration: none;
+}
+
+.textContent {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	padding-left: 32px;
+}
+
+.dialogName {
+	width: 100%;
+	height: 40%;
+	text-align: left;
+	font-size: small;
+}
+
+.dialogAvatar {
+	display: flex;
+	height: 70px;
+	width: 70px;
+	min-width: 70px;
+	border-radius: 50px;
+	margin: auto;
+	background-image: url(https://cdn.iconscout.com/icon/free/png-256/avatar-367-456319.png);
+	/* border: 1px solid gray; */
+	background-size: cover;
+}
+
+.status {
+	float: right;
+	height: 100%;
+	width: 20%;
+	display: flex;
+	flex-direction: column;
+	padding: 5px;
+}
+
+.messageTime {
+	width: 100%;
+	height: 40%;
+	text-align: center;
+	font-size: small;
+}
+
+.lastMessage {
+	text-align: left;
+	width: 100%;
+	height: 60%;
+}
+
+.messageStatus {
+	width: 100%;
+	height: 60%;
+}
